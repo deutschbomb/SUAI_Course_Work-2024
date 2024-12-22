@@ -1,11 +1,14 @@
 
-namespace AutoService.View
+namespace App
 {
     public partial class ClientsForm : Form
     {
-        public ClientsForm()
+        Presenter Presenter;
+
+        public ClientsForm(ref Presenter Presenter)
         {
             InitializeComponent();
+            this.Presenter = Presenter;
         }
     }
 }

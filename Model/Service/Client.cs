@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AutoService.Model.Sevice
+namespace App
 {
     // Класс владельца автомобиля
     public class Owner
     {
-        public int Id { get; set; }    // PrimaryKey
+        public int Id { get; set; } // PrimaryKey
         public string? OwnerSurname { get; set; }
         public string? OwnerName { get; set; }
         public string? OwnerPatronymic { get; set; }
@@ -17,9 +17,13 @@ namespace AutoService.Model.Sevice
         public string? OwnerAddress { get; set; }
         public string? OwnerTelephone { get; set; }
 
-        // Ссылка на заявку
-        public virtual Request? Request { get; set; }
-        public int RequsetId { get; set; }
+        // Навигационные свойства
+        public virtual List<Request> Requests { get; set; } // заявки владельца на ремонт
+
+        public Owner()
+        {
+            this.Requests = new List<Request>();
+        }
     }
 
     // Класс автомобиля
@@ -40,8 +44,12 @@ namespace AutoService.Model.Sevice
         public DateTime Year { get; set; }
         public decimal Price { get; set; }
 
-        // Ссылка на заявку
-        public virtual Request? Request { get; set; }
-        public int RequsetId { get; set; }
+        // Навигационные свойства
+        public virtual List<Request> Requests { get; set; } // заявки на ремонт автомобиля
+
+        public Car()
+        {
+            this.Requests = new List<Request>();
+        }
     }
 }

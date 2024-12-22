@@ -1,45 +1,56 @@
-﻿using AutoService.Model.Sevice;
-using Microsoft.Identity.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AutoService.Model.Parts
+﻿
+namespace App
 {
     // Класс запчасти
     public class Part
     {
-        public int Id { get; set; } // PrimaryKey
+        public int PartId { get; set; } // PrimaryKey
         public string? CatalogueNumber { get; set; }
         public string? PartName { get; set; }
 
         // Навигационные свойства
-        public virtual List<Supplier> Suppliers { get; set; } // ссылка на поставщиков запчасти
+        /// <summary>
+        /// M:M - номенклатура
+        /// </summary>
+        public virtual List<Supplier> Suppliers { get; set; } // поставщики запчастей
+        /// <summary>
+        /// M:M - запчасти в поставке
+        /// </summary>
+        public virtual List<Supply> Supplies { get; set; } // поставки запчастей
+        public virtual List<Position> Positions { get; set; } // позиции поставки
+        /// <summary>
+        /// 1:1 - запчасть на складе
+        /// </summary>
+        public virtual Accounting? Accounting { get; set; }
+        /// <summary>
+        /// M:M - заказ-наряд
+        /// </summary>
+        public virtual List<Employee> Employees { get; set; } // механики
+        public virtual List<Work> Works { get; set; } // проводимые работы
+        public virtual List<Order> Orders { get; set; } // заказ-наряд
 
-        // Ссылка на запчасть на складе
-        public virtual Storage? Storage { get; set; }
-
-        // Ссылка на заказ-наряд
-        public virtual Order? Order { get; set; }
-
-        //public virtual SupplyAmount? SupplyAmount { get; set; }
 
         public Part()
         {
-            Suppliers = new List<Supplier>();
+            this.Suppliers = new List<Supplier>();
+
+            this.Supplies = new List<Supply>();
+            this.Positions = new List<Position>();
+
+            this.Employees = new List<Employee>();
+            this.Works = new List<Work>();
+            this.Orders = new List<Order>();
         }
     }
 
-    // Класс склада запчастей
-    public class Storage
+    // Класс учёта запчастей
+    public class Accounting
     {
+        // Ссылка на запчасть
+        public int PartId { get; set; }
+        public virtual Part? Part { get; set; }
+
         public int Balance { get; set; }
         public decimal PartPrice { get; set; }
-
-        // ForeignKeys - навигационные свойства
-        public virtual Part? Part { get; set; } // ссылка на запчасть
-        public int PartID { get; set; }
     }
 }

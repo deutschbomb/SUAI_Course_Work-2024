@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AutoService.View
+namespace App
 {
-    internal interface IView
+    public interface IView
     {
+
     }
 }

@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AutoService.Presenter
+﻿
+namespace App
 {
-    internal class Presenter
+    public class Presenter : IPresenter
     {
+        public IView View;
+        public Context? Context;
+
+        public Presenter(IView View)
+        {
+            this.View = View;
+            this.Context = new Context();
+            this.Context.Database.EnsureCreated();
+        }
+
     }
 }

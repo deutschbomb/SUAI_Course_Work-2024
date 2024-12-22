@@ -1,15 +1,15 @@
-namespace AutoService.View
+namespace App
 {
     internal static class Program
     {
         /// <summary>
-        ///  The main entry point for the application.
+        ///  Главная входная точка приложения.
         /// </summary>
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
+            // Чтобы настроить конфигурацию приложения, например, установить шрифт по умолчанию,
+            // смотрите https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new MainForm());
         }

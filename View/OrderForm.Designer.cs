@@ -1,5 +1,5 @@
 ﻿
-namespace AutoService.View
+namespace App
 {
     partial class OrderForm
     {
@@ -36,7 +36,11 @@ namespace AutoService.View
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(960, 540);
+            Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Pixel);
+            MaximizeBox = false;
             Name = "OrderForm";
+            ShowIcon = false;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Заказ-наряд";
             ResumeLayout(false);
         }
