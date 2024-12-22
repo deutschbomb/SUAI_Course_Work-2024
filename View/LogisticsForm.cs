@@ -22,6 +22,7 @@ namespace App
             this.home = home;
             this.previous = prev;
         }
+
         private void LogisticsForm_Load(object sender, EventArgs e)
         {
             postDatePicker.MinDate = DateTime.Now;
@@ -41,6 +42,11 @@ namespace App
         {
             this.previous.Show();
             this.Close();
+        }
+
+        private void LogisticsForm_FormClosed(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
 
     }

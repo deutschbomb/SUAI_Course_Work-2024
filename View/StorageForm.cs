@@ -32,9 +32,9 @@ namespace App
             logistics.Show();
         }
 
-        private void catalogueNumberInput_TextChanged(object sender, EventArgs e)
+        private void StorageForm_FormClosed(object sender, EventArgs e)
         {
-
+            Application.Exit();
         }
     }
 }

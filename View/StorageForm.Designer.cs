@@ -36,8 +36,6 @@ namespace App
             addButton = new Button();
             editButton = new Button();
             deleteButton = new Button();
-            tableLayoutPanel = new FlowLayoutPanel();
-            storageTable = new DataGridView();
             controlsLayoutPanel = new TableLayoutPanel();
             shortLayoutPanel = new TableLayoutPanel();
             shortLayoutPanel2 = new FlowLayoutPanel();
@@ -47,10 +45,6 @@ namespace App
             priceLayoutPanel = new FlowLayoutPanel();
             priceLabel = new Label();
             priceInput = new NumericUpDown();
-            buttonsLayoutPanel = new FlowLayoutPanel();
-            acceptButton = new Button();
-            resetButton = new Button();
-            toSupplyButton = new Button();
             longLayoutPanel = new TableLayoutPanel();
             longLayoutPanel2 = new FlowLayoutPanel();
             catalogueNumberLayoutPanel = new FlowLayoutPanel();
@@ -59,10 +53,13 @@ namespace App
             NameLayoutPanel = new FlowLayoutPanel();
             nameLabel = new Label();
             nameInput = new TextBox();
+            storageTable = new DataGridView();
+            flowLayoutPanel2 = new FlowLayoutPanel();
+            button4 = new Button();
+            button5 = new Button();
+            button6 = new Button();
             formLayoutPanel.SuspendLayout();
             menuLayoutPanel.SuspendLayout();
-            tableLayoutPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)storageTable).BeginInit();
             controlsLayoutPanel.SuspendLayout();
             shortLayoutPanel.SuspendLayout();
             shortLayoutPanel2.SuspendLayout();
@@ -70,29 +67,32 @@ namespace App
             ((System.ComponentModel.ISupportInitialize)balanceInput).BeginInit();
             priceLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)priceInput).BeginInit();
-            buttonsLayoutPanel.SuspendLayout();
             longLayoutPanel.SuspendLayout();
             longLayoutPanel2.SuspendLayout();
             catalogueNumberLayoutPanel.SuspendLayout();
             NameLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)storageTable).BeginInit();
+            flowLayoutPanel2.SuspendLayout();
             SuspendLayout();
             // 
             // formLayoutPanel
             // 
             formLayoutPanel.BackColor = Color.Transparent;
             formLayoutPanel.ColumnCount = 1;
-            formLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            formLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             formLayoutPanel.Controls.Add(menuLayoutPanel, 0, 0);
-            formLayoutPanel.Controls.Add(tableLayoutPanel, 0, 1);
-            formLayoutPanel.Controls.Add(controlsLayoutPanel, 0, 2);
+            formLayoutPanel.Controls.Add(controlsLayoutPanel, 0, 4);
+            formLayoutPanel.Controls.Add(storageTable, 0, 2);
             formLayoutPanel.Dock = DockStyle.Fill;
             formLayoutPanel.Location = new Point(0, 0);
             formLayoutPanel.Margin = new Padding(0);
             formLayoutPanel.Name = "formLayoutPanel";
-            formLayoutPanel.Padding = new Padding(20, 0, 20, 0);
-            formLayoutPanel.RowCount = 3;
+            formLayoutPanel.Padding = new Padding(20, 10, 20, 10);
+            formLayoutPanel.RowCount = 5;
             formLayoutPanel.RowStyles.Add(new RowStyle());
+            formLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             formLayoutPanel.RowStyles.Add(new RowStyle());
+            formLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             formLayoutPanel.RowStyles.Add(new RowStyle());
             formLayoutPanel.Size = new Size(960, 540);
             formLayoutPanel.TabIndex = 1;
@@ -106,23 +106,24 @@ namespace App
             menuLayoutPanel.Controls.Add(addButton);
             menuLayoutPanel.Controls.Add(editButton);
             menuLayoutPanel.Controls.Add(deleteButton);
-            menuLayoutPanel.Location = new Point(21, 10);
-            menuLayoutPanel.Margin = new Padding(0, 10, 0, 10);
+            menuLayoutPanel.Location = new Point(20, 10);
+            menuLayoutPanel.Margin = new Padding(0);
             menuLayoutPanel.Name = "menuLayoutPanel";
-            menuLayoutPanel.Size = new Size(918, 50);
+            menuLayoutPanel.Size = new Size(919, 50);
             menuLayoutPanel.TabIndex = 0;
             // 
             // homeButton
             // 
+            homeButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             homeButton.BackColor = Color.Transparent;
             homeButton.FlatAppearance.BorderSize = 0;
             homeButton.FlatStyle = FlatStyle.Flat;
             homeButton.Font = new Font("Segoe MDL2 Assets", 18F, FontStyle.Regular, GraphicsUnit.Pixel);
             homeButton.ForeColor = SystemColors.WindowFrame;
-            homeButton.Location = new Point(0, 0);
+            homeButton.Location = new Point(0, 5);
             homeButton.Margin = new Padding(0, 0, 10, 0);
             homeButton.Name = "homeButton";
-            homeButton.Size = new Size(50, 50);
+            homeButton.Size = new Size(40, 40);
             homeButton.TabIndex = 4;
             homeButton.Text = "";
             homeButton.UseVisualStyleBackColor = false;
@@ -130,15 +131,16 @@ namespace App
             // 
             // returnButton
             // 
+            returnButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             returnButton.BackColor = Color.Transparent;
             returnButton.FlatAppearance.BorderSize = 0;
             returnButton.FlatStyle = FlatStyle.Flat;
             returnButton.Font = new Font("Segoe MDL2 Assets", 18F, FontStyle.Regular, GraphicsUnit.Pixel);
             returnButton.ForeColor = SystemColors.WindowFrame;
-            returnButton.Location = new Point(70, 0);
+            returnButton.Location = new Point(60, 5);
             returnButton.Margin = new Padding(10, 0, 10, 0);
             returnButton.Name = "returnButton";
-            returnButton.Size = new Size(50, 50);
+            returnButton.Size = new Size(40, 40);
             returnButton.TabIndex = 5;
             returnButton.Text = "";
             returnButton.UseVisualStyleBackColor = false;
@@ -152,10 +154,10 @@ namespace App
             addButton.FlatStyle = FlatStyle.Flat;
             addButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             addButton.ForeColor = SystemColors.ButtonFace;
-            addButton.Location = new Point(140, 0);
+            addButton.Location = new Point(120, 0);
             addButton.Margin = new Padding(10, 0, 10, 0);
             addButton.Name = "addButton";
-            addButton.Size = new Size(246, 50);
+            addButton.Size = new Size(253, 50);
             addButton.TabIndex = 1;
             addButton.Text = "Добавить";
             addButton.UseVisualStyleBackColor = false;
@@ -168,10 +170,10 @@ namespace App
             editButton.FlatStyle = FlatStyle.Flat;
             editButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             editButton.ForeColor = SystemColors.ButtonFace;
-            editButton.Location = new Point(406, 0);
+            editButton.Location = new Point(393, 0);
             editButton.Margin = new Padding(10, 0, 10, 0);
             editButton.Name = "editButton";
-            editButton.Size = new Size(246, 50);
+            editButton.Size = new Size(253, 50);
             editButton.TabIndex = 2;
             editButton.Text = "Изменить";
             editButton.UseVisualStyleBackColor = false;
@@ -184,55 +186,32 @@ namespace App
             deleteButton.FlatStyle = FlatStyle.Flat;
             deleteButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             deleteButton.ForeColor = SystemColors.ButtonFace;
-            deleteButton.Location = new Point(672, 0);
+            deleteButton.Location = new Point(666, 0);
             deleteButton.Margin = new Padding(10, 0, 0, 0);
             deleteButton.Name = "deleteButton";
-            deleteButton.Size = new Size(246, 50);
+            deleteButton.Size = new Size(253, 50);
             deleteButton.TabIndex = 3;
             deleteButton.Text = "Удалить";
             deleteButton.UseVisualStyleBackColor = false;
             // 
-            // tableLayoutPanel
-            // 
-            tableLayoutPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            tableLayoutPanel.Controls.Add(storageTable);
-            tableLayoutPanel.FlowDirection = FlowDirection.TopDown;
-            tableLayoutPanel.Location = new Point(20, 80);
-            tableLayoutPanel.Margin = new Padding(0, 10, 0, 10);
-            tableLayoutPanel.Name = "tableLayoutPanel";
-            tableLayoutPanel.Size = new Size(919, 260);
-            tableLayoutPanel.TabIndex = 0;
-            // 
-            // storageTable
-            // 
-            storageTable.BackgroundColor = Color.White;
-            storageTable.BorderStyle = BorderStyle.None;
-            storageTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            storageTable.Cursor = Cursors.Hand;
-            storageTable.GridColor = SystemColors.ControlDark;
-            storageTable.Location = new Point(0, 0);
-            storageTable.Margin = new Padding(0);
-            storageTable.Name = "storageTable";
-            storageTable.Size = new Size(920, 260);
-            storageTable.TabIndex = 0;
-            // 
             // controlsLayoutPanel
             // 
-            controlsLayoutPanel.ColumnCount = 3;
-            controlsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 610F));
-            controlsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 160F));
+            controlsLayoutPanel.ColumnCount = 5;
+            controlsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 600F));
+            controlsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
+            controlsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F));
+            controlsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
             controlsLayoutPanel.ColumnStyles.Add(new ColumnStyle());
-            controlsLayoutPanel.Controls.Add(shortLayoutPanel, 1, 0);
-            controlsLayoutPanel.Controls.Add(buttonsLayoutPanel, 2, 0);
+            controlsLayoutPanel.Controls.Add(flowLayoutPanel2, 4, 0);
+            controlsLayoutPanel.Controls.Add(shortLayoutPanel, 2, 0);
             controlsLayoutPanel.Controls.Add(longLayoutPanel, 0, 0);
-            controlsLayoutPanel.Location = new Point(20, 350);
+            controlsLayoutPanel.Dock = DockStyle.Fill;
+            controlsLayoutPanel.Location = new Point(20, 340);
             controlsLayoutPanel.Margin = new Padding(0);
             controlsLayoutPanel.Name = "controlsLayoutPanel";
-            controlsLayoutPanel.Padding = new Padding(0, 10, 0, 10);
             controlsLayoutPanel.RowCount = 1;
-            controlsLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            controlsLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 170F));
-            controlsLayoutPanel.Size = new Size(919, 190);
+            controlsLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            controlsLayoutPanel.Size = new Size(920, 190);
             controlsLayoutPanel.TabIndex = 1;
             // 
             // shortLayoutPanel
@@ -241,14 +220,14 @@ namespace App
             shortLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             shortLayoutPanel.Controls.Add(shortLayoutPanel2, 0, 1);
             shortLayoutPanel.Dock = DockStyle.Fill;
-            shortLayoutPanel.Location = new Point(610, 10);
-            shortLayoutPanel.Margin = new Padding(0, 0, 10, 0);
+            shortLayoutPanel.Location = new Point(610, 0);
+            shortLayoutPanel.Margin = new Padding(0);
             shortLayoutPanel.Name = "shortLayoutPanel";
             shortLayoutPanel.RowCount = 3;
             shortLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             shortLayoutPanel.RowStyles.Add(new RowStyle());
             shortLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            shortLayoutPanel.Size = new Size(150, 170);
+            shortLayoutPanel.Size = new Size(150, 190);
             shortLayoutPanel.TabIndex = 5;
             // 
             // shortLayoutPanel2
@@ -256,7 +235,7 @@ namespace App
             shortLayoutPanel2.Controls.Add(balanceLayoutPanel);
             shortLayoutPanel2.Controls.Add(priceLayoutPanel);
             shortLayoutPanel2.Dock = DockStyle.Fill;
-            shortLayoutPanel2.Location = new Point(0, 20);
+            shortLayoutPanel2.Location = new Point(0, 30);
             shortLayoutPanel2.Margin = new Padding(0);
             shortLayoutPanel2.Name = "shortLayoutPanel2";
             shortLayoutPanel2.Size = new Size(150, 130);
@@ -264,7 +243,7 @@ namespace App
             // 
             // balanceLayoutPanel
             // 
-            balanceLayoutPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            balanceLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             balanceLayoutPanel.AutoSize = true;
             balanceLayoutPanel.Controls.Add(balanceLabel);
             balanceLayoutPanel.Controls.Add(balanceInput);
@@ -300,7 +279,7 @@ namespace App
             // 
             // priceLayoutPanel
             // 
-            priceLayoutPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            priceLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             priceLayoutPanel.AutoSize = true;
             priceLayoutPanel.Controls.Add(priceLabel);
             priceLayoutPanel.Controls.Add(priceInput);
@@ -334,73 +313,13 @@ namespace App
             priceInput.Size = new Size(150, 26);
             priceInput.TabIndex = 2;
             // 
-            // buttonsLayoutPanel
-            // 
-            buttonsLayoutPanel.Controls.Add(acceptButton);
-            buttonsLayoutPanel.Controls.Add(resetButton);
-            buttonsLayoutPanel.Controls.Add(toSupplyButton);
-            buttonsLayoutPanel.Dock = DockStyle.Fill;
-            buttonsLayoutPanel.FlowDirection = FlowDirection.TopDown;
-            buttonsLayoutPanel.Location = new Point(770, 10);
-            buttonsLayoutPanel.Margin = new Padding(0);
-            buttonsLayoutPanel.Name = "buttonsLayoutPanel";
-            buttonsLayoutPanel.Size = new Size(150, 170);
-            buttonsLayoutPanel.TabIndex = 0;
-            // 
-            // acceptButton
-            // 
-            acceptButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            acceptButton.BackColor = SystemColors.MenuHighlight;
-            acceptButton.FlatStyle = FlatStyle.Flat;
-            acceptButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            acceptButton.ForeColor = SystemColors.ButtonFace;
-            acceptButton.Location = new Point(0, 0);
-            acceptButton.Margin = new Padding(0);
-            acceptButton.Name = "acceptButton";
-            acceptButton.Size = new Size(150, 50);
-            acceptButton.TabIndex = 2;
-            acceptButton.Text = "Принять";
-            acceptButton.UseVisualStyleBackColor = false;
-            // 
-            // resetButton
-            // 
-            resetButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            resetButton.BackColor = SystemColors.ScrollBar;
-            resetButton.FlatAppearance.BorderSize = 0;
-            resetButton.FlatStyle = FlatStyle.Flat;
-            resetButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            resetButton.ForeColor = SystemColors.ControlText;
-            resetButton.Location = new Point(0, 60);
-            resetButton.Margin = new Padding(0, 10, 0, 10);
-            resetButton.Name = "resetButton";
-            resetButton.Size = new Size(150, 50);
-            resetButton.TabIndex = 3;
-            resetButton.Text = "Сбросить";
-            resetButton.UseVisualStyleBackColor = false;
-            // 
-            // toSupplyButton
-            // 
-            toSupplyButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            toSupplyButton.BackColor = SystemColors.MenuHighlight;
-            toSupplyButton.FlatStyle = FlatStyle.Flat;
-            toSupplyButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            toSupplyButton.ForeColor = SystemColors.ButtonFace;
-            toSupplyButton.Location = new Point(0, 120);
-            toSupplyButton.Margin = new Padding(0);
-            toSupplyButton.Name = "toSupplyButton";
-            toSupplyButton.Size = new Size(150, 50);
-            toSupplyButton.TabIndex = 4;
-            toSupplyButton.Text = "Заказать";
-            toSupplyButton.UseVisualStyleBackColor = false;
-            toSupplyButton.Click += toSupplyButton_Click;
-            // 
             // longLayoutPanel
             // 
             longLayoutPanel.ColumnCount = 1;
             longLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             longLayoutPanel.Controls.Add(longLayoutPanel2, 0, 1);
-            longLayoutPanel.Location = new Point(0, 10);
-            longLayoutPanel.Margin = new Padding(0, 0, 10, 0);
+            longLayoutPanel.Location = new Point(0, 0);
+            longLayoutPanel.Margin = new Padding(0);
             longLayoutPanel.Name = "longLayoutPanel";
             longLayoutPanel.RowCount = 3;
             longLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
@@ -421,10 +340,10 @@ namespace App
             // 
             // catalogueNumberLayoutPanel
             // 
+            catalogueNumberLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             catalogueNumberLayoutPanel.AutoSize = true;
             catalogueNumberLayoutPanel.Controls.Add(catalogueNumberLabel);
             catalogueNumberLayoutPanel.Controls.Add(catalogueNumberInput);
-            catalogueNumberLayoutPanel.Dock = DockStyle.Fill;
             catalogueNumberLayoutPanel.FlowDirection = FlowDirection.TopDown;
             catalogueNumberLayoutPanel.Location = new Point(0, 0);
             catalogueNumberLayoutPanel.Margin = new Padding(0);
@@ -454,14 +373,13 @@ namespace App
             catalogueNumberInput.Name = "catalogueNumberInput";
             catalogueNumberInput.Size = new Size(600, 26);
             catalogueNumberInput.TabIndex = 1;
-            catalogueNumberInput.TextChanged += catalogueNumberInput_TextChanged;
             // 
             // NameLayoutPanel
             // 
+            NameLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             NameLayoutPanel.AutoSize = true;
             NameLayoutPanel.Controls.Add(nameLabel);
             NameLayoutPanel.Controls.Add(nameInput);
-            NameLayoutPanel.Dock = DockStyle.Fill;
             NameLayoutPanel.FlowDirection = FlowDirection.TopDown;
             NameLayoutPanel.Location = new Point(0, 61);
             NameLayoutPanel.Margin = new Padding(0);
@@ -492,6 +410,78 @@ namespace App
             nameInput.Size = new Size(600, 26);
             nameInput.TabIndex = 1;
             // 
+            // storageTable
+            // 
+            storageTable.BackgroundColor = Color.White;
+            storageTable.BorderStyle = BorderStyle.None;
+            storageTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            storageTable.Cursor = Cursors.Hand;
+            storageTable.GridColor = SystemColors.ControlDark;
+            storageTable.Location = new Point(20, 80);
+            storageTable.Margin = new Padding(0);
+            storageTable.Name = "storageTable";
+            storageTable.Size = new Size(920, 240);
+            storageTable.TabIndex = 2;
+            // 
+            // flowLayoutPanel2
+            // 
+            flowLayoutPanel2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            flowLayoutPanel2.Controls.Add(button4);
+            flowLayoutPanel2.Controls.Add(button5);
+            flowLayoutPanel2.Controls.Add(button6);
+            flowLayoutPanel2.FlowDirection = FlowDirection.TopDown;
+            flowLayoutPanel2.Location = new Point(770, 10);
+            flowLayoutPanel2.Margin = new Padding(0);
+            flowLayoutPanel2.Name = "flowLayoutPanel2";
+            flowLayoutPanel2.Size = new Size(150, 170);
+            flowLayoutPanel2.TabIndex = 8;
+            // 
+            // button4
+            // 
+            button4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            button4.BackColor = SystemColors.MenuHighlight;
+            button4.FlatStyle = FlatStyle.Flat;
+            button4.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            button4.ForeColor = SystemColors.ButtonFace;
+            button4.Location = new Point(0, 0);
+            button4.Margin = new Padding(0);
+            button4.Name = "button4";
+            button4.Size = new Size(150, 50);
+            button4.TabIndex = 2;
+            button4.Text = "Принять";
+            button4.UseVisualStyleBackColor = false;
+            // 
+            // button5
+            // 
+            button5.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            button5.BackColor = SystemColors.ScrollBar;
+            button5.FlatAppearance.BorderSize = 0;
+            button5.FlatStyle = FlatStyle.Flat;
+            button5.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            button5.ForeColor = SystemColors.ControlText;
+            button5.Location = new Point(0, 60);
+            button5.Margin = new Padding(0, 10, 0, 10);
+            button5.Name = "button5";
+            button5.Size = new Size(150, 50);
+            button5.TabIndex = 3;
+            button5.Text = "Сбросить";
+            button5.UseVisualStyleBackColor = false;
+            // 
+            // button6
+            // 
+            button6.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            button6.BackColor = SystemColors.MenuHighlight;
+            button6.FlatStyle = FlatStyle.Flat;
+            button6.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            button6.ForeColor = SystemColors.ButtonFace;
+            button6.Location = new Point(0, 120);
+            button6.Margin = new Padding(0);
+            button6.Name = "button6";
+            button6.Size = new Size(150, 50);
+            button6.TabIndex = 4;
+            button6.Text = "Заказать";
+            button6.UseVisualStyleBackColor = false;
+            // 
             // StorageForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -505,12 +495,11 @@ namespace App
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Склад автосервиса";
+            FormClosed += StorageForm_FormClosed;
             formLayoutPanel.ResumeLayout(false);
             formLayoutPanel.PerformLayout();
             menuLayoutPanel.ResumeLayout(false);
             menuLayoutPanel.PerformLayout();
-            tableLayoutPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)storageTable).EndInit();
             controlsLayoutPanel.ResumeLayout(false);
             shortLayoutPanel.ResumeLayout(false);
             shortLayoutPanel2.ResumeLayout(false);
@@ -519,7 +508,6 @@ namespace App
             ((System.ComponentModel.ISupportInitialize)balanceInput).EndInit();
             priceLayoutPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)priceInput).EndInit();
-            buttonsLayoutPanel.ResumeLayout(false);
             longLayoutPanel.ResumeLayout(false);
             longLayoutPanel2.ResumeLayout(false);
             longLayoutPanel2.PerformLayout();
@@ -527,6 +515,8 @@ namespace App
             catalogueNumberLayoutPanel.PerformLayout();
             NameLayoutPanel.ResumeLayout(false);
             NameLayoutPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)storageTable).EndInit();
+            flowLayoutPanel2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -535,17 +525,11 @@ namespace App
         private TableLayoutPanel formLayoutPanel;
         private FlowLayoutPanel menuLayoutPanel;
         private Button addButton;
-        private FlowLayoutPanel tableLayoutPanel;
         private Button editButton;
         private Button deleteButton;
         private Button homeButton;
         private Button returnButton;
-        private DataGridView storageTable;
         private TableLayoutPanel controlsLayoutPanel;
-        private FlowLayoutPanel buttonsLayoutPanel;
-        private Button acceptButton;
-        private Button resetButton;
-        private Button toSupplyButton;
         private TableLayoutPanel longLayoutPanel;
         private FlowLayoutPanel catalogueNumberLayoutPanel;
         private Label catalogueNumberLabel;
@@ -562,5 +546,10 @@ namespace App
         private Label priceLabel;
         private NumericUpDown balanceInput;
         private NumericUpDown priceInput;
+        private DataGridView storageTable;
+        private FlowLayoutPanel flowLayoutPanel2;
+        private Button button4;
+        private Button button5;
+        private Button button6;
     }
 }

@@ -29,5 +29,11 @@ namespace App
             this.home.Show();
             this.Close();
         }
+
+        private void EmployeesForm_FormClosed(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
     }
 }

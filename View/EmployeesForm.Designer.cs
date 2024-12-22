@@ -46,29 +46,29 @@ namespace App
             specialtiesPicker = new ComboBox();
             textsLayoutPanel = new TableLayoutPanel();
             flowLayoutPanel4 = new FlowLayoutPanel();
-            flowLayoutPanel9 = new FlowLayoutPanel();
+            birthDateLayoutPanel = new FlowLayoutPanel();
             birthDateLabel = new Label();
             birthDatePicker = new DateTimePicker();
-            flowLayoutPanel6 = new FlowLayoutPanel();
+            passportLayoutPanel = new FlowLayoutPanel();
             passportLabel = new Label();
             passportInput = new TextBox();
-            flowLayoutPanel7 = new FlowLayoutPanel();
+            addressLayoutPanel = new FlowLayoutPanel();
             addressLabel = new Label();
             addressInput = new TextBox();
-            flowLayoutPanel8 = new FlowLayoutPanel();
+            telephoneLayoutPanel = new FlowLayoutPanel();
             telephoneLabel = new Label();
             telephoneInput = new TextBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
-            catalogueNumberLayoutPanel = new FlowLayoutPanel();
+            surnameLayoutPanel = new FlowLayoutPanel();
             surnameLabel = new Label();
             surnameInput = new TextBox();
-            flowLayoutPanel2 = new FlowLayoutPanel();
+            nameLayoutPanel = new FlowLayoutPanel();
             nameLabel = new Label();
             nameInput = new TextBox();
-            flowLayoutPanel3 = new FlowLayoutPanel();
+            patronymicLayoutPanel = new FlowLayoutPanel();
             patronymicLabel = new Label();
             patronymicInput = new TextBox();
-            postDateLayoutPanel = new FlowLayoutPanel();
+            employmentDateLayoutPane = new FlowLayoutPanel();
             employmentDateLabel = new Label();
             employmentDatePicker = new DateTimePicker();
             buttonsLayoutPanel2 = new TableLayoutPanel();
@@ -83,15 +83,15 @@ namespace App
             specialtyLayoutPanel.SuspendLayout();
             textsLayoutPanel.SuspendLayout();
             flowLayoutPanel4.SuspendLayout();
-            flowLayoutPanel9.SuspendLayout();
-            flowLayoutPanel6.SuspendLayout();
-            flowLayoutPanel7.SuspendLayout();
-            flowLayoutPanel8.SuspendLayout();
+            birthDateLayoutPanel.SuspendLayout();
+            passportLayoutPanel.SuspendLayout();
+            addressLayoutPanel.SuspendLayout();
+            telephoneLayoutPanel.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
-            catalogueNumberLayoutPanel.SuspendLayout();
-            flowLayoutPanel2.SuspendLayout();
-            flowLayoutPanel3.SuspendLayout();
-            postDateLayoutPanel.SuspendLayout();
+            surnameLayoutPanel.SuspendLayout();
+            nameLayoutPanel.SuspendLayout();
+            patronymicLayoutPanel.SuspendLayout();
+            employmentDateLayoutPane.SuspendLayout();
             buttonsLayoutPanel2.SuspendLayout();
             flowLayoutPanel5.SuspendLayout();
             SuspendLayout();
@@ -100,19 +100,21 @@ namespace App
             // 
             formLayoutPanel.BackColor = Color.Transparent;
             formLayoutPanel.ColumnCount = 1;
-            formLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            formLayoutPanel.Controls.Add(menuLayoutPanel, 0, 0);
-            formLayoutPanel.Controls.Add(tableLayoutPanel, 0, 1);
-            formLayoutPanel.Controls.Add(controlsLayoutPanel, 0, 2);
+            formLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            formLayoutPanel.Controls.Add(menuLayoutPanel, 0, 1);
+            formLayoutPanel.Controls.Add(tableLayoutPanel, 0, 2);
+            formLayoutPanel.Controls.Add(controlsLayoutPanel, 0, 3);
             formLayoutPanel.Dock = DockStyle.Fill;
             formLayoutPanel.Location = new Point(0, 0);
             formLayoutPanel.Margin = new Padding(0);
             formLayoutPanel.Name = "formLayoutPanel";
             formLayoutPanel.Padding = new Padding(20, 0, 20, 0);
-            formLayoutPanel.RowCount = 3;
+            formLayoutPanel.RowCount = 5;
+            formLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 10F));
             formLayoutPanel.RowStyles.Add(new RowStyle());
             formLayoutPanel.RowStyles.Add(new RowStyle());
             formLayoutPanel.RowStyles.Add(new RowStyle());
+            formLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 10F));
             formLayoutPanel.Size = new Size(960, 540);
             formLayoutPanel.TabIndex = 3;
             // 
@@ -127,22 +129,23 @@ namespace App
             menuLayoutPanel.Controls.Add(deleteButton);
             menuLayoutPanel.Dock = DockStyle.Fill;
             menuLayoutPanel.Location = new Point(20, 10);
-            menuLayoutPanel.Margin = new Padding(0, 10, 0, 10);
+            menuLayoutPanel.Margin = new Padding(0);
             menuLayoutPanel.Name = "menuLayoutPanel";
             menuLayoutPanel.Size = new Size(920, 50);
             menuLayoutPanel.TabIndex = 0;
             // 
             // homeButton
             // 
+            homeButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             homeButton.BackColor = Color.Transparent;
             homeButton.FlatAppearance.BorderSize = 0;
             homeButton.FlatStyle = FlatStyle.Flat;
             homeButton.Font = new Font("Segoe MDL2 Assets", 18F, FontStyle.Regular, GraphicsUnit.Pixel);
             homeButton.ForeColor = SystemColors.WindowFrame;
-            homeButton.Location = new Point(0, 0);
+            homeButton.Location = new Point(0, 5);
             homeButton.Margin = new Padding(0, 0, 10, 0);
             homeButton.Name = "homeButton";
-            homeButton.Size = new Size(50, 50);
+            homeButton.Size = new Size(40, 40);
             homeButton.TabIndex = 4;
             homeButton.Text = "";
             homeButton.UseVisualStyleBackColor = false;
@@ -150,15 +153,16 @@ namespace App
             // 
             // returnButton
             // 
+            returnButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             returnButton.BackColor = Color.Transparent;
             returnButton.FlatAppearance.BorderSize = 0;
             returnButton.FlatStyle = FlatStyle.Flat;
             returnButton.Font = new Font("Segoe MDL2 Assets", 18F, FontStyle.Regular, GraphicsUnit.Pixel);
             returnButton.ForeColor = SystemColors.WindowFrame;
-            returnButton.Location = new Point(70, 0);
+            returnButton.Location = new Point(60, 5);
             returnButton.Margin = new Padding(10, 0, 10, 0);
             returnButton.Name = "returnButton";
-            returnButton.Size = new Size(50, 50);
+            returnButton.Size = new Size(40, 40);
             returnButton.TabIndex = 5;
             returnButton.Text = "";
             returnButton.UseVisualStyleBackColor = false;
@@ -172,8 +176,8 @@ namespace App
             employeesPicker.FlatStyle = FlatStyle.System;
             employeesPicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             employeesPicker.FormattingEnabled = true;
-            employeesPicker.Location = new Point(130, 11);
-            employeesPicker.Margin = new Padding(0);
+            employeesPicker.Location = new Point(120, 11);
+            employeesPicker.Margin = new Padding(10, 0, 10, 0);
             employeesPicker.Name = "employeesPicker";
             employeesPicker.Size = new Size(296, 27);
             employeesPicker.TabIndex = 1;
@@ -232,7 +236,7 @@ namespace App
             tableLayoutPanel.AutoSize = true;
             tableLayoutPanel.Controls.Add(divider1);
             tableLayoutPanel.FlowDirection = FlowDirection.TopDown;
-            tableLayoutPanel.Location = new Point(20, 70);
+            tableLayoutPanel.Location = new Point(20, 60);
             tableLayoutPanel.Margin = new Padding(0);
             tableLayoutPanel.Name = "tableLayoutPanel";
             tableLayoutPanel.Size = new Size(920, 21);
@@ -256,8 +260,8 @@ namespace App
             controlsLayoutPanel.Controls.Add(inputsLayoutPanel, 0, 0);
             controlsLayoutPanel.Controls.Add(buttonsLayoutPanel2, 1, 0);
             controlsLayoutPanel.Dock = DockStyle.Fill;
-            controlsLayoutPanel.Location = new Point(20, 101);
-            controlsLayoutPanel.Margin = new Padding(0, 10, 0, 10);
+            controlsLayoutPanel.Location = new Point(20, 81);
+            controlsLayoutPanel.Margin = new Padding(0);
             controlsLayoutPanel.Name = "controlsLayoutPanel";
             controlsLayoutPanel.RowCount = 1;
             controlsLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
@@ -338,10 +342,10 @@ namespace App
             // flowLayoutPanel4
             // 
             flowLayoutPanel4.AutoSize = true;
-            flowLayoutPanel4.Controls.Add(flowLayoutPanel9);
-            flowLayoutPanel4.Controls.Add(flowLayoutPanel6);
-            flowLayoutPanel4.Controls.Add(flowLayoutPanel7);
-            flowLayoutPanel4.Controls.Add(flowLayoutPanel8);
+            flowLayoutPanel4.Controls.Add(birthDateLayoutPanel);
+            flowLayoutPanel4.Controls.Add(passportLayoutPanel);
+            flowLayoutPanel4.Controls.Add(addressLayoutPanel);
+            flowLayoutPanel4.Controls.Add(telephoneLayoutPanel);
             flowLayoutPanel4.Dock = DockStyle.Fill;
             flowLayoutPanel4.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel4.Location = new Point(385, 0);
@@ -350,18 +354,18 @@ namespace App
             flowLayoutPanel4.Size = new Size(375, 254);
             flowLayoutPanel4.TabIndex = 1;
             // 
-            // flowLayoutPanel9
+            // birthDateLayoutPanel
             // 
-            flowLayoutPanel9.AutoSize = true;
-            flowLayoutPanel9.Controls.Add(birthDateLabel);
-            flowLayoutPanel9.Controls.Add(birthDatePicker);
-            flowLayoutPanel9.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel9.Location = new Point(0, 0);
-            flowLayoutPanel9.Margin = new Padding(0);
-            flowLayoutPanel9.Name = "flowLayoutPanel9";
-            flowLayoutPanel9.Padding = new Padding(0, 5, 0, 5);
-            flowLayoutPanel9.Size = new Size(375, 61);
-            flowLayoutPanel9.TabIndex = 5;
+            birthDateLayoutPanel.AutoSize = true;
+            birthDateLayoutPanel.Controls.Add(birthDateLabel);
+            birthDateLayoutPanel.Controls.Add(birthDatePicker);
+            birthDateLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            birthDateLayoutPanel.Location = new Point(0, 0);
+            birthDateLayoutPanel.Margin = new Padding(0);
+            birthDateLayoutPanel.Name = "birthDateLayoutPanel";
+            birthDateLayoutPanel.Padding = new Padding(0, 5, 0, 5);
+            birthDateLayoutPanel.Size = new Size(375, 61);
+            birthDateLayoutPanel.TabIndex = 5;
             // 
             // birthDateLabel
             // 
@@ -383,18 +387,18 @@ namespace App
             birthDatePicker.Size = new Size(375, 26);
             birthDatePicker.TabIndex = 1;
             // 
-            // flowLayoutPanel6
+            // passportLayoutPanel
             // 
-            flowLayoutPanel6.AutoSize = true;
-            flowLayoutPanel6.Controls.Add(passportLabel);
-            flowLayoutPanel6.Controls.Add(passportInput);
-            flowLayoutPanel6.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel6.Location = new Point(0, 61);
-            flowLayoutPanel6.Margin = new Padding(0);
-            flowLayoutPanel6.Name = "flowLayoutPanel6";
-            flowLayoutPanel6.Padding = new Padding(0, 5, 0, 5);
-            flowLayoutPanel6.Size = new Size(375, 61);
-            flowLayoutPanel6.TabIndex = 2;
+            passportLayoutPanel.AutoSize = true;
+            passportLayoutPanel.Controls.Add(passportLabel);
+            passportLayoutPanel.Controls.Add(passportInput);
+            passportLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            passportLayoutPanel.Location = new Point(0, 61);
+            passportLayoutPanel.Margin = new Padding(0);
+            passportLayoutPanel.Name = "passportLayoutPanel";
+            passportLayoutPanel.Padding = new Padding(0, 5, 0, 5);
+            passportLayoutPanel.Size = new Size(375, 61);
+            passportLayoutPanel.TabIndex = 2;
             // 
             // passportLabel
             // 
@@ -418,18 +422,18 @@ namespace App
             passportInput.Size = new Size(375, 26);
             passportInput.TabIndex = 1;
             // 
-            // flowLayoutPanel7
+            // addressLayoutPanel
             // 
-            flowLayoutPanel7.AutoSize = true;
-            flowLayoutPanel7.Controls.Add(addressLabel);
-            flowLayoutPanel7.Controls.Add(addressInput);
-            flowLayoutPanel7.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel7.Location = new Point(0, 122);
-            flowLayoutPanel7.Margin = new Padding(0);
-            flowLayoutPanel7.Name = "flowLayoutPanel7";
-            flowLayoutPanel7.Padding = new Padding(0, 5, 0, 5);
-            flowLayoutPanel7.Size = new Size(375, 61);
-            flowLayoutPanel7.TabIndex = 3;
+            addressLayoutPanel.AutoSize = true;
+            addressLayoutPanel.Controls.Add(addressLabel);
+            addressLayoutPanel.Controls.Add(addressInput);
+            addressLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            addressLayoutPanel.Location = new Point(0, 122);
+            addressLayoutPanel.Margin = new Padding(0);
+            addressLayoutPanel.Name = "addressLayoutPanel";
+            addressLayoutPanel.Padding = new Padding(0, 5, 0, 5);
+            addressLayoutPanel.Size = new Size(375, 61);
+            addressLayoutPanel.TabIndex = 3;
             // 
             // addressLabel
             // 
@@ -453,18 +457,18 @@ namespace App
             addressInput.Size = new Size(375, 26);
             addressInput.TabIndex = 1;
             // 
-            // flowLayoutPanel8
+            // telephoneLayoutPanel
             // 
-            flowLayoutPanel8.AutoSize = true;
-            flowLayoutPanel8.Controls.Add(telephoneLabel);
-            flowLayoutPanel8.Controls.Add(telephoneInput);
-            flowLayoutPanel8.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel8.Location = new Point(0, 183);
-            flowLayoutPanel8.Margin = new Padding(0);
-            flowLayoutPanel8.Name = "flowLayoutPanel8";
-            flowLayoutPanel8.Padding = new Padding(0, 5, 0, 5);
-            flowLayoutPanel8.Size = new Size(375, 61);
-            flowLayoutPanel8.TabIndex = 4;
+            telephoneLayoutPanel.AutoSize = true;
+            telephoneLayoutPanel.Controls.Add(telephoneLabel);
+            telephoneLayoutPanel.Controls.Add(telephoneInput);
+            telephoneLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            telephoneLayoutPanel.Location = new Point(0, 183);
+            telephoneLayoutPanel.Margin = new Padding(0);
+            telephoneLayoutPanel.Name = "telephoneLayoutPanel";
+            telephoneLayoutPanel.Padding = new Padding(0, 5, 0, 5);
+            telephoneLayoutPanel.Size = new Size(375, 61);
+            telephoneLayoutPanel.TabIndex = 4;
             // 
             // telephoneLabel
             // 
@@ -490,10 +494,10 @@ namespace App
             // 
             // flowLayoutPanel1
             // 
-            flowLayoutPanel1.Controls.Add(catalogueNumberLayoutPanel);
-            flowLayoutPanel1.Controls.Add(flowLayoutPanel2);
-            flowLayoutPanel1.Controls.Add(flowLayoutPanel3);
-            flowLayoutPanel1.Controls.Add(postDateLayoutPanel);
+            flowLayoutPanel1.Controls.Add(surnameLayoutPanel);
+            flowLayoutPanel1.Controls.Add(nameLayoutPanel);
+            flowLayoutPanel1.Controls.Add(patronymicLayoutPanel);
+            flowLayoutPanel1.Controls.Add(employmentDateLayoutPane);
             flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel1.Location = new Point(0, 0);
@@ -502,18 +506,18 @@ namespace App
             flowLayoutPanel1.Size = new Size(375, 254);
             flowLayoutPanel1.TabIndex = 0;
             // 
-            // catalogueNumberLayoutPanel
+            // surnameLayoutPanel
             // 
-            catalogueNumberLayoutPanel.AutoSize = true;
-            catalogueNumberLayoutPanel.Controls.Add(surnameLabel);
-            catalogueNumberLayoutPanel.Controls.Add(surnameInput);
-            catalogueNumberLayoutPanel.FlowDirection = FlowDirection.TopDown;
-            catalogueNumberLayoutPanel.Location = new Point(0, 0);
-            catalogueNumberLayoutPanel.Margin = new Padding(0);
-            catalogueNumberLayoutPanel.Name = "catalogueNumberLayoutPanel";
-            catalogueNumberLayoutPanel.Padding = new Padding(0, 5, 0, 5);
-            catalogueNumberLayoutPanel.Size = new Size(375, 61);
-            catalogueNumberLayoutPanel.TabIndex = 2;
+            surnameLayoutPanel.AutoSize = true;
+            surnameLayoutPanel.Controls.Add(surnameLabel);
+            surnameLayoutPanel.Controls.Add(surnameInput);
+            surnameLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            surnameLayoutPanel.Location = new Point(0, 0);
+            surnameLayoutPanel.Margin = new Padding(0);
+            surnameLayoutPanel.Name = "surnameLayoutPanel";
+            surnameLayoutPanel.Padding = new Padding(0, 5, 0, 5);
+            surnameLayoutPanel.Size = new Size(375, 61);
+            surnameLayoutPanel.TabIndex = 2;
             // 
             // surnameLabel
             // 
@@ -537,18 +541,18 @@ namespace App
             surnameInput.Size = new Size(375, 26);
             surnameInput.TabIndex = 1;
             // 
-            // flowLayoutPanel2
+            // nameLayoutPanel
             // 
-            flowLayoutPanel2.AutoSize = true;
-            flowLayoutPanel2.Controls.Add(nameLabel);
-            flowLayoutPanel2.Controls.Add(nameInput);
-            flowLayoutPanel2.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel2.Location = new Point(0, 61);
-            flowLayoutPanel2.Margin = new Padding(0);
-            flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Padding = new Padding(0, 5, 0, 5);
-            flowLayoutPanel2.Size = new Size(375, 61);
-            flowLayoutPanel2.TabIndex = 3;
+            nameLayoutPanel.AutoSize = true;
+            nameLayoutPanel.Controls.Add(nameLabel);
+            nameLayoutPanel.Controls.Add(nameInput);
+            nameLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            nameLayoutPanel.Location = new Point(0, 61);
+            nameLayoutPanel.Margin = new Padding(0);
+            nameLayoutPanel.Name = "nameLayoutPanel";
+            nameLayoutPanel.Padding = new Padding(0, 5, 0, 5);
+            nameLayoutPanel.Size = new Size(375, 61);
+            nameLayoutPanel.TabIndex = 3;
             // 
             // nameLabel
             // 
@@ -572,18 +576,18 @@ namespace App
             nameInput.Size = new Size(375, 26);
             nameInput.TabIndex = 1;
             // 
-            // flowLayoutPanel3
+            // patronymicLayoutPanel
             // 
-            flowLayoutPanel3.AutoSize = true;
-            flowLayoutPanel3.Controls.Add(patronymicLabel);
-            flowLayoutPanel3.Controls.Add(patronymicInput);
-            flowLayoutPanel3.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel3.Location = new Point(0, 122);
-            flowLayoutPanel3.Margin = new Padding(0);
-            flowLayoutPanel3.Name = "flowLayoutPanel3";
-            flowLayoutPanel3.Padding = new Padding(0, 5, 0, 5);
-            flowLayoutPanel3.Size = new Size(375, 61);
-            flowLayoutPanel3.TabIndex = 4;
+            patronymicLayoutPanel.AutoSize = true;
+            patronymicLayoutPanel.Controls.Add(patronymicLabel);
+            patronymicLayoutPanel.Controls.Add(patronymicInput);
+            patronymicLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            patronymicLayoutPanel.Location = new Point(0, 122);
+            patronymicLayoutPanel.Margin = new Padding(0);
+            patronymicLayoutPanel.Name = "patronymicLayoutPanel";
+            patronymicLayoutPanel.Padding = new Padding(0, 5, 0, 5);
+            patronymicLayoutPanel.Size = new Size(375, 61);
+            patronymicLayoutPanel.TabIndex = 4;
             // 
             // patronymicLabel
             // 
@@ -607,18 +611,18 @@ namespace App
             patronymicInput.Size = new Size(375, 26);
             patronymicInput.TabIndex = 1;
             // 
-            // postDateLayoutPanel
+            // employmentDateLayoutPane
             // 
-            postDateLayoutPanel.AutoSize = true;
-            postDateLayoutPanel.Controls.Add(employmentDateLabel);
-            postDateLayoutPanel.Controls.Add(employmentDatePicker);
-            postDateLayoutPanel.FlowDirection = FlowDirection.TopDown;
-            postDateLayoutPanel.Location = new Point(0, 183);
-            postDateLayoutPanel.Margin = new Padding(0);
-            postDateLayoutPanel.Name = "postDateLayoutPanel";
-            postDateLayoutPanel.Padding = new Padding(0, 5, 0, 5);
-            postDateLayoutPanel.Size = new Size(375, 61);
-            postDateLayoutPanel.TabIndex = 5;
+            employmentDateLayoutPane.AutoSize = true;
+            employmentDateLayoutPane.Controls.Add(employmentDateLabel);
+            employmentDateLayoutPane.Controls.Add(employmentDatePicker);
+            employmentDateLayoutPane.FlowDirection = FlowDirection.TopDown;
+            employmentDateLayoutPane.Location = new Point(0, 183);
+            employmentDateLayoutPane.Margin = new Padding(0);
+            employmentDateLayoutPane.Name = "employmentDateLayoutPane";
+            employmentDateLayoutPane.Padding = new Padding(0, 5, 0, 5);
+            employmentDateLayoutPane.Size = new Size(375, 61);
+            employmentDateLayoutPane.TabIndex = 5;
             // 
             // employmentDateLabel
             // 
@@ -709,6 +713,7 @@ namespace App
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Сотрудники автосервиса";
+            FormClosed += EmployeesForm_FormClosed;
             Load += EmployeesForm_Load;
             formLayoutPanel.ResumeLayout(false);
             formLayoutPanel.PerformLayout();
@@ -723,28 +728,27 @@ namespace App
             textsLayoutPanel.PerformLayout();
             flowLayoutPanel4.ResumeLayout(false);
             flowLayoutPanel4.PerformLayout();
-            flowLayoutPanel9.ResumeLayout(false);
-            flowLayoutPanel6.ResumeLayout(false);
-            flowLayoutPanel6.PerformLayout();
-            flowLayoutPanel7.ResumeLayout(false);
-            flowLayoutPanel7.PerformLayout();
-            flowLayoutPanel8.ResumeLayout(false);
-            flowLayoutPanel8.PerformLayout();
+            birthDateLayoutPanel.ResumeLayout(false);
+            passportLayoutPanel.ResumeLayout(false);
+            passportLayoutPanel.PerformLayout();
+            addressLayoutPanel.ResumeLayout(false);
+            addressLayoutPanel.PerformLayout();
+            telephoneLayoutPanel.ResumeLayout(false);
+            telephoneLayoutPanel.PerformLayout();
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel1.PerformLayout();
-            catalogueNumberLayoutPanel.ResumeLayout(false);
-            catalogueNumberLayoutPanel.PerformLayout();
-            flowLayoutPanel2.ResumeLayout(false);
-            flowLayoutPanel2.PerformLayout();
-            flowLayoutPanel3.ResumeLayout(false);
-            flowLayoutPanel3.PerformLayout();
-            postDateLayoutPanel.ResumeLayout(false);
+            surnameLayoutPanel.ResumeLayout(false);
+            surnameLayoutPanel.PerformLayout();
+            nameLayoutPanel.ResumeLayout(false);
+            nameLayoutPanel.PerformLayout();
+            patronymicLayoutPanel.ResumeLayout(false);
+            patronymicLayoutPanel.PerformLayout();
+            employmentDateLayoutPane.ResumeLayout(false);
             buttonsLayoutPanel2.ResumeLayout(false);
             buttonsLayoutPanel2.PerformLayout();
             flowLayoutPanel5.ResumeLayout(false);
             ResumeLayout(false);
         }
-
         #endregion
 
         private TableLayoutPanel formLayoutPanel;
@@ -768,29 +772,29 @@ namespace App
         private ComboBox specialtiesPicker;
         private TableLayoutPanel textsLayoutPanel;
         private FlowLayoutPanel flowLayoutPanel1;
-        private FlowLayoutPanel catalogueNumberLayoutPanel;
+        private FlowLayoutPanel surnameLayoutPanel;
         private Label surnameLabel;
         private TextBox surnameInput;
-        private FlowLayoutPanel flowLayoutPanel2;
+        private FlowLayoutPanel nameLayoutPanel;
         private Label nameLabel;
         private TextBox nameInput;
-        private FlowLayoutPanel flowLayoutPanel3;
+        private FlowLayoutPanel patronymicLayoutPanel;
         private Label patronymicLabel;
         private TextBox patronymicInput;
-        private FlowLayoutPanel postDateLayoutPanel;
+        private FlowLayoutPanel employmentDateLayoutPane;
         private Label employmentDateLabel;
         private DateTimePicker employmentDatePicker;
         private FlowLayoutPanel flowLayoutPanel4;
-        private FlowLayoutPanel flowLayoutPanel6;
+        private FlowLayoutPanel passportLayoutPanel;
         private Label passportLabel;
         private TextBox passportInput;
-        private FlowLayoutPanel flowLayoutPanel7;
+        private FlowLayoutPanel addressLayoutPanel;
         private Label addressLabel;
         private TextBox addressInput;
-        private FlowLayoutPanel flowLayoutPanel8;
+        private FlowLayoutPanel telephoneLayoutPanel;
         private Label telephoneLabel;
         private TextBox telephoneInput;
-        private FlowLayoutPanel flowLayoutPanel9;
+        private FlowLayoutPanel birthDateLayoutPanel;
         private Label birthDateLabel;
         private DateTimePicker birthDatePicker;
     }
