@@ -29,6 +29,7 @@ namespace App
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             formLayoutPanel = new TableLayoutPanel();
             menuLayoutPanel = new FlowLayoutPanel();
             homeButton = new Button();
@@ -36,54 +37,63 @@ namespace App
             addButton = new Button();
             editButton = new Button();
             deleteButton = new Button();
-            tableLayoutPanel1 = new TableLayoutPanel();
-            tableLayoutPanel2 = new TableLayoutPanel();
-            buttonsLayoutPanel2 = new TableLayoutPanel();
-            flowLayoutPanel5 = new FlowLayoutPanel();
-            acceptButton = new Button();
-            resetButton = new Button();
-            button1 = new Button();
-            tableLayoutPanel3 = new TableLayoutPanel();
-            tableLayoutPanel4 = new TableLayoutPanel();
-            flowLayoutPanel2 = new FlowLayoutPanel();
-            label2 = new Label();
-            comboBox2 = new ComboBox();
-            flowLayoutPanel1 = new FlowLayoutPanel();
-            label1 = new Label();
-            comboBox1 = new ComboBox();
+            controlsLayoutPanel = new TableLayoutPanel();
+            inputsLayoutPanel = new TableLayoutPanel();
+            pickersLayoutPanel = new TableLayoutPanel();
+            carLayoutPanel = new FlowLayoutPanel();
+            carLabel = new Label();
+            carsPicker = new ComboBox();
+            carBindingSource = new BindingSource(components);
+            ownerLayoutPanel = new FlowLayoutPanel();
+            ownerLabel = new Label();
+            ownersPicker = new ComboBox();
+            ownerBindingSource = new BindingSource(components);
             employeeLayoutPanel = new FlowLayoutPanel();
             employeeLabel = new Label();
             employeePicker = new ComboBox();
-            tableLayoutPanel5 = new TableLayoutPanel();
-            tableLayoutPanel6 = new TableLayoutPanel();
-            checkBox1 = new CheckBox();
-            flowLayoutPanel6 = new FlowLayoutPanel();
-            label5 = new Label();
-            dateTimePicker3 = new DateTimePicker();
-            flowLayoutPanel4 = new FlowLayoutPanel();
-            label4 = new Label();
-            dateTimePicker2 = new DateTimePicker();
+            employeeBindingSource = new BindingSource(components);
+            datesLayoutPanel = new TableLayoutPanel();
+            endDateLayoutPanel = new FlowLayoutPanel();
+            endDateLabel = new Label();
+            endDatePicker = new DateTimePicker();
+            startDateLayoutPanel = new FlowLayoutPanel();
+            startDateLabel = new Label();
+            startDatePicker = new DateTimePicker();
             postDateLayoutPanel = new FlowLayoutPanel();
             postDateLabel = new Label();
             postDatePicker = new DateTimePicker();
-            suppliesTable = new DataGridView();
+            endedCheckBox = new CheckBox();
+            buttonsLayoutPanel = new FlowLayoutPanel();
+            acceptButton = new Button();
+            resetButton = new Button();
+            toOrdersButton = new Button();
+            requestsTable = new DataGridView();
+            ownerIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            carIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            employeeIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            requestDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            startDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            completedDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
+            completeDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            requestBindingSource = new BindingSource(components);
             formLayoutPanel.SuspendLayout();
             menuLayoutPanel.SuspendLayout();
-            tableLayoutPanel1.SuspendLayout();
-            tableLayoutPanel2.SuspendLayout();
-            buttonsLayoutPanel2.SuspendLayout();
-            flowLayoutPanel5.SuspendLayout();
-            tableLayoutPanel3.SuspendLayout();
-            tableLayoutPanel4.SuspendLayout();
-            flowLayoutPanel2.SuspendLayout();
-            flowLayoutPanel1.SuspendLayout();
+            controlsLayoutPanel.SuspendLayout();
+            inputsLayoutPanel.SuspendLayout();
+            pickersLayoutPanel.SuspendLayout();
+            carLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)carBindingSource).BeginInit();
+            ownerLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ownerBindingSource).BeginInit();
             employeeLayoutPanel.SuspendLayout();
-            tableLayoutPanel5.SuspendLayout();
-            tableLayoutPanel6.SuspendLayout();
-            flowLayoutPanel6.SuspendLayout();
-            flowLayoutPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)employeeBindingSource).BeginInit();
+            datesLayoutPanel.SuspendLayout();
+            endDateLayoutPanel.SuspendLayout();
+            startDateLayoutPanel.SuspendLayout();
             postDateLayoutPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)suppliesTable).BeginInit();
+            buttonsLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)requestsTable).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)requestBindingSource).BeginInit();
             SuspendLayout();
             // 
             // formLayoutPanel
@@ -92,8 +102,8 @@ namespace App
             formLayoutPanel.ColumnCount = 1;
             formLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             formLayoutPanel.Controls.Add(menuLayoutPanel, 0, 0);
-            formLayoutPanel.Controls.Add(tableLayoutPanel1, 0, 4);
-            formLayoutPanel.Controls.Add(suppliesTable, 0, 2);
+            formLayoutPanel.Controls.Add(controlsLayoutPanel, 0, 4);
+            formLayoutPanel.Controls.Add(requestsTable, 0, 2);
             formLayoutPanel.Dock = DockStyle.Fill;
             formLayoutPanel.Location = new Point(0, 0);
             formLayoutPanel.Margin = new Padding(0);
@@ -110,17 +120,17 @@ namespace App
             // 
             // menuLayoutPanel
             // 
-            menuLayoutPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             menuLayoutPanel.AutoSize = true;
             menuLayoutPanel.Controls.Add(homeButton);
             menuLayoutPanel.Controls.Add(returnButton);
             menuLayoutPanel.Controls.Add(addButton);
             menuLayoutPanel.Controls.Add(editButton);
             menuLayoutPanel.Controls.Add(deleteButton);
+            menuLayoutPanel.Dock = DockStyle.Fill;
             menuLayoutPanel.Location = new Point(20, 10);
             menuLayoutPanel.Margin = new Padding(0);
             menuLayoutPanel.Name = "menuLayoutPanel";
-            menuLayoutPanel.Size = new Size(919, 50);
+            menuLayoutPanel.Size = new Size(920, 50);
             menuLayoutPanel.TabIndex = 0;
             // 
             // homeButton
@@ -172,6 +182,7 @@ namespace App
             addButton.TabIndex = 1;
             addButton.Text = "Добавить";
             addButton.UseVisualStyleBackColor = false;
+            addButton.Click += addButton_Click;
             // 
             // editButton
             // 
@@ -188,6 +199,7 @@ namespace App
             editButton.TabIndex = 2;
             editButton.Text = "Изменить";
             editButton.UseVisualStyleBackColor = false;
+            editButton.Click += editButton_Click;
             // 
             // deleteButton
             // 
@@ -204,229 +216,156 @@ namespace App
             deleteButton.TabIndex = 3;
             deleteButton.Text = "Удалить";
             deleteButton.UseVisualStyleBackColor = false;
+            deleteButton.Click += deleteButton_Click;
             // 
-            // tableLayoutPanel1
+            // controlsLayoutPanel
             // 
-            tableLayoutPanel1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            tableLayoutPanel1.ColumnCount = 3;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 155F));
-            tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 2, 0);
-            tableLayoutPanel1.Controls.Add(tableLayoutPanel3, 0, 0);
-            tableLayoutPanel1.Location = new Point(20, 337);
-            tableLayoutPanel1.Margin = new Padding(0);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 1;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle());
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.Size = new Size(920, 190);
-            tableLayoutPanel1.TabIndex = 1;
+            controlsLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            controlsLayoutPanel.ColumnCount = 3;
+            controlsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            controlsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
+            controlsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F));
+            controlsLayoutPanel.Controls.Add(inputsLayoutPanel, 0, 0);
+            controlsLayoutPanel.Controls.Add(buttonsLayoutPanel, 2, 0);
+            controlsLayoutPanel.Location = new Point(20, 340);
+            controlsLayoutPanel.Margin = new Padding(0);
+            controlsLayoutPanel.Name = "controlsLayoutPanel";
+            controlsLayoutPanel.RowCount = 1;
+            controlsLayoutPanel.RowStyles.Add(new RowStyle());
+            controlsLayoutPanel.Size = new Size(920, 190);
+            controlsLayoutPanel.TabIndex = 1;
             // 
-            // tableLayoutPanel2
+            // inputsLayoutPanel
             // 
-            tableLayoutPanel2.AutoSize = true;
-            tableLayoutPanel2.ColumnCount = 1;
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Controls.Add(buttonsLayoutPanel2, 0, 1);
-            tableLayoutPanel2.Dock = DockStyle.Fill;
-            tableLayoutPanel2.Location = new Point(765, 0);
-            tableLayoutPanel2.Margin = new Padding(0);
-            tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 3;
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle());
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(155, 190);
-            tableLayoutPanel2.TabIndex = 0;
+            inputsLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            inputsLayoutPanel.AutoSize = true;
+            inputsLayoutPanel.ColumnCount = 1;
+            inputsLayoutPanel.ColumnStyles.Add(new ColumnStyle());
+            inputsLayoutPanel.Controls.Add(pickersLayoutPanel, 0, 0);
+            inputsLayoutPanel.Controls.Add(datesLayoutPanel, 0, 1);
+            inputsLayoutPanel.Location = new Point(0, 3);
+            inputsLayoutPanel.Margin = new Padding(0);
+            inputsLayoutPanel.Name = "inputsLayoutPanel";
+            inputsLayoutPanel.RowCount = 2;
+            inputsLayoutPanel.RowStyles.Add(new RowStyle());
+            inputsLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            inputsLayoutPanel.Size = new Size(760, 184);
+            inputsLayoutPanel.TabIndex = 1;
             // 
-            // buttonsLayoutPanel2
+            // pickersLayoutPanel
             // 
-            buttonsLayoutPanel2.AutoSize = true;
-            buttonsLayoutPanel2.ColumnCount = 1;
-            buttonsLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            buttonsLayoutPanel2.Controls.Add(flowLayoutPanel5, 0, 1);
-            buttonsLayoutPanel2.Location = new Point(0, 10);
-            buttonsLayoutPanel2.Margin = new Padding(0);
-            buttonsLayoutPanel2.Name = "buttonsLayoutPanel2";
-            buttonsLayoutPanel2.RowCount = 3;
-            buttonsLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            buttonsLayoutPanel2.RowStyles.Add(new RowStyle());
-            buttonsLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            buttonsLayoutPanel2.Size = new Size(150, 170);
-            buttonsLayoutPanel2.TabIndex = 1;
+            pickersLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            pickersLayoutPanel.AutoSize = true;
+            pickersLayoutPanel.ColumnCount = 5;
+            pickersLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
+            pickersLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
+            pickersLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
+            pickersLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
+            pickersLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            pickersLayoutPanel.Controls.Add(carLayoutPanel, 4, 0);
+            pickersLayoutPanel.Controls.Add(ownerLayoutPanel, 2, 0);
+            pickersLayoutPanel.Controls.Add(employeeLayoutPanel, 0, 0);
+            pickersLayoutPanel.Location = new Point(0, 0);
+            pickersLayoutPanel.Margin = new Padding(0);
+            pickersLayoutPanel.Name = "pickersLayoutPanel";
+            pickersLayoutPanel.RowCount = 1;
+            pickersLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            pickersLayoutPanel.Size = new Size(760, 62);
+            pickersLayoutPanel.TabIndex = 0;
             // 
-            // flowLayoutPanel5
+            // carLayoutPanel
             // 
-            flowLayoutPanel5.AutoSize = true;
-            flowLayoutPanel5.Controls.Add(acceptButton);
-            flowLayoutPanel5.Controls.Add(resetButton);
-            flowLayoutPanel5.Controls.Add(button1);
-            flowLayoutPanel5.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel5.Location = new Point(0, 0);
-            flowLayoutPanel5.Margin = new Padding(0);
-            flowLayoutPanel5.Name = "flowLayoutPanel5";
-            flowLayoutPanel5.Size = new Size(150, 170);
-            flowLayoutPanel5.TabIndex = 0;
+            carLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            carLayoutPanel.AutoSize = true;
+            carLayoutPanel.Controls.Add(carLabel);
+            carLayoutPanel.Controls.Add(carsPicker);
+            carLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            carLayoutPanel.Location = new Point(512, 0);
+            carLayoutPanel.Margin = new Padding(0);
+            carLayoutPanel.Name = "carLayoutPanel";
+            carLayoutPanel.Padding = new Padding(0, 5, 0, 5);
+            carLayoutPanel.Size = new Size(248, 62);
+            carLayoutPanel.TabIndex = 5;
             // 
-            // acceptButton
+            // carLabel
             // 
-            acceptButton.BackColor = SystemColors.MenuHighlight;
-            acceptButton.FlatStyle = FlatStyle.Flat;
-            acceptButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            acceptButton.ForeColor = SystemColors.ButtonFace;
-            acceptButton.Location = new Point(0, 0);
-            acceptButton.Margin = new Padding(0);
-            acceptButton.Name = "acceptButton";
-            acceptButton.Size = new Size(150, 50);
-            acceptButton.TabIndex = 6;
-            acceptButton.Text = "Принять";
-            acceptButton.UseVisualStyleBackColor = false;
+            carLabel.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            carLabel.Location = new Point(0, 5);
+            carLabel.Margin = new Padding(0);
+            carLabel.Name = "carLabel";
+            carLabel.Size = new Size(245, 25);
+            carLabel.TabIndex = 0;
+            carLabel.Text = "Автомобиль";
             // 
-            // resetButton
+            // carsPicker
             // 
-            resetButton.BackColor = SystemColors.ScrollBar;
-            resetButton.FlatAppearance.BorderSize = 0;
-            resetButton.FlatStyle = FlatStyle.Flat;
-            resetButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            resetButton.ForeColor = SystemColors.ControlText;
-            resetButton.Location = new Point(0, 60);
-            resetButton.Margin = new Padding(0, 10, 0, 10);
-            resetButton.Name = "resetButton";
-            resetButton.Size = new Size(150, 50);
-            resetButton.TabIndex = 7;
-            resetButton.Text = "Сбросить";
-            resetButton.UseVisualStyleBackColor = false;
+            carsPicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            carsPicker.BackColor = Color.White;
+            carsPicker.DataSource = carBindingSource;
+            carsPicker.DisplayMember = "LicensePlate";
+            carsPicker.DropDownStyle = ComboBoxStyle.DropDownList;
+            carsPicker.FlatStyle = FlatStyle.System;
+            carsPicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            carsPicker.FormattingEnabled = true;
+            carsPicker.Location = new Point(0, 30);
+            carsPicker.Margin = new Padding(0);
+            carsPicker.Name = "carsPicker";
+            carsPicker.Size = new Size(245, 27);
+            carsPicker.TabIndex = 1;
+            carsPicker.ValueMember = "Id";
             // 
-            // button1
+            // carBindingSource
             // 
-            button1.BackColor = SystemColors.MenuHighlight;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            button1.ForeColor = SystemColors.ButtonFace;
-            button1.Location = new Point(0, 120);
-            button1.Margin = new Padding(0);
-            button1.Name = "button1";
-            button1.Size = new Size(150, 50);
-            button1.TabIndex = 6;
-            button1.Text = "Заказ-наряд";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            carBindingSource.DataSource = typeof(Car);
             // 
-            // tableLayoutPanel3
+            // ownerLayoutPanel
             // 
-            tableLayoutPanel3.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            tableLayoutPanel3.AutoSize = true;
-            tableLayoutPanel3.ColumnCount = 1;
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel3.Controls.Add(tableLayoutPanel4, 0, 0);
-            tableLayoutPanel3.Controls.Add(tableLayoutPanel5, 0, 1);
-            tableLayoutPanel3.Location = new Point(0, 3);
-            tableLayoutPanel3.Margin = new Padding(0);
-            tableLayoutPanel3.Name = "tableLayoutPanel3";
-            tableLayoutPanel3.RowCount = 2;
-            tableLayoutPanel3.RowStyles.Add(new RowStyle());
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel3.Size = new Size(755, 184);
-            tableLayoutPanel3.TabIndex = 1;
+            ownerLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            ownerLayoutPanel.AutoSize = true;
+            ownerLayoutPanel.Controls.Add(ownerLabel);
+            ownerLayoutPanel.Controls.Add(ownersPicker);
+            ownerLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            ownerLayoutPanel.Location = new Point(256, 0);
+            ownerLayoutPanel.Margin = new Padding(0);
+            ownerLayoutPanel.Name = "ownerLayoutPanel";
+            ownerLayoutPanel.Padding = new Padding(0, 5, 0, 5);
+            ownerLayoutPanel.Size = new Size(246, 62);
+            ownerLayoutPanel.TabIndex = 4;
             // 
-            // tableLayoutPanel4
+            // ownerLabel
             // 
-            tableLayoutPanel4.AutoSize = true;
-            tableLayoutPanel4.ColumnCount = 5;
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel4.Controls.Add(flowLayoutPanel2, 4, 0);
-            tableLayoutPanel4.Controls.Add(flowLayoutPanel1, 2, 0);
-            tableLayoutPanel4.Controls.Add(employeeLayoutPanel, 0, 0);
-            tableLayoutPanel4.Location = new Point(0, 0);
-            tableLayoutPanel4.Margin = new Padding(0);
-            tableLayoutPanel4.Name = "tableLayoutPanel4";
-            tableLayoutPanel4.RowCount = 1;
-            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel4.Size = new Size(755, 62);
-            tableLayoutPanel4.TabIndex = 0;
+            ownerLabel.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            ownerLabel.Location = new Point(0, 5);
+            ownerLabel.Margin = new Padding(0);
+            ownerLabel.Name = "ownerLabel";
+            ownerLabel.Size = new Size(245, 25);
+            ownerLabel.TabIndex = 0;
+            ownerLabel.Text = "Владелец";
             // 
-            // flowLayoutPanel2
+            // ownersPicker
             // 
-            flowLayoutPanel2.AutoSize = true;
-            flowLayoutPanel2.Controls.Add(label2);
-            flowLayoutPanel2.Controls.Add(comboBox2);
-            flowLayoutPanel2.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel2.Location = new Point(509, 0);
-            flowLayoutPanel2.Margin = new Padding(0);
-            flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Padding = new Padding(0, 5, 0, 5);
-            flowLayoutPanel2.Size = new Size(245, 62);
-            flowLayoutPanel2.TabIndex = 5;
+            ownersPicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            ownersPicker.BackColor = Color.White;
+            ownersPicker.DataSource = ownerBindingSource;
+            ownersPicker.DisplayMember = "OwnerPassportNumber";
+            ownersPicker.DropDownStyle = ComboBoxStyle.DropDownList;
+            ownersPicker.FlatStyle = FlatStyle.System;
+            ownersPicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            ownersPicker.FormattingEnabled = true;
+            ownersPicker.Location = new Point(0, 30);
+            ownersPicker.Margin = new Padding(0);
+            ownersPicker.Name = "ownersPicker";
+            ownersPicker.Size = new Size(245, 27);
+            ownersPicker.TabIndex = 1;
+            ownersPicker.ValueMember = "Id";
             // 
-            // label2
+            // ownerBindingSource
             // 
-            label2.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            label2.Location = new Point(0, 5);
-            label2.Margin = new Padding(0);
-            label2.Name = "label2";
-            label2.Size = new Size(245, 25);
-            label2.TabIndex = 0;
-            label2.Text = "Автомобиль";
-            // 
-            // comboBox2
-            // 
-            comboBox2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            comboBox2.BackColor = Color.White;
-            comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox2.FlatStyle = FlatStyle.System;
-            comboBox2.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(0, 30);
-            comboBox2.Margin = new Padding(0);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(245, 27);
-            comboBox2.TabIndex = 1;
-            // 
-            // flowLayoutPanel1
-            // 
-            flowLayoutPanel1.AutoSize = true;
-            flowLayoutPanel1.Controls.Add(label1);
-            flowLayoutPanel1.Controls.Add(comboBox1);
-            flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel1.Location = new Point(254, 0);
-            flowLayoutPanel1.Margin = new Padding(0);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Padding = new Padding(0, 5, 0, 5);
-            flowLayoutPanel1.Size = new Size(245, 62);
-            flowLayoutPanel1.TabIndex = 4;
-            // 
-            // label1
-            // 
-            label1.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            label1.Location = new Point(0, 5);
-            label1.Margin = new Padding(0);
-            label1.Name = "label1";
-            label1.Size = new Size(245, 25);
-            label1.TabIndex = 0;
-            label1.Text = "Владелец";
-            // 
-            // comboBox1
-            // 
-            comboBox1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            comboBox1.BackColor = Color.White;
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.FlatStyle = FlatStyle.System;
-            comboBox1.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(0, 30);
-            comboBox1.Margin = new Padding(0);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(245, 27);
-            comboBox1.TabIndex = 1;
+            ownerBindingSource.DataSource = typeof(Owner);
             // 
             // employeeLayoutPanel
             // 
+            employeeLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             employeeLayoutPanel.AutoSize = true;
             employeeLayoutPanel.Controls.Add(employeeLabel);
             employeeLayoutPanel.Controls.Add(employeePicker);
@@ -435,7 +374,7 @@ namespace App
             employeeLayoutPanel.Margin = new Padding(0);
             employeeLayoutPanel.Name = "employeeLayoutPanel";
             employeeLayoutPanel.Padding = new Padding(0, 5, 0, 5);
-            employeeLayoutPanel.Size = new Size(244, 62);
+            employeeLayoutPanel.Size = new Size(246, 62);
             employeeLayoutPanel.TabIndex = 3;
             // 
             // employeeLabel
@@ -452,6 +391,8 @@ namespace App
             // 
             employeePicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             employeePicker.BackColor = Color.White;
+            employeePicker.DataSource = employeeBindingSource;
+            employeePicker.DisplayMember = "EmployeePassportNumber";
             employeePicker.DropDownStyle = ComboBoxStyle.DropDownList;
             employeePicker.FlatStyle = FlatStyle.System;
             employeePicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -461,125 +402,103 @@ namespace App
             employeePicker.Name = "employeePicker";
             employeePicker.Size = new Size(245, 27);
             employeePicker.TabIndex = 1;
+            employeePicker.ValueMember = "EmployeeId";
             // 
-            // tableLayoutPanel5
+            // employeeBindingSource
             // 
-            tableLayoutPanel5.ColumnCount = 3;
-            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
-            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel5.Controls.Add(tableLayoutPanel6, 2, 0);
-            tableLayoutPanel5.Controls.Add(flowLayoutPanel6, 2, 1);
-            tableLayoutPanel5.Controls.Add(flowLayoutPanel4, 0, 1);
-            tableLayoutPanel5.Controls.Add(postDateLayoutPanel, 0, 0);
-            tableLayoutPanel5.Dock = DockStyle.Fill;
-            tableLayoutPanel5.Location = new Point(0, 62);
-            tableLayoutPanel5.Margin = new Padding(0);
-            tableLayoutPanel5.Name = "tableLayoutPanel5";
-            tableLayoutPanel5.RowCount = 2;
-            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel5.RowStyles.Add(new RowStyle());
-            tableLayoutPanel5.Size = new Size(755, 122);
-            tableLayoutPanel5.TabIndex = 1;
+            employeeBindingSource.DataSource = typeof(Employee);
             // 
-            // tableLayoutPanel6
+            // datesLayoutPanel
             // 
-            tableLayoutPanel6.AutoSize = true;
-            tableLayoutPanel6.ColumnCount = 1;
-            tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel6.Controls.Add(checkBox1, 0, 1);
-            tableLayoutPanel6.Dock = DockStyle.Fill;
-            tableLayoutPanel6.Location = new Point(382, 0);
-            tableLayoutPanel6.Margin = new Padding(0);
-            tableLayoutPanel6.Name = "tableLayoutPanel6";
-            tableLayoutPanel6.RowCount = 2;
-            tableLayoutPanel6.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel6.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel6.Size = new Size(373, 61);
-            tableLayoutPanel6.TabIndex = 11;
+            datesLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            datesLayoutPanel.ColumnCount = 3;
+            datesLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            datesLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
+            datesLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            datesLayoutPanel.Controls.Add(endDateLayoutPanel, 2, 1);
+            datesLayoutPanel.Controls.Add(startDateLayoutPanel, 0, 1);
+            datesLayoutPanel.Controls.Add(postDateLayoutPanel, 0, 0);
+            datesLayoutPanel.Controls.Add(endedCheckBox, 2, 0);
+            datesLayoutPanel.Location = new Point(0, 62);
+            datesLayoutPanel.Margin = new Padding(0);
+            datesLayoutPanel.Name = "datesLayoutPanel";
+            datesLayoutPanel.RowCount = 2;
+            datesLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            datesLayoutPanel.RowStyles.Add(new RowStyle());
+            datesLayoutPanel.Size = new Size(760, 122);
+            datesLayoutPanel.TabIndex = 1;
             // 
-            // checkBox1
+            // endDateLayoutPanel
             // 
-            checkBox1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            checkBox1.AutoSize = true;
-            checkBox1.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            checkBox1.ImageAlign = ContentAlignment.MiddleRight;
-            checkBox1.Location = new Point(0, 34);
-            checkBox1.Margin = new Padding(0);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(373, 23);
-            checkBox1.TabIndex = 0;
-            checkBox1.Text = "Завершено";
-            checkBox1.UseVisualStyleBackColor = true;
+            endDateLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            endDateLayoutPanel.AutoSize = true;
+            endDateLayoutPanel.Controls.Add(endDateLabel);
+            endDateLayoutPanel.Controls.Add(endDatePicker);
+            endDateLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            endDateLayoutPanel.Location = new Point(385, 61);
+            endDateLayoutPanel.Margin = new Padding(0);
+            endDateLayoutPanel.Name = "endDateLayoutPanel";
+            endDateLayoutPanel.Padding = new Padding(0, 5, 0, 5);
+            endDateLayoutPanel.Size = new Size(375, 61);
+            endDateLayoutPanel.TabIndex = 8;
             // 
-            // flowLayoutPanel6
+            // endDateLabel
             // 
-            flowLayoutPanel6.AutoSize = true;
-            flowLayoutPanel6.Controls.Add(label5);
-            flowLayoutPanel6.Controls.Add(dateTimePicker3);
-            flowLayoutPanel6.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel6.Location = new Point(382, 61);
-            flowLayoutPanel6.Margin = new Padding(0);
-            flowLayoutPanel6.Name = "flowLayoutPanel6";
-            flowLayoutPanel6.Padding = new Padding(0, 5, 0, 5);
-            flowLayoutPanel6.Size = new Size(372, 61);
-            flowLayoutPanel6.TabIndex = 8;
+            endDateLabel.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            endDateLabel.Location = new Point(0, 5);
+            endDateLabel.Margin = new Padding(0);
+            endDateLabel.Name = "endDateLabel";
+            endDateLabel.Size = new Size(372, 25);
+            endDateLabel.TabIndex = 0;
+            endDateLabel.Text = "Дата завершения работы";
             // 
-            // label5
+            // endDatePicker
             // 
-            label5.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            label5.Location = new Point(0, 5);
-            label5.Margin = new Padding(0);
-            label5.Name = "label5";
-            label5.Size = new Size(372, 25);
-            label5.TabIndex = 0;
-            label5.Text = "Дата завершения работы";
+            endDatePicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            endDatePicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            endDatePicker.Location = new Point(0, 30);
+            endDatePicker.Margin = new Padding(0);
+            endDatePicker.Name = "endDatePicker";
+            endDatePicker.Size = new Size(372, 26);
+            endDatePicker.TabIndex = 1;
             // 
-            // dateTimePicker3
+            // startDateLayoutPanel
             // 
-            dateTimePicker3.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            dateTimePicker3.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            dateTimePicker3.Location = new Point(0, 30);
-            dateTimePicker3.Margin = new Padding(0);
-            dateTimePicker3.Name = "dateTimePicker3";
-            dateTimePicker3.Size = new Size(372, 26);
-            dateTimePicker3.TabIndex = 1;
+            startDateLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            startDateLayoutPanel.AutoSize = true;
+            startDateLayoutPanel.Controls.Add(startDateLabel);
+            startDateLayoutPanel.Controls.Add(startDatePicker);
+            startDateLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            startDateLayoutPanel.Location = new Point(0, 61);
+            startDateLayoutPanel.Margin = new Padding(0);
+            startDateLayoutPanel.Name = "startDateLayoutPanel";
+            startDateLayoutPanel.Padding = new Padding(0, 5, 0, 5);
+            startDateLayoutPanel.Size = new Size(375, 61);
+            startDateLayoutPanel.TabIndex = 7;
             // 
-            // flowLayoutPanel4
+            // startDateLabel
             // 
-            flowLayoutPanel4.AutoSize = true;
-            flowLayoutPanel4.Controls.Add(label4);
-            flowLayoutPanel4.Controls.Add(dateTimePicker2);
-            flowLayoutPanel4.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel4.Location = new Point(0, 61);
-            flowLayoutPanel4.Margin = new Padding(0);
-            flowLayoutPanel4.Name = "flowLayoutPanel4";
-            flowLayoutPanel4.Padding = new Padding(0, 5, 0, 5);
-            flowLayoutPanel4.Size = new Size(372, 61);
-            flowLayoutPanel4.TabIndex = 7;
+            startDateLabel.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            startDateLabel.Location = new Point(0, 5);
+            startDateLabel.Margin = new Padding(0);
+            startDateLabel.Name = "startDateLabel";
+            startDateLabel.Size = new Size(372, 25);
+            startDateLabel.TabIndex = 0;
+            startDateLabel.Text = "Дата начала работы";
             // 
-            // label4
+            // startDatePicker
             // 
-            label4.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            label4.Location = new Point(0, 5);
-            label4.Margin = new Padding(0);
-            label4.Name = "label4";
-            label4.Size = new Size(372, 25);
-            label4.TabIndex = 0;
-            label4.Text = "Дата начала работы";
-            // 
-            // dateTimePicker2
-            // 
-            dateTimePicker2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            dateTimePicker2.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            dateTimePicker2.Location = new Point(0, 30);
-            dateTimePicker2.Margin = new Padding(0);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(372, 26);
-            dateTimePicker2.TabIndex = 1;
+            startDatePicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            startDatePicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            startDatePicker.Location = new Point(0, 30);
+            startDatePicker.Margin = new Padding(0);
+            startDatePicker.Name = "startDatePicker";
+            startDatePicker.Size = new Size(372, 26);
+            startDatePicker.TabIndex = 1;
             // 
             // postDateLayoutPanel
             // 
+            postDateLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             postDateLayoutPanel.AutoSize = true;
             postDateLayoutPanel.Controls.Add(postDateLabel);
             postDateLayoutPanel.Controls.Add(postDatePicker);
@@ -588,7 +507,7 @@ namespace App
             postDateLayoutPanel.Margin = new Padding(0);
             postDateLayoutPanel.Name = "postDateLayoutPanel";
             postDateLayoutPanel.Padding = new Padding(0, 5, 0, 5);
-            postDateLayoutPanel.Size = new Size(372, 61);
+            postDateLayoutPanel.Size = new Size(375, 61);
             postDateLayoutPanel.TabIndex = 5;
             // 
             // postDateLabel
@@ -611,24 +530,155 @@ namespace App
             postDatePicker.Size = new Size(372, 26);
             postDatePicker.TabIndex = 1;
             // 
-            // suppliesTable
+            // endedCheckBox
             // 
-            suppliesTable.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            suppliesTable.BackgroundColor = Color.White;
-            suppliesTable.BorderStyle = BorderStyle.None;
-            suppliesTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            suppliesTable.Cursor = Cursors.Hand;
-            suppliesTable.GridColor = SystemColors.ControlDark;
-            suppliesTable.Location = new Point(20, 80);
-            suppliesTable.Margin = new Padding(0);
-            suppliesTable.Name = "suppliesTable";
-            suppliesTable.Size = new Size(920, 235);
-            suppliesTable.TabIndex = 2;
+            endedCheckBox.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            endedCheckBox.AutoSize = true;
+            endedCheckBox.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            endedCheckBox.ImageAlign = ContentAlignment.MiddleRight;
+            endedCheckBox.Location = new Point(385, 28);
+            endedCheckBox.Margin = new Padding(0);
+            endedCheckBox.Name = "endedCheckBox";
+            endedCheckBox.Padding = new Padding(0, 5, 0, 5);
+            endedCheckBox.Size = new Size(375, 33);
+            endedCheckBox.TabIndex = 9;
+            endedCheckBox.Text = "Завершено";
+            endedCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // buttonsLayoutPanel
+            // 
+            buttonsLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            buttonsLayoutPanel.AutoSize = true;
+            buttonsLayoutPanel.Controls.Add(acceptButton);
+            buttonsLayoutPanel.Controls.Add(resetButton);
+            buttonsLayoutPanel.Controls.Add(toOrdersButton);
+            buttonsLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            buttonsLayoutPanel.Location = new Point(770, 10);
+            buttonsLayoutPanel.Margin = new Padding(0);
+            buttonsLayoutPanel.Name = "buttonsLayoutPanel";
+            buttonsLayoutPanel.Size = new Size(150, 170);
+            buttonsLayoutPanel.TabIndex = 2;
+            // 
+            // acceptButton
+            // 
+            acceptButton.BackColor = SystemColors.MenuHighlight;
+            acceptButton.FlatStyle = FlatStyle.Flat;
+            acceptButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            acceptButton.ForeColor = SystemColors.ButtonFace;
+            acceptButton.Location = new Point(0, 0);
+            acceptButton.Margin = new Padding(0);
+            acceptButton.Name = "acceptButton";
+            acceptButton.Size = new Size(150, 50);
+            acceptButton.TabIndex = 6;
+            acceptButton.Text = "Принять";
+            acceptButton.UseVisualStyleBackColor = false;
+            acceptButton.Click += acceptButton_Click;
+            // 
+            // resetButton
+            // 
+            resetButton.BackColor = SystemColors.ScrollBar;
+            resetButton.FlatAppearance.BorderSize = 0;
+            resetButton.FlatStyle = FlatStyle.Flat;
+            resetButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            resetButton.ForeColor = SystemColors.ControlText;
+            resetButton.Location = new Point(0, 60);
+            resetButton.Margin = new Padding(0, 10, 0, 10);
+            resetButton.Name = "resetButton";
+            resetButton.Size = new Size(150, 50);
+            resetButton.TabIndex = 7;
+            resetButton.Text = "Сбросить";
+            resetButton.UseVisualStyleBackColor = false;
+            resetButton.Click += resetButton_Click;
+            // 
+            // toOrdersButton
+            // 
+            toOrdersButton.BackColor = SystemColors.MenuHighlight;
+            toOrdersButton.FlatStyle = FlatStyle.Flat;
+            toOrdersButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            toOrdersButton.ForeColor = SystemColors.ButtonFace;
+            toOrdersButton.Location = new Point(0, 120);
+            toOrdersButton.Margin = new Padding(0);
+            toOrdersButton.Name = "toOrdersButton";
+            toOrdersButton.Size = new Size(150, 50);
+            toOrdersButton.TabIndex = 6;
+            toOrdersButton.Text = "Заказ-наряд";
+            toOrdersButton.UseVisualStyleBackColor = false;
+            toOrdersButton.Click += toOrdersButton_Click;
+            // 
+            // requestsTable
+            // 
+            requestsTable.AllowUserToAddRows = false;
+            requestsTable.AllowUserToDeleteRows = false;
+            requestsTable.AllowUserToResizeColumns = false;
+            requestsTable.AllowUserToResizeRows = false;
+            requestsTable.AutoGenerateColumns = false;
+            requestsTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            requestsTable.BackgroundColor = Color.White;
+            requestsTable.BorderStyle = BorderStyle.None;
+            requestsTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            requestsTable.Columns.AddRange(new DataGridViewColumn[] { ownerIdDataGridViewTextBoxColumn, carIdDataGridViewTextBoxColumn, employeeIdDataGridViewTextBoxColumn, requestDateDataGridViewTextBoxColumn, startDateDataGridViewTextBoxColumn, completedDataGridViewCheckBoxColumn, completeDateDataGridViewTextBoxColumn });
+            requestsTable.Cursor = Cursors.Hand;
+            requestsTable.DataSource = requestBindingSource;
+            requestsTable.Dock = DockStyle.Top;
+            requestsTable.EditMode = DataGridViewEditMode.EditProgrammatically;
+            requestsTable.GridColor = SystemColors.ControlDark;
+            requestsTable.Location = new Point(20, 80);
+            requestsTable.Margin = new Padding(0);
+            requestsTable.Name = "requestsTable";
+            requestsTable.Size = new Size(920, 240);
+            requestsTable.TabIndex = 2;
+            // 
+            // ownerIdDataGridViewTextBoxColumn
+            // 
+            ownerIdDataGridViewTextBoxColumn.DataPropertyName = "OwnerId";
+            ownerIdDataGridViewTextBoxColumn.HeaderText = "OwnerId";
+            ownerIdDataGridViewTextBoxColumn.Name = "ownerIdDataGridViewTextBoxColumn";
+            // 
+            // carIdDataGridViewTextBoxColumn
+            // 
+            carIdDataGridViewTextBoxColumn.DataPropertyName = "CarId";
+            carIdDataGridViewTextBoxColumn.HeaderText = "CarId";
+            carIdDataGridViewTextBoxColumn.Name = "carIdDataGridViewTextBoxColumn";
+            // 
+            // employeeIdDataGridViewTextBoxColumn
+            // 
+            employeeIdDataGridViewTextBoxColumn.DataPropertyName = "EmployeeId";
+            employeeIdDataGridViewTextBoxColumn.HeaderText = "EmployeeId";
+            employeeIdDataGridViewTextBoxColumn.Name = "employeeIdDataGridViewTextBoxColumn";
+            // 
+            // requestDateDataGridViewTextBoxColumn
+            // 
+            requestDateDataGridViewTextBoxColumn.DataPropertyName = "RequestDate";
+            requestDateDataGridViewTextBoxColumn.HeaderText = "RequestDate";
+            requestDateDataGridViewTextBoxColumn.Name = "requestDateDataGridViewTextBoxColumn";
+            // 
+            // startDateDataGridViewTextBoxColumn
+            // 
+            startDateDataGridViewTextBoxColumn.DataPropertyName = "StartDate";
+            startDateDataGridViewTextBoxColumn.HeaderText = "StartDate";
+            startDateDataGridViewTextBoxColumn.Name = "startDateDataGridViewTextBoxColumn";
+            // 
+            // completedDataGridViewCheckBoxColumn
+            // 
+            completedDataGridViewCheckBoxColumn.DataPropertyName = "Completed";
+            completedDataGridViewCheckBoxColumn.HeaderText = "Completed";
+            completedDataGridViewCheckBoxColumn.Name = "completedDataGridViewCheckBoxColumn";
+            // 
+            // completeDateDataGridViewTextBoxColumn
+            // 
+            completeDateDataGridViewTextBoxColumn.DataPropertyName = "CompleteDate";
+            completeDateDataGridViewTextBoxColumn.HeaderText = "CompleteDate";
+            completeDateDataGridViewTextBoxColumn.Name = "completeDateDataGridViewTextBoxColumn";
+            // 
+            // requestBindingSource
+            // 
+            requestBindingSource.DataSource = typeof(Request);
             // 
             // RequestsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             ClientSize = new Size(960, 540);
             Controls.Add(formLayoutPanel);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -637,34 +687,32 @@ namespace App
             Name = "RequestsForm";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Заявки на ремонт";
+            Text = "Информационная система: заявки на ремонт";
             FormClosed += RequestsForm_FormClosed;
             formLayoutPanel.ResumeLayout(false);
             formLayoutPanel.PerformLayout();
             menuLayoutPanel.ResumeLayout(false);
             menuLayoutPanel.PerformLayout();
-            tableLayoutPanel1.ResumeLayout(false);
-            tableLayoutPanel1.PerformLayout();
-            tableLayoutPanel2.ResumeLayout(false);
-            tableLayoutPanel2.PerformLayout();
-            buttonsLayoutPanel2.ResumeLayout(false);
-            buttonsLayoutPanel2.PerformLayout();
-            flowLayoutPanel5.ResumeLayout(false);
-            tableLayoutPanel3.ResumeLayout(false);
-            tableLayoutPanel3.PerformLayout();
-            tableLayoutPanel4.ResumeLayout(false);
-            tableLayoutPanel4.PerformLayout();
-            flowLayoutPanel2.ResumeLayout(false);
-            flowLayoutPanel1.ResumeLayout(false);
+            controlsLayoutPanel.ResumeLayout(false);
+            controlsLayoutPanel.PerformLayout();
+            inputsLayoutPanel.ResumeLayout(false);
+            inputsLayoutPanel.PerformLayout();
+            pickersLayoutPanel.ResumeLayout(false);
+            pickersLayoutPanel.PerformLayout();
+            carLayoutPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)carBindingSource).EndInit();
+            ownerLayoutPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)ownerBindingSource).EndInit();
             employeeLayoutPanel.ResumeLayout(false);
-            tableLayoutPanel5.ResumeLayout(false);
-            tableLayoutPanel5.PerformLayout();
-            tableLayoutPanel6.ResumeLayout(false);
-            tableLayoutPanel6.PerformLayout();
-            flowLayoutPanel6.ResumeLayout(false);
-            flowLayoutPanel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)employeeBindingSource).EndInit();
+            datesLayoutPanel.ResumeLayout(false);
+            datesLayoutPanel.PerformLayout();
+            endDateLayoutPanel.ResumeLayout(false);
+            startDateLayoutPanel.ResumeLayout(false);
             postDateLayoutPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)suppliesTable).EndInit();
+            buttonsLayoutPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)requestsTable).EndInit();
+            ((System.ComponentModel.ISupportInitialize)requestBindingSource).EndInit();
             ResumeLayout(false);
         }
 
@@ -677,36 +725,45 @@ namespace App
         private Button addButton;
         private Button editButton;
         private Button deleteButton;
-        private TableLayoutPanel tableLayoutPanel1;
-        private TableLayoutPanel tableLayoutPanel2;
-        private TableLayoutPanel buttonsLayoutPanel2;
-        private FlowLayoutPanel flowLayoutPanel5;
-        private Button acceptButton;
-        private Button resetButton;
-        private Button button1;
-        private TableLayoutPanel tableLayoutPanel3;
-        private TableLayoutPanel tableLayoutPanel4;
-        private FlowLayoutPanel flowLayoutPanel2;
-        private Label label2;
-        private ComboBox comboBox2;
-        private FlowLayoutPanel flowLayoutPanel1;
-        private Label label1;
-        private ComboBox comboBox1;
+        private TableLayoutPanel controlsLayoutPanel;
+        private TableLayoutPanel inputsLayoutPanel;
+        private TableLayoutPanel pickersLayoutPanel;
+        private FlowLayoutPanel carLayoutPanel;
+        private Label carLabel;
+        private ComboBox carsPicker;
+        private FlowLayoutPanel ownerLayoutPanel;
+        private Label ownerLabel;
+        private ComboBox ownersPicker;
         private FlowLayoutPanel employeeLayoutPanel;
         private Label employeeLabel;
         private ComboBox employeePicker;
-        private TableLayoutPanel tableLayoutPanel5;
-        private TableLayoutPanel tableLayoutPanel6;
-        private CheckBox checkBox1;
-        private FlowLayoutPanel flowLayoutPanel6;
-        private Label label5;
-        private DateTimePicker dateTimePicker3;
-        private FlowLayoutPanel flowLayoutPanel4;
-        private Label label4;
-        private DateTimePicker dateTimePicker2;
+        private TableLayoutPanel datesLayoutPanel;
+        private FlowLayoutPanel endDateLayoutPanel;
+        private Label endDateLabel;
+        private DateTimePicker endDatePicker;
+        private FlowLayoutPanel startDateLayoutPanel;
+        private Label startDateLabel;
+        private DateTimePicker startDatePicker;
         private FlowLayoutPanel postDateLayoutPanel;
         private Label postDateLabel;
         private DateTimePicker postDatePicker;
-        private DataGridView suppliesTable;
+        private DataGridView requestsTable;
+        private FlowLayoutPanel buttonsLayoutPanel;
+        private Button acceptButton;
+        private Button resetButton;
+        private Button toOrdersButton;
+        private CheckBox endedCheckBox;
+        private BindingSource requestBindingSource;
+        private DataGridViewTextBoxColumn ownerIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn carIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn employeeIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn employeeDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn requestDateDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn startDateDataGridViewTextBoxColumn;
+        private DataGridViewCheckBoxColumn completedDataGridViewCheckBoxColumn;
+        private DataGridViewTextBoxColumn completeDateDataGridViewTextBoxColumn;
+        private BindingSource ownerBindingSource;
+        private BindingSource employeeBindingSource;
+        private BindingSource carBindingSource;
     }
 }

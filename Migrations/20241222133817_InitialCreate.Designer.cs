@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutoService.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20241221173339_InitialCreate")]
+    [Migration("20241222133817_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -119,7 +119,7 @@ namespace AutoService.Migrations
                     b.Property<string>("EmployeePatronymic")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EmployeeSurame")
+                    b.Property<string>("EmployeeSurname")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EmployeeTelephone")
@@ -132,7 +132,7 @@ namespace AutoService.Migrations
 
                     b.HasIndex("SpecialtyId");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Cars");
                 });
 
             modelBuilder.Entity("App.Order", b =>
@@ -203,6 +203,44 @@ namespace AutoService.Migrations
                     b.HasKey("PartId");
 
                     b.ToTable("Parts");
+
+                    b.HasData(
+                        new
+                        {
+                            PartId = 1,
+                            CatalogueNumber = "1421427908",
+                            PartName = "Масляный фильтр"
+                        },
+                        new
+                        {
+                            PartId = 2,
+                            CatalogueNumber = "6460920301",
+                            PartName = "Топливный фильтр"
+                        },
+                        new
+                        {
+                            PartId = 3,
+                            CatalogueNumber = "165460509R",
+                            PartName = "Воздушный фильтр"
+                        },
+                        new
+                        {
+                            PartId = 4,
+                            CatalogueNumber = "0DJ300027H",
+                            PartName = "6-ступенчатая МКП"
+                        },
+                        new
+                        {
+                            PartId = 5,
+                            CatalogueNumber = "1K0411105A",
+                            PartName = "Пружина амортизатора"
+                        },
+                        new
+                        {
+                            PartId = 6,
+                            CatalogueNumber = "1K0413031B",
+                            PartName = "Амортизатор"
+                        });
                 });
 
             modelBuilder.Entity("App.Position", b =>
@@ -279,6 +317,23 @@ namespace AutoService.Migrations
                     b.HasKey("SpecialtyId");
 
                     b.ToTable("Specialties");
+
+                    b.HasData(
+                        new
+                        {
+                            SpecialtyId = 1,
+                            SpecialtyName = "Менеджер"
+                        },
+                        new
+                        {
+                            SpecialtyId = 2,
+                            SpecialtyName = "Механик"
+                        },
+                        new
+                        {
+                            SpecialtyId = 3,
+                            SpecialtyName = "Кладовщик"
+                        });
                 });
 
             modelBuilder.Entity("App.Supplier", b =>
@@ -298,6 +353,32 @@ namespace AutoService.Migrations
                     b.HasKey("SupplierId");
 
                     b.ToTable("Suppliers");
+
+                    b.HasData(
+                        new
+                        {
+                            SupplierId = 1,
+                            SupplierName = "VAG",
+                            TaxpayerIdentificationNumber = "6311116633"
+                        },
+                        new
+                        {
+                            SupplierId = 2,
+                            SupplierName = "Bilstein",
+                            TaxpayerIdentificationNumber = "7728798878"
+                        },
+                        new
+                        {
+                            SupplierId = 3,
+                            SupplierName = "Bosch",
+                            TaxpayerIdentificationNumber = "7706092944"
+                        },
+                        new
+                        {
+                            SupplierId = 4,
+                            SupplierName = "Goodwill",
+                            TaxpayerIdentificationNumber = "7708259331"
+                        });
                 });
 
             modelBuilder.Entity("App.Supply", b =>
@@ -352,6 +433,41 @@ namespace AutoService.Migrations
                     b.HasKey("WorkId");
 
                     b.ToTable("Works");
+
+                    b.HasData(
+                        new
+                        {
+                            WorkId = 1,
+                            WorkPrice = 1200m,
+                            WorkType = "Мойка кузова"
+                        },
+                        new
+                        {
+                            WorkId = 2,
+                            WorkDescription = "Замена масел, антифриза, и др. жидкостей",
+                            WorkPrice = 3000m,
+                            WorkType = "Замена тех. жидкостей"
+                        },
+                        new
+                        {
+                            WorkId = 3,
+                            WorkPrice = 2000m,
+                            WorkType = "Замена фильтров"
+                        },
+                        new
+                        {
+                            WorkId = 4,
+                            WorkDescription = "Снятие и установка коробки передач",
+                            WorkPrice = 100000m,
+                            WorkType = "Замена КПП"
+                        },
+                        new
+                        {
+                            WorkId = 5,
+                            WorkDescription = "Осмотр и замена неисправностей",
+                            WorkPrice = 5000m,
+                            WorkType = "Т/О подвески"
+                        });
                 });
 
             modelBuilder.Entity("EmployeePart", b =>
@@ -398,7 +514,7 @@ namespace AutoService.Migrations
             modelBuilder.Entity("App.Employee", b =>
                 {
                     b.HasOne("App.Specialty", "Specialty")
-                        .WithMany("Employees")
+                        .WithMany("Cars")
                         .HasForeignKey("SpecialtyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -558,7 +674,7 @@ namespace AutoService.Migrations
 
             modelBuilder.Entity("App.Specialty", b =>
                 {
-                    b.Navigation("Employees");
+                    b.Navigation("Cars");
                 });
 
             modelBuilder.Entity("App.Supplier", b =>

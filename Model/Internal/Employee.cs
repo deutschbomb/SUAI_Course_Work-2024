@@ -26,13 +26,13 @@ namespace App
         public virtual Specialty? Specialty { get; set; }
 
         public string? EmployeeName { get; set; }
-        public string? EmployeeSurame { get; set; }
+        public string? EmployeeSurname { get; set; }
         public string? EmployeePatronymic { get; set; }
         public string? EmployeePassportNumber { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         public string? EmployeeAddress { get; set; }
         public string? EmployeeTelephone { get; set; }
-        public DateTime DateOfEmployment { get; set; }
+        public DateTime? DateOfEmployment { get; set; }
 
         // Навигационные свойства
         public virtual List<Request> Requests { get; set; } // заявки на ремонт

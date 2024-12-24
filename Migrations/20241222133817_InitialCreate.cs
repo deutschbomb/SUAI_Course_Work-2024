@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace AutoService.Migrations
 {
     /// <inheritdoc />
@@ -28,7 +30,7 @@ namespace AutoService.Migrations
                     WheelDriveType = table.Column<string>(type: "varchar(3)", nullable: true),
                     Generation = table.Column<byte>(type: "tinyint", nullable: true),
                     Facelift = table.Column<byte>(type: "tinyint", nullable: true),
-                    Year = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Year = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
@@ -137,7 +139,7 @@ namespace AutoService.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SpecialtyId = table.Column<int>(type: "int", nullable: false),
                     EmployeeName = table.Column<string>(type: "varchar(50)", nullable: true),
-                    EmployeeSurame = table.Column<string>(type: "varchar(50)", nullable: false),
+                    EmployeeSurname = table.Column<string>(type: "varchar(50)", nullable: false),
                     EmployeePatronymic = table.Column<string>(type: "varchar(50)", nullable: true),
                     EmployeePassportNumber = table.Column<string>(type: "varchar(10)", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime", nullable: true),
@@ -185,7 +187,7 @@ namespace AutoService.Migrations
                 columns: table => new
                 {
                     WorkId = table.Column<int>(type: "int", nullable: false),
-                    PartId = table.Column<int>(type: "int", nullable: false),
+                    PartId = table.Column<int>(type: "int", nullable: true),
                     EmployeeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -299,6 +301,52 @@ namespace AutoService.Migrations
                         principalTable: "Supplies",
                         principalColumn: "SupplyId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Parts",
+                columns: new[] { "PartId", "CatalogueNumber", "PartName" },
+                values: new object[,]
+                {
+                    { 1, "1421427908", "Масляный фильтр" },
+                    { 2, "6460920301", "Топливный фильтр" },
+                    { 3, "165460509R", "Воздушный фильтр" },
+                    { 4, "0DJ300027H", "6-ступенчатая МКП" },
+                    { 5, "1K0411105A", "Пружина амортизатора" },
+                    { 6, "1K0413031B", "Амортизатор" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Specialties",
+                columns: new[] { "SpecialtyId", "SpecialtyName" },
+                values: new object[,]
+                {
+                    { 1, "Менеджер" },
+                    { 2, "Механик" },
+                    { 3, "Кладовщик" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Suppliers",
+                columns: new[] { "SupplierId", "SupplierName", "TaxpayerIdentificationNumber" },
+                values: new object[,]
+                {
+                    { 1, "VAG", "6311116633" },
+                    { 2, "Bilstein", "7728798878" },
+                    { 3, "Bosch", "7706092944" },
+                    { 4, "Goodwill", "7708259331" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Works",
+                columns: new[] { "WorkId", "WorkDescription", "WorkPrice", "WorkType" },
+                values: new object[,]
+                {
+                    { 1, null, 1200m, "Мойка кузова" },
+                    { 2, "Замена масел, антифриза, и др. жидкостей", 3000m, "Замена тех. жидкостей" },
+                    { 3, null, 2000m, "Замена фильтров" },
+                    { 4, "Снятие и установка коробки передач", 100000m, "Замена КПП" },
+                    { 5, "Осмотр и замена неисправностей", 5000m, "Т/О подвески" }
                 });
 
             migrationBuilder.CreateIndex(

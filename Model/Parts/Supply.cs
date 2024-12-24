@@ -34,9 +34,9 @@ namespace App
         public int EmployeeId { get; set; }
         public virtual Employee? Employee { get; set; }
 
-        public DateTime DateOfPost { get; set; }
+        public DateTime? DateOfPost { get; set; }
         public bool Delivered { get; set; }
-        public DateTime DateOfDelivery { get; set; }
+        public DateTime? DateOfDelivery { get; set; }
 
         // Навигационные свойства
         /// <summary>

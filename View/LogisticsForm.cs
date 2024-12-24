@@ -1,7 +1,7 @@
 
 namespace App
 {
-    public partial class LogisticsForm : Form
+    public partial class LogisticsForm : Form, IView
     {
         Presenter Presenter;
         MainForm home;
@@ -23,30 +23,20 @@ namespace App
             this.previous = prev;
         }
 
-        private void LogisticsForm_Load(object sender, EventArgs e)
-        {
-            postDatePicker.MinDate = DateTime.Now;
-            deliveryDatePicker.MinDate = DateTime.Now;
-
-            postDatePicker.Value = postDatePicker.MinDate;
-            deliveryDatePicker.Value = deliveryDatePicker.MinDate;
-        }
-
         private void homeButton_Click(object sender, EventArgs e)
         {
-            this.home.Show();
+            this.previous = this.previous == this.home ? this.previous : this.home;
             this.Close();
         }
 
         private void returnButton_Click(object sender, EventArgs e)
         {
-            this.previous.Show();
             this.Close();
         }
 
         private void LogisticsForm_FormClosed(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.previous.Show();
         }
 
     }

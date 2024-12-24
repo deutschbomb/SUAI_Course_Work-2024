@@ -3,7 +3,7 @@ namespace App
 {
     public partial class MainForm : Form, IView
     {
-        Presenter Presenter;
+        private Presenter Presenter;
 
         public MainForm()
         {
@@ -20,14 +20,14 @@ namespace App
 
         private void clientsButton_Click(object sender, EventArgs e)
         {
-            ClientsForm clients = new ClientsForm(ref Presenter);
+            ClientsForm clients = new ClientsForm(ref Presenter, this);
             this.Hide();
             clients.Show();
         }
 
         private void requestsButton_Click(object sender, EventArgs e)
         {
-            RequestsForm requests = new RequestsForm(ref Presenter);
+            RequestsForm requests = new RequestsForm(ref Presenter, this);
             this.Hide();
             requests.Show();
         }

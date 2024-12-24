@@ -39,9 +39,9 @@ namespace App
         public string? TransmissionType { get; set; }
         public string? FuelType { get; set; }
         public string? WheelDriveType { get; set; }
-        public byte Generation { get; set; }
-        public byte Facelift { get; set; }
-        public DateTime Year { get; set; }
+        public byte? Generation { get; set; }
+        public byte? Facelift { get; set; }
+        public int Year { get; set; }
         public decimal Price { get; set; }
 
         // Навигационные свойства

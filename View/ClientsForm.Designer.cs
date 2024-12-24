@@ -29,94 +29,103 @@ namespace App
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             formLayoutPanel = new TableLayoutPanel();
-            menuLayoutPanel = new FlowLayoutPanel();
-            homeButton = new Button();
-            returnButton = new Button();
-            employeesPicker = new ComboBox();
-            addButton = new Button();
-            editButton = new Button();
-            deleteButton = new Button();
             tableLayoutPanel = new FlowLayoutPanel();
-            divider1 = new Label();
+            divider = new Label();
             controlsLayoutPanel = new TableLayoutPanel();
             inputsLayoutPanel = new TableLayoutPanel();
-            textsLayoutPanel = new TableLayoutPanel();
-            flowLayoutPanel4 = new FlowLayoutPanel();
-            flowLayoutPanel12 = new FlowLayoutPanel();
-            label4 = new Label();
-            textBox4 = new TextBox();
-            flowLayoutPanel2 = new FlowLayoutPanel();
-            label1 = new Label();
-            textBox1 = new TextBox();
-            flowLayoutPanel10 = new FlowLayoutPanel();
-            label2 = new Label();
-            textBox2 = new TextBox();
-            flowLayoutPanel11 = new FlowLayoutPanel();
-            label3 = new Label();
-            textBox3 = new TextBox();
-            flowLayoutPanel9 = new FlowLayoutPanel();
-            birthDateLabel = new Label();
-            birthDatePicker = new DateTimePicker();
+            rightLayoutPanel = new FlowLayoutPanel();
+            brandLayoutPanel = new FlowLayoutPanel();
+            brandLabel = new Label();
+            brandInput = new TextBox();
+            modelLayoutPanel = new FlowLayoutPanel();
+            modelLabel = new Label();
+            modelInput = new TextBox();
+            VINLayoutPanel1 = new FlowLayoutPanel();
+            VINLabel = new Label();
+            VINInput = new TextBox();
+            licenseLayoutPanel = new FlowLayoutPanel();
+            licenseLabel = new Label();
+            licenseInput = new TextBox();
+            yearLayoutPanel = new FlowLayoutPanel();
+            yearDateLabel = new Label();
+            yearInput = new NumericUpDown();
             priceLayoutPanel = new FlowLayoutPanel();
             priceLabel = new Label();
             priceInput = new NumericUpDown();
-            flowLayoutPanel1 = new FlowLayoutPanel();
+            leftLayoutPanel = new FlowLayoutPanel();
             surnameNumberLayoutPanel = new FlowLayoutPanel();
             surnameLabel = new Label();
             surnameInput = new TextBox();
             nameLayoutPanel = new FlowLayoutPanel();
             nameLabel = new Label();
             nameInput = new TextBox();
-            flowLayoutPanel3 = new FlowLayoutPanel();
+            patronymicLayoutPanel = new FlowLayoutPanel();
             patronymicLabel = new Label();
             patronymicInput = new TextBox();
-            flowLayoutPanel6 = new FlowLayoutPanel();
+            passportLayoutPanel = new FlowLayoutPanel();
             passportLabel = new Label();
             passportInput = new TextBox();
-            flowLayoutPanel8 = new FlowLayoutPanel();
+            telephoneLayoutPanel = new FlowLayoutPanel();
             telephoneLabel = new Label();
             telephoneInput = new TextBox();
-            flowLayoutPanel7 = new FlowLayoutPanel();
+            addressLayoutPanel = new FlowLayoutPanel();
             addressLabel = new Label();
             addressInput = new TextBox();
-            buttonsLayoutPanel2 = new TableLayoutPanel();
-            flowLayoutPanel5 = new FlowLayoutPanel();
+            buttonsLayoutPanel = new FlowLayoutPanel();
             acceptButton = new Button();
             resetButton = new Button();
+            menuLayoutPanel = new TableLayoutPanel();
+            dbLayoutPanel = new FlowLayoutPanel();
+            addButton = new Button();
+            editButton = new Button();
+            deleteButton = new Button();
+            clientsLayoutPanel = new FlowLayoutPanel();
+            ownersPicker = new ComboBox();
+            ownerBindingSource = new BindingSource(components);
+            carsPicker = new ComboBox();
+            carBindingSource = new BindingSource(components);
+            redirectLayoutPanel = new FlowLayoutPanel();
+            homeButton = new Button();
+            returnButton = new Button();
             formLayoutPanel.SuspendLayout();
-            menuLayoutPanel.SuspendLayout();
             tableLayoutPanel.SuspendLayout();
             controlsLayoutPanel.SuspendLayout();
             inputsLayoutPanel.SuspendLayout();
-            textsLayoutPanel.SuspendLayout();
-            flowLayoutPanel4.SuspendLayout();
-            flowLayoutPanel12.SuspendLayout();
-            flowLayoutPanel2.SuspendLayout();
-            flowLayoutPanel10.SuspendLayout();
-            flowLayoutPanel11.SuspendLayout();
-            flowLayoutPanel9.SuspendLayout();
+            rightLayoutPanel.SuspendLayout();
+            brandLayoutPanel.SuspendLayout();
+            modelLayoutPanel.SuspendLayout();
+            VINLayoutPanel1.SuspendLayout();
+            licenseLayoutPanel.SuspendLayout();
+            yearLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)yearInput).BeginInit();
             priceLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)priceInput).BeginInit();
-            flowLayoutPanel1.SuspendLayout();
+            leftLayoutPanel.SuspendLayout();
             surnameNumberLayoutPanel.SuspendLayout();
             nameLayoutPanel.SuspendLayout();
-            flowLayoutPanel3.SuspendLayout();
-            flowLayoutPanel6.SuspendLayout();
-            flowLayoutPanel8.SuspendLayout();
-            flowLayoutPanel7.SuspendLayout();
-            buttonsLayoutPanel2.SuspendLayout();
-            flowLayoutPanel5.SuspendLayout();
+            patronymicLayoutPanel.SuspendLayout();
+            passportLayoutPanel.SuspendLayout();
+            telephoneLayoutPanel.SuspendLayout();
+            addressLayoutPanel.SuspendLayout();
+            buttonsLayoutPanel.SuspendLayout();
+            menuLayoutPanel.SuspendLayout();
+            dbLayoutPanel.SuspendLayout();
+            clientsLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ownerBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)carBindingSource).BeginInit();
+            redirectLayoutPanel.SuspendLayout();
             SuspendLayout();
             // 
             // formLayoutPanel
             // 
             formLayoutPanel.BackColor = Color.Transparent;
             formLayoutPanel.ColumnCount = 1;
-            formLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            formLayoutPanel.Controls.Add(menuLayoutPanel, 0, 0);
+            formLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             formLayoutPanel.Controls.Add(tableLayoutPanel, 0, 1);
             formLayoutPanel.Controls.Add(controlsLayoutPanel, 0, 2);
+            formLayoutPanel.Controls.Add(menuLayoutPanel, 0, 0);
             formLayoutPanel.Dock = DockStyle.Fill;
             formLayoutPanel.Location = new Point(0, 0);
             formLayoutPanel.Margin = new Padding(0);
@@ -129,149 +138,38 @@ namespace App
             formLayoutPanel.Size = new Size(960, 540);
             formLayoutPanel.TabIndex = 4;
             // 
-            // menuLayoutPanel
-            // 
-            menuLayoutPanel.AutoSize = true;
-            menuLayoutPanel.Controls.Add(homeButton);
-            menuLayoutPanel.Controls.Add(returnButton);
-            menuLayoutPanel.Controls.Add(employeesPicker);
-            menuLayoutPanel.Controls.Add(addButton);
-            menuLayoutPanel.Controls.Add(editButton);
-            menuLayoutPanel.Controls.Add(deleteButton);
-            menuLayoutPanel.Dock = DockStyle.Fill;
-            menuLayoutPanel.Location = new Point(20, 10);
-            menuLayoutPanel.Margin = new Padding(0);
-            menuLayoutPanel.Name = "menuLayoutPanel";
-            menuLayoutPanel.Size = new Size(920, 50);
-            menuLayoutPanel.TabIndex = 0;
-            // 
-            // homeButton
-            // 
-            homeButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            homeButton.BackColor = Color.Transparent;
-            homeButton.FlatAppearance.BorderSize = 0;
-            homeButton.FlatStyle = FlatStyle.Flat;
-            homeButton.Font = new Font("Segoe MDL2 Assets", 18F, FontStyle.Regular, GraphicsUnit.Pixel);
-            homeButton.ForeColor = SystemColors.WindowFrame;
-            homeButton.Location = new Point(0, 5);
-            homeButton.Margin = new Padding(0, 0, 10, 0);
-            homeButton.Name = "homeButton";
-            homeButton.Size = new Size(40, 40);
-            homeButton.TabIndex = 4;
-            homeButton.Text = "";
-            homeButton.UseVisualStyleBackColor = false;
-            homeButton.Click += homeButton_Click;
-            // 
-            // returnButton
-            // 
-            returnButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            returnButton.BackColor = Color.Transparent;
-            returnButton.FlatAppearance.BorderSize = 0;
-            returnButton.FlatStyle = FlatStyle.Flat;
-            returnButton.Font = new Font("Segoe MDL2 Assets", 18F, FontStyle.Regular, GraphicsUnit.Pixel);
-            returnButton.ForeColor = SystemColors.WindowFrame;
-            returnButton.Location = new Point(60, 5);
-            returnButton.Margin = new Padding(10, 0, 10, 0);
-            returnButton.Name = "returnButton";
-            returnButton.Size = new Size(40, 40);
-            returnButton.TabIndex = 5;
-            returnButton.Text = "";
-            returnButton.UseVisualStyleBackColor = false;
-            returnButton.Click += returnButton_Click;
-            // 
-            // employeesPicker
-            // 
-            employeesPicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            employeesPicker.BackColor = Color.White;
-            employeesPicker.DropDownStyle = ComboBoxStyle.DropDownList;
-            employeesPicker.FlatStyle = FlatStyle.System;
-            employeesPicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            employeesPicker.FormattingEnabled = true;
-            employeesPicker.Location = new Point(120, 11);
-            employeesPicker.Margin = new Padding(10, 0, 10, 0);
-            employeesPicker.Name = "employeesPicker";
-            employeesPicker.Size = new Size(296, 27);
-            employeesPicker.TabIndex = 1;
-            // 
-            // addButton
-            // 
-            addButton.AutoSize = true;
-            addButton.BackColor = SystemColors.MenuHighlight;
-            addButton.Dock = DockStyle.Left;
-            addButton.FlatStyle = FlatStyle.Flat;
-            addButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            addButton.ForeColor = SystemColors.ButtonFace;
-            addButton.Location = new Point(436, 0);
-            addButton.Margin = new Padding(10, 0, 10, 0);
-            addButton.Name = "addButton";
-            addButton.Size = new Size(148, 50);
-            addButton.TabIndex = 1;
-            addButton.Text = "Добавить";
-            addButton.UseVisualStyleBackColor = false;
-            // 
-            // editButton
-            // 
-            editButton.AutoSize = true;
-            editButton.BackColor = SystemColors.MenuHighlight;
-            editButton.Dock = DockStyle.Left;
-            editButton.FlatStyle = FlatStyle.Flat;
-            editButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            editButton.ForeColor = SystemColors.ButtonFace;
-            editButton.Location = new Point(604, 0);
-            editButton.Margin = new Padding(10, 0, 10, 0);
-            editButton.Name = "editButton";
-            editButton.Size = new Size(148, 50);
-            editButton.TabIndex = 2;
-            editButton.Text = "Изменить";
-            editButton.UseVisualStyleBackColor = false;
-            // 
-            // deleteButton
-            // 
-            deleteButton.AutoSize = true;
-            deleteButton.BackColor = SystemColors.MenuHighlight;
-            deleteButton.Dock = DockStyle.Left;
-            deleteButton.FlatStyle = FlatStyle.Flat;
-            deleteButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            deleteButton.ForeColor = SystemColors.ButtonFace;
-            deleteButton.Location = new Point(772, 0);
-            deleteButton.Margin = new Padding(10, 0, 0, 0);
-            deleteButton.Name = "deleteButton";
-            deleteButton.Size = new Size(148, 50);
-            deleteButton.TabIndex = 3;
-            deleteButton.Text = "Удалить";
-            deleteButton.UseVisualStyleBackColor = false;
-            // 
             // tableLayoutPanel
             // 
             tableLayoutPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             tableLayoutPanel.AutoSize = true;
-            tableLayoutPanel.Controls.Add(divider1);
+            tableLayoutPanel.Controls.Add(divider);
             tableLayoutPanel.FlowDirection = FlowDirection.TopDown;
-            tableLayoutPanel.Location = new Point(20, 60);
+            tableLayoutPanel.Location = new Point(20, 66);
             tableLayoutPanel.Margin = new Padding(0);
             tableLayoutPanel.Name = "tableLayoutPanel";
             tableLayoutPanel.Size = new Size(920, 21);
             tableLayoutPanel.TabIndex = 0;
             // 
-            // divider1
+            // divider
             // 
-            divider1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            divider1.BackColor = SystemColors.ControlDark;
-            divider1.Location = new Point(0, 10);
-            divider1.Margin = new Padding(0, 10, 0, 10);
-            divider1.Name = "divider1";
-            divider1.Size = new Size(920, 1);
-            divider1.TabIndex = 4;
+            divider.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            divider.BackColor = SystemColors.ControlDark;
+            divider.Location = new Point(0, 10);
+            divider.Margin = new Padding(0, 10, 0, 10);
+            divider.Name = "divider";
+            divider.Size = new Size(920, 1);
+            divider.TabIndex = 4;
             // 
             // controlsLayoutPanel
             // 
-            controlsLayoutPanel.ColumnCount = 2;
+            controlsLayoutPanel.ColumnCount = 3;
             controlsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            controlsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
             controlsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F));
             controlsLayoutPanel.Controls.Add(inputsLayoutPanel, 0, 0);
-            controlsLayoutPanel.Controls.Add(buttonsLayoutPanel2, 1, 0);
+            controlsLayoutPanel.Controls.Add(buttonsLayoutPanel, 2, 0);
             controlsLayoutPanel.Dock = DockStyle.Fill;
-            controlsLayoutPanel.Location = new Point(20, 81);
+            controlsLayoutPanel.Location = new Point(20, 87);
             controlsLayoutPanel.Margin = new Padding(0);
             controlsLayoutPanel.Name = "controlsLayoutPanel";
             controlsLayoutPanel.RowCount = 1;
@@ -281,228 +179,231 @@ namespace App
             // 
             // inputsLayoutPanel
             // 
-            inputsLayoutPanel.ColumnCount = 1;
-            inputsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            inputsLayoutPanel.Controls.Add(textsLayoutPanel, 0, 1);
-            inputsLayoutPanel.Dock = DockStyle.Fill;
-            inputsLayoutPanel.Location = new Point(0, 0);
-            inputsLayoutPanel.Margin = new Padding(0, 0, 10, 0);
+            inputsLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            inputsLayoutPanel.AutoSize = true;
+            inputsLayoutPanel.ColumnCount = 3;
+            inputsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            inputsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
+            inputsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            inputsLayoutPanel.Controls.Add(rightLayoutPanel, 2, 0);
+            inputsLayoutPanel.Controls.Add(leftLayoutPanel, 0, 0);
+            inputsLayoutPanel.Location = new Point(0, 41);
+            inputsLayoutPanel.Margin = new Padding(0);
             inputsLayoutPanel.Name = "inputsLayoutPanel";
-            inputsLayoutPanel.RowCount = 3;
-            inputsLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            inputsLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 370F));
-            inputsLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            inputsLayoutPanel.Size = new Size(760, 449);
-            inputsLayoutPanel.TabIndex = 1;
+            inputsLayoutPanel.RowCount = 1;
+            inputsLayoutPanel.RowStyles.Add(new RowStyle());
+            inputsLayoutPanel.Size = new Size(760, 366);
+            inputsLayoutPanel.TabIndex = 5;
             // 
-            // textsLayoutPanel
+            // rightLayoutPanel
             // 
-            textsLayoutPanel.ColumnCount = 2;
-            textsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            textsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            textsLayoutPanel.Controls.Add(flowLayoutPanel4, 1, 0);
-            textsLayoutPanel.Controls.Add(flowLayoutPanel1, 0, 0);
-            textsLayoutPanel.Dock = DockStyle.Fill;
-            textsLayoutPanel.Location = new Point(0, 39);
-            textsLayoutPanel.Margin = new Padding(0);
-            textsLayoutPanel.Name = "textsLayoutPanel";
-            textsLayoutPanel.RowCount = 1;
-            textsLayoutPanel.RowStyles.Add(new RowStyle());
-            textsLayoutPanel.Size = new Size(760, 370);
-            textsLayoutPanel.TabIndex = 4;
+            rightLayoutPanel.AutoSize = true;
+            rightLayoutPanel.Controls.Add(brandLayoutPanel);
+            rightLayoutPanel.Controls.Add(modelLayoutPanel);
+            rightLayoutPanel.Controls.Add(VINLayoutPanel1);
+            rightLayoutPanel.Controls.Add(licenseLayoutPanel);
+            rightLayoutPanel.Controls.Add(yearLayoutPanel);
+            rightLayoutPanel.Controls.Add(priceLayoutPanel);
+            rightLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            rightLayoutPanel.Location = new Point(385, 0);
+            rightLayoutPanel.Margin = new Padding(0);
+            rightLayoutPanel.Name = "rightLayoutPanel";
+            rightLayoutPanel.Size = new Size(375, 366);
+            rightLayoutPanel.TabIndex = 1;
             // 
-            // flowLayoutPanel4
+            // brandLayoutPanel
             // 
-            flowLayoutPanel4.AutoSize = true;
-            flowLayoutPanel4.Controls.Add(flowLayoutPanel12);
-            flowLayoutPanel4.Controls.Add(flowLayoutPanel2);
-            flowLayoutPanel4.Controls.Add(flowLayoutPanel10);
-            flowLayoutPanel4.Controls.Add(flowLayoutPanel11);
-            flowLayoutPanel4.Controls.Add(flowLayoutPanel9);
-            flowLayoutPanel4.Controls.Add(priceLayoutPanel);
-            flowLayoutPanel4.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel4.Location = new Point(385, 0);
-            flowLayoutPanel4.Margin = new Padding(5, 0, 0, 0);
-            flowLayoutPanel4.Name = "flowLayoutPanel4";
-            flowLayoutPanel4.Size = new Size(375, 366);
-            flowLayoutPanel4.TabIndex = 1;
+            brandLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            brandLayoutPanel.AutoSize = true;
+            brandLayoutPanel.Controls.Add(brandLabel);
+            brandLayoutPanel.Controls.Add(brandInput);
+            brandLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            brandLayoutPanel.Location = new Point(0, 0);
+            brandLayoutPanel.Margin = new Padding(0);
+            brandLayoutPanel.Name = "brandLayoutPanel";
+            brandLayoutPanel.Padding = new Padding(0, 5, 0, 5);
+            brandLayoutPanel.Size = new Size(375, 61);
+            brandLayoutPanel.TabIndex = 2;
             // 
-            // flowLayoutPanel12
+            // brandLabel
             // 
-            flowLayoutPanel12.AutoSize = true;
-            flowLayoutPanel12.Controls.Add(label4);
-            flowLayoutPanel12.Controls.Add(textBox4);
-            flowLayoutPanel12.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel12.Location = new Point(0, 0);
-            flowLayoutPanel12.Margin = new Padding(0);
-            flowLayoutPanel12.Name = "flowLayoutPanel12";
-            flowLayoutPanel12.Padding = new Padding(0, 5, 0, 5);
-            flowLayoutPanel12.Size = new Size(375, 61);
-            flowLayoutPanel12.TabIndex = 2;
+            brandLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            brandLabel.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            brandLabel.Location = new Point(0, 5);
+            brandLabel.Margin = new Padding(0);
+            brandLabel.Name = "brandLabel";
+            brandLabel.Size = new Size(375, 25);
+            brandLabel.TabIndex = 0;
+            brandLabel.Text = "Марка";
             // 
-            // label4
+            // brandInput
             // 
-            label4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            label4.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            label4.Location = new Point(0, 5);
-            label4.Margin = new Padding(0);
-            label4.Name = "label4";
-            label4.Size = new Size(375, 25);
-            label4.TabIndex = 0;
-            label4.Text = "Марка";
+            brandInput.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            brandInput.BorderStyle = BorderStyle.FixedSingle;
+            brandInput.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            brandInput.Location = new Point(0, 30);
+            brandInput.Margin = new Padding(0);
+            brandInput.MaxLength = 25;
+            brandInput.Name = "brandInput";
+            brandInput.PlaceholderText = "Марка";
+            brandInput.Size = new Size(375, 26);
+            brandInput.TabIndex = 1;
             // 
-            // textBox4
+            // modelLayoutPanel
             // 
-            textBox4.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            textBox4.BorderStyle = BorderStyle.FixedSingle;
-            textBox4.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            textBox4.Location = new Point(0, 30);
-            textBox4.Margin = new Padding(0);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(375, 26);
-            textBox4.TabIndex = 1;
+            modelLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            modelLayoutPanel.AutoSize = true;
+            modelLayoutPanel.Controls.Add(modelLabel);
+            modelLayoutPanel.Controls.Add(modelInput);
+            modelLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            modelLayoutPanel.Location = new Point(0, 61);
+            modelLayoutPanel.Margin = new Padding(0);
+            modelLayoutPanel.Name = "modelLayoutPanel";
+            modelLayoutPanel.Padding = new Padding(0, 5, 0, 5);
+            modelLayoutPanel.Size = new Size(375, 61);
+            modelLayoutPanel.TabIndex = 2;
             // 
-            // flowLayoutPanel2
+            // modelLabel
             // 
-            flowLayoutPanel2.AutoSize = true;
-            flowLayoutPanel2.Controls.Add(label1);
-            flowLayoutPanel2.Controls.Add(textBox1);
-            flowLayoutPanel2.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel2.Location = new Point(0, 61);
-            flowLayoutPanel2.Margin = new Padding(0);
-            flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Padding = new Padding(0, 5, 0, 5);
-            flowLayoutPanel2.Size = new Size(375, 61);
-            flowLayoutPanel2.TabIndex = 2;
+            modelLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            modelLabel.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            modelLabel.Location = new Point(0, 5);
+            modelLabel.Margin = new Padding(0);
+            modelLabel.Name = "modelLabel";
+            modelLabel.Size = new Size(375, 25);
+            modelLabel.TabIndex = 0;
+            modelLabel.Text = "Модель";
             // 
-            // label1
+            // modelInput
             // 
-            label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            label1.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            label1.Location = new Point(0, 5);
-            label1.Margin = new Padding(0);
-            label1.Name = "label1";
-            label1.Size = new Size(375, 25);
-            label1.TabIndex = 0;
-            label1.Text = "Модель";
+            modelInput.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            modelInput.BorderStyle = BorderStyle.FixedSingle;
+            modelInput.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            modelInput.Location = new Point(0, 30);
+            modelInput.Margin = new Padding(0);
+            modelInput.MaxLength = 25;
+            modelInput.Name = "modelInput";
+            modelInput.PlaceholderText = "Модель";
+            modelInput.Size = new Size(375, 26);
+            modelInput.TabIndex = 1;
             // 
-            // textBox1
+            // VINLayoutPanel1
             // 
-            textBox1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            textBox1.Location = new Point(0, 30);
-            textBox1.Margin = new Padding(0);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(375, 26);
-            textBox1.TabIndex = 1;
+            VINLayoutPanel1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            VINLayoutPanel1.AutoSize = true;
+            VINLayoutPanel1.Controls.Add(VINLabel);
+            VINLayoutPanel1.Controls.Add(VINInput);
+            VINLayoutPanel1.FlowDirection = FlowDirection.TopDown;
+            VINLayoutPanel1.Location = new Point(0, 122);
+            VINLayoutPanel1.Margin = new Padding(0);
+            VINLayoutPanel1.Name = "VINLayoutPanel1";
+            VINLayoutPanel1.Padding = new Padding(0, 5, 0, 5);
+            VINLayoutPanel1.Size = new Size(375, 61);
+            VINLayoutPanel1.TabIndex = 4;
             // 
-            // flowLayoutPanel10
+            // VINLabel
             // 
-            flowLayoutPanel10.AutoSize = true;
-            flowLayoutPanel10.Controls.Add(label2);
-            flowLayoutPanel10.Controls.Add(textBox2);
-            flowLayoutPanel10.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel10.Location = new Point(0, 122);
-            flowLayoutPanel10.Margin = new Padding(0);
-            flowLayoutPanel10.Name = "flowLayoutPanel10";
-            flowLayoutPanel10.Padding = new Padding(0, 5, 0, 5);
-            flowLayoutPanel10.Size = new Size(375, 61);
-            flowLayoutPanel10.TabIndex = 4;
+            VINLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            VINLabel.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            VINLabel.Location = new Point(0, 5);
+            VINLabel.Margin = new Padding(0);
+            VINLabel.Name = "VINLabel";
+            VINLabel.Size = new Size(375, 25);
+            VINLabel.TabIndex = 0;
+            VINLabel.Text = "VIN";
             // 
-            // label2
+            // VINInput
             // 
-            label2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            label2.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            label2.Location = new Point(0, 5);
-            label2.Margin = new Padding(0);
-            label2.Name = "label2";
-            label2.Size = new Size(375, 25);
-            label2.TabIndex = 0;
-            label2.Text = "VIN";
+            VINInput.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            VINInput.BorderStyle = BorderStyle.FixedSingle;
+            VINInput.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            VINInput.Location = new Point(0, 30);
+            VINInput.Margin = new Padding(0);
+            VINInput.MaxLength = 17;
+            VINInput.Name = "VINInput";
+            VINInput.PlaceholderText = "000 000000 00000000";
+            VINInput.Size = new Size(375, 26);
+            VINInput.TabIndex = 1;
             // 
-            // textBox2
+            // licenseLayoutPanel
             // 
-            textBox2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            textBox2.BorderStyle = BorderStyle.FixedSingle;
-            textBox2.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            textBox2.Location = new Point(0, 30);
-            textBox2.Margin = new Padding(0);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(375, 26);
-            textBox2.TabIndex = 1;
+            licenseLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            licenseLayoutPanel.AutoSize = true;
+            licenseLayoutPanel.Controls.Add(licenseLabel);
+            licenseLayoutPanel.Controls.Add(licenseInput);
+            licenseLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            licenseLayoutPanel.Location = new Point(0, 183);
+            licenseLayoutPanel.Margin = new Padding(0);
+            licenseLayoutPanel.Name = "licenseLayoutPanel";
+            licenseLayoutPanel.Padding = new Padding(0, 5, 0, 5);
+            licenseLayoutPanel.Size = new Size(375, 61);
+            licenseLayoutPanel.TabIndex = 3;
             // 
-            // flowLayoutPanel11
+            // licenseLabel
             // 
-            flowLayoutPanel11.AutoSize = true;
-            flowLayoutPanel11.Controls.Add(label3);
-            flowLayoutPanel11.Controls.Add(textBox3);
-            flowLayoutPanel11.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel11.Location = new Point(0, 183);
-            flowLayoutPanel11.Margin = new Padding(0);
-            flowLayoutPanel11.Name = "flowLayoutPanel11";
-            flowLayoutPanel11.Padding = new Padding(0, 5, 0, 5);
-            flowLayoutPanel11.Size = new Size(375, 61);
-            flowLayoutPanel11.TabIndex = 3;
+            licenseLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            licenseLabel.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            licenseLabel.Location = new Point(0, 5);
+            licenseLabel.Margin = new Padding(0);
+            licenseLabel.Name = "licenseLabel";
+            licenseLabel.Size = new Size(375, 25);
+            licenseLabel.TabIndex = 0;
+            licenseLabel.Text = "Регистрационный номер";
             // 
-            // label3
+            // licenseInput
             // 
-            label3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            label3.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            label3.Location = new Point(0, 5);
-            label3.Margin = new Padding(0);
-            label3.Name = "label3";
-            label3.Size = new Size(375, 25);
-            label3.TabIndex = 0;
-            label3.Text = "Регистрационный номер";
+            licenseInput.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            licenseInput.BorderStyle = BorderStyle.FixedSingle;
+            licenseInput.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            licenseInput.Location = new Point(0, 30);
+            licenseInput.Margin = new Padding(0);
+            licenseInput.MaxLength = 6;
+            licenseInput.Name = "licenseInput";
+            licenseInput.PlaceholderText = "A000AA";
+            licenseInput.Size = new Size(375, 26);
+            licenseInput.TabIndex = 1;
             // 
-            // textBox3
+            // yearLayoutPanel
             // 
-            textBox3.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            textBox3.BorderStyle = BorderStyle.FixedSingle;
-            textBox3.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            textBox3.Location = new Point(0, 30);
-            textBox3.Margin = new Padding(0);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(375, 26);
-            textBox3.TabIndex = 1;
+            yearLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            yearLayoutPanel.AutoSize = true;
+            yearLayoutPanel.Controls.Add(yearDateLabel);
+            yearLayoutPanel.Controls.Add(yearInput);
+            yearLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            yearLayoutPanel.Location = new Point(0, 244);
+            yearLayoutPanel.Margin = new Padding(0);
+            yearLayoutPanel.Name = "yearLayoutPanel";
+            yearLayoutPanel.Padding = new Padding(0, 5, 0, 5);
+            yearLayoutPanel.Size = new Size(375, 61);
+            yearLayoutPanel.TabIndex = 5;
             // 
-            // flowLayoutPanel9
+            // yearDateLabel
             // 
-            flowLayoutPanel9.AutoSize = true;
-            flowLayoutPanel9.Controls.Add(birthDateLabel);
-            flowLayoutPanel9.Controls.Add(birthDatePicker);
-            flowLayoutPanel9.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel9.Location = new Point(0, 244);
-            flowLayoutPanel9.Margin = new Padding(0);
-            flowLayoutPanel9.Name = "flowLayoutPanel9";
-            flowLayoutPanel9.Padding = new Padding(0, 5, 0, 5);
-            flowLayoutPanel9.Size = new Size(375, 61);
-            flowLayoutPanel9.TabIndex = 5;
+            yearDateLabel.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            yearDateLabel.Location = new Point(0, 5);
+            yearDateLabel.Margin = new Padding(0);
+            yearDateLabel.Name = "yearDateLabel";
+            yearDateLabel.Size = new Size(375, 25);
+            yearDateLabel.TabIndex = 0;
+            yearDateLabel.Text = "Год выпуска";
             // 
-            // birthDateLabel
+            // yearInput
             // 
-            birthDateLabel.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            birthDateLabel.Location = new Point(0, 5);
-            birthDateLabel.Margin = new Padding(0);
-            birthDateLabel.Name = "birthDateLabel";
-            birthDateLabel.Size = new Size(375, 25);
-            birthDateLabel.TabIndex = 0;
-            birthDateLabel.Text = "Год выпуска";
-            // 
-            // birthDatePicker
-            // 
-            birthDatePicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            birthDatePicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            birthDatePicker.Location = new Point(0, 30);
-            birthDatePicker.Margin = new Padding(0);
-            birthDatePicker.Name = "birthDatePicker";
-            birthDatePicker.Size = new Size(375, 26);
-            birthDatePicker.TabIndex = 1;
+            yearInput.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            yearInput.BorderStyle = BorderStyle.FixedSingle;
+            yearInput.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            yearInput.Location = new Point(0, 30);
+            yearInput.Margin = new Padding(0);
+            yearInput.Maximum = new decimal(new int[] { 999999999, 0, 0, 0 });
+            yearInput.Minimum = new decimal(new int[] { 1900, 0, 0, 0 });
+            yearInput.Name = "yearInput";
+            yearInput.Size = new Size(375, 26);
+            yearInput.TabIndex = 2;
+            yearInput.Value = new decimal(new int[] { 1900, 0, 0, 0 });
             // 
             // priceLayoutPanel
             // 
-            priceLayoutPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            priceLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             priceLayoutPanel.AutoSize = true;
             priceLayoutPanel.Controls.Add(priceLabel);
             priceLayoutPanel.Controls.Add(priceInput);
@@ -523,7 +424,7 @@ namespace App
             priceLabel.Name = "priceLabel";
             priceLabel.Size = new Size(375, 25);
             priceLabel.TabIndex = 0;
-            priceLabel.Text = "Стоимость автомобиля";
+            priceLabel.Text = "Стоимость автомобиля, руб.";
             // 
             // priceInput
             // 
@@ -532,28 +433,31 @@ namespace App
             priceInput.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             priceInput.Location = new Point(0, 30);
             priceInput.Margin = new Padding(0);
+            priceInput.Maximum = new decimal(new int[] { 999999999, 0, 0, 0 });
             priceInput.Name = "priceInput";
             priceInput.Size = new Size(375, 26);
             priceInput.TabIndex = 2;
+            priceInput.ThousandsSeparator = true;
             // 
-            // flowLayoutPanel1
+            // leftLayoutPanel
             // 
-            flowLayoutPanel1.AutoSize = true;
-            flowLayoutPanel1.Controls.Add(surnameNumberLayoutPanel);
-            flowLayoutPanel1.Controls.Add(nameLayoutPanel);
-            flowLayoutPanel1.Controls.Add(flowLayoutPanel3);
-            flowLayoutPanel1.Controls.Add(flowLayoutPanel6);
-            flowLayoutPanel1.Controls.Add(flowLayoutPanel8);
-            flowLayoutPanel1.Controls.Add(flowLayoutPanel7);
-            flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel1.Location = new Point(0, 0);
-            flowLayoutPanel1.Margin = new Padding(0, 0, 5, 0);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(375, 366);
-            flowLayoutPanel1.TabIndex = 0;
+            leftLayoutPanel.AutoSize = true;
+            leftLayoutPanel.Controls.Add(surnameNumberLayoutPanel);
+            leftLayoutPanel.Controls.Add(nameLayoutPanel);
+            leftLayoutPanel.Controls.Add(patronymicLayoutPanel);
+            leftLayoutPanel.Controls.Add(passportLayoutPanel);
+            leftLayoutPanel.Controls.Add(telephoneLayoutPanel);
+            leftLayoutPanel.Controls.Add(addressLayoutPanel);
+            leftLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            leftLayoutPanel.Location = new Point(0, 0);
+            leftLayoutPanel.Margin = new Padding(0);
+            leftLayoutPanel.Name = "leftLayoutPanel";
+            leftLayoutPanel.Size = new Size(375, 366);
+            leftLayoutPanel.TabIndex = 0;
             // 
             // surnameNumberLayoutPanel
             // 
+            surnameNumberLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             surnameNumberLayoutPanel.AutoSize = true;
             surnameNumberLayoutPanel.Controls.Add(surnameLabel);
             surnameNumberLayoutPanel.Controls.Add(surnameInput);
@@ -583,12 +487,15 @@ namespace App
             surnameInput.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             surnameInput.Location = new Point(0, 30);
             surnameInput.Margin = new Padding(0);
+            surnameInput.MaxLength = 50;
             surnameInput.Name = "surnameInput";
+            surnameInput.PlaceholderText = "Иванов";
             surnameInput.Size = new Size(375, 26);
             surnameInput.TabIndex = 1;
             // 
             // nameLayoutPanel
             // 
+            nameLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             nameLayoutPanel.AutoSize = true;
             nameLayoutPanel.Controls.Add(nameLabel);
             nameLayoutPanel.Controls.Add(nameInput);
@@ -618,22 +525,25 @@ namespace App
             nameInput.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             nameInput.Location = new Point(0, 30);
             nameInput.Margin = new Padding(0);
+            nameInput.MaxLength = 50;
             nameInput.Name = "nameInput";
+            nameInput.PlaceholderText = "Иван";
             nameInput.Size = new Size(375, 26);
             nameInput.TabIndex = 1;
             // 
-            // flowLayoutPanel3
+            // patronymicLayoutPanel
             // 
-            flowLayoutPanel3.AutoSize = true;
-            flowLayoutPanel3.Controls.Add(patronymicLabel);
-            flowLayoutPanel3.Controls.Add(patronymicInput);
-            flowLayoutPanel3.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel3.Location = new Point(0, 122);
-            flowLayoutPanel3.Margin = new Padding(0);
-            flowLayoutPanel3.Name = "flowLayoutPanel3";
-            flowLayoutPanel3.Padding = new Padding(0, 5, 0, 5);
-            flowLayoutPanel3.Size = new Size(375, 61);
-            flowLayoutPanel3.TabIndex = 4;
+            patronymicLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            patronymicLayoutPanel.AutoSize = true;
+            patronymicLayoutPanel.Controls.Add(patronymicLabel);
+            patronymicLayoutPanel.Controls.Add(patronymicInput);
+            patronymicLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            patronymicLayoutPanel.Location = new Point(0, 122);
+            patronymicLayoutPanel.Margin = new Padding(0);
+            patronymicLayoutPanel.Name = "patronymicLayoutPanel";
+            patronymicLayoutPanel.Padding = new Padding(0, 5, 0, 5);
+            patronymicLayoutPanel.Size = new Size(375, 61);
+            patronymicLayoutPanel.TabIndex = 4;
             // 
             // patronymicLabel
             // 
@@ -653,22 +563,25 @@ namespace App
             patronymicInput.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             patronymicInput.Location = new Point(0, 30);
             patronymicInput.Margin = new Padding(0);
+            patronymicInput.MaxLength = 50;
             patronymicInput.Name = "patronymicInput";
+            patronymicInput.PlaceholderText = "Иванович";
             patronymicInput.Size = new Size(375, 26);
             patronymicInput.TabIndex = 1;
             // 
-            // flowLayoutPanel6
+            // passportLayoutPanel
             // 
-            flowLayoutPanel6.AutoSize = true;
-            flowLayoutPanel6.Controls.Add(passportLabel);
-            flowLayoutPanel6.Controls.Add(passportInput);
-            flowLayoutPanel6.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel6.Location = new Point(0, 183);
-            flowLayoutPanel6.Margin = new Padding(0);
-            flowLayoutPanel6.Name = "flowLayoutPanel6";
-            flowLayoutPanel6.Padding = new Padding(0, 5, 0, 5);
-            flowLayoutPanel6.Size = new Size(375, 61);
-            flowLayoutPanel6.TabIndex = 2;
+            passportLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            passportLayoutPanel.AutoSize = true;
+            passportLayoutPanel.Controls.Add(passportLabel);
+            passportLayoutPanel.Controls.Add(passportInput);
+            passportLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            passportLayoutPanel.Location = new Point(0, 183);
+            passportLayoutPanel.Margin = new Padding(0);
+            passportLayoutPanel.Name = "passportLayoutPanel";
+            passportLayoutPanel.Padding = new Padding(0, 5, 0, 5);
+            passportLayoutPanel.Size = new Size(375, 61);
+            passportLayoutPanel.TabIndex = 2;
             // 
             // passportLabel
             // 
@@ -688,22 +601,27 @@ namespace App
             passportInput.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             passportInput.Location = new Point(0, 30);
             passportInput.Margin = new Padding(0);
+            passportInput.MaxLength = 10;
             passportInput.Name = "passportInput";
+            passportInput.PlaceholderText = "0000 000000";
             passportInput.Size = new Size(375, 26);
             passportInput.TabIndex = 1;
+            passportInput.Enter += passportInput_Enter;
+            passportInput.Leave += passportInput_Leave;
             // 
-            // flowLayoutPanel8
+            // telephoneLayoutPanel
             // 
-            flowLayoutPanel8.AutoSize = true;
-            flowLayoutPanel8.Controls.Add(telephoneLabel);
-            flowLayoutPanel8.Controls.Add(telephoneInput);
-            flowLayoutPanel8.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel8.Location = new Point(0, 244);
-            flowLayoutPanel8.Margin = new Padding(0);
-            flowLayoutPanel8.Name = "flowLayoutPanel8";
-            flowLayoutPanel8.Padding = new Padding(0, 5, 0, 5);
-            flowLayoutPanel8.Size = new Size(375, 61);
-            flowLayoutPanel8.TabIndex = 4;
+            telephoneLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            telephoneLayoutPanel.AutoSize = true;
+            telephoneLayoutPanel.Controls.Add(telephoneLabel);
+            telephoneLayoutPanel.Controls.Add(telephoneInput);
+            telephoneLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            telephoneLayoutPanel.Location = new Point(0, 244);
+            telephoneLayoutPanel.Margin = new Padding(0);
+            telephoneLayoutPanel.Name = "telephoneLayoutPanel";
+            telephoneLayoutPanel.Padding = new Padding(0, 5, 0, 5);
+            telephoneLayoutPanel.Size = new Size(375, 61);
+            telephoneLayoutPanel.TabIndex = 4;
             // 
             // telephoneLabel
             // 
@@ -723,22 +641,27 @@ namespace App
             telephoneInput.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             telephoneInput.Location = new Point(0, 30);
             telephoneInput.Margin = new Padding(0);
+            telephoneInput.MaxLength = 12;
             telephoneInput.Name = "telephoneInput";
+            telephoneInput.PlaceholderText = "+7 (___) ___-__-__";
             telephoneInput.Size = new Size(375, 26);
             telephoneInput.TabIndex = 1;
+            telephoneInput.Enter += telephoneInput_Enter;
+            telephoneInput.Leave += telephoneInput_Leave;
             // 
-            // flowLayoutPanel7
+            // addressLayoutPanel
             // 
-            flowLayoutPanel7.AutoSize = true;
-            flowLayoutPanel7.Controls.Add(addressLabel);
-            flowLayoutPanel7.Controls.Add(addressInput);
-            flowLayoutPanel7.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel7.Location = new Point(0, 305);
-            flowLayoutPanel7.Margin = new Padding(0);
-            flowLayoutPanel7.Name = "flowLayoutPanel7";
-            flowLayoutPanel7.Padding = new Padding(0, 5, 0, 5);
-            flowLayoutPanel7.Size = new Size(375, 61);
-            flowLayoutPanel7.TabIndex = 3;
+            addressLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            addressLayoutPanel.AutoSize = true;
+            addressLayoutPanel.Controls.Add(addressLabel);
+            addressLayoutPanel.Controls.Add(addressInput);
+            addressLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            addressLayoutPanel.Location = new Point(0, 305);
+            addressLayoutPanel.Margin = new Padding(0);
+            addressLayoutPanel.Name = "addressLayoutPanel";
+            addressLayoutPanel.Padding = new Padding(0, 5, 0, 5);
+            addressLayoutPanel.Size = new Size(375, 61);
+            addressLayoutPanel.TabIndex = 3;
             // 
             // addressLabel
             // 
@@ -758,37 +681,24 @@ namespace App
             addressInput.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             addressInput.Location = new Point(0, 30);
             addressInput.Margin = new Padding(0);
+            addressInput.MaxLength = 50;
             addressInput.Name = "addressInput";
+            addressInput.PlaceholderText = "ул. Большая Морская, д. 0";
             addressInput.Size = new Size(375, 26);
             addressInput.TabIndex = 1;
             // 
-            // buttonsLayoutPanel2
+            // buttonsLayoutPanel
             // 
-            buttonsLayoutPanel2.ColumnCount = 1;
-            buttonsLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            buttonsLayoutPanel2.Controls.Add(flowLayoutPanel5, 0, 1);
-            buttonsLayoutPanel2.Dock = DockStyle.Fill;
-            buttonsLayoutPanel2.Location = new Point(770, 0);
-            buttonsLayoutPanel2.Margin = new Padding(0);
-            buttonsLayoutPanel2.Name = "buttonsLayoutPanel2";
-            buttonsLayoutPanel2.RowCount = 3;
-            buttonsLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            buttonsLayoutPanel2.RowStyles.Add(new RowStyle());
-            buttonsLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            buttonsLayoutPanel2.Size = new Size(150, 449);
-            buttonsLayoutPanel2.TabIndex = 0;
-            // 
-            // flowLayoutPanel5
-            // 
-            flowLayoutPanel5.AutoSize = true;
-            flowLayoutPanel5.Controls.Add(acceptButton);
-            flowLayoutPanel5.Controls.Add(resetButton);
-            flowLayoutPanel5.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel5.Location = new Point(0, 169);
-            flowLayoutPanel5.Margin = new Padding(0);
-            flowLayoutPanel5.Name = "flowLayoutPanel5";
-            flowLayoutPanel5.Size = new Size(150, 110);
-            flowLayoutPanel5.TabIndex = 0;
+            buttonsLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            buttonsLayoutPanel.AutoSize = true;
+            buttonsLayoutPanel.Controls.Add(acceptButton);
+            buttonsLayoutPanel.Controls.Add(resetButton);
+            buttonsLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            buttonsLayoutPanel.Location = new Point(770, 169);
+            buttonsLayoutPanel.Margin = new Padding(0);
+            buttonsLayoutPanel.Name = "buttonsLayoutPanel";
+            buttonsLayoutPanel.Size = new Size(150, 110);
+            buttonsLayoutPanel.TabIndex = 2;
             // 
             // acceptButton
             // 
@@ -803,6 +713,7 @@ namespace App
             acceptButton.TabIndex = 6;
             acceptButton.Text = "Принять";
             acceptButton.UseVisualStyleBackColor = false;
+            acceptButton.Click += acceptButton_Click;
             // 
             // resetButton
             // 
@@ -816,13 +727,197 @@ namespace App
             resetButton.Name = "resetButton";
             resetButton.Size = new Size(150, 50);
             resetButton.TabIndex = 7;
-            resetButton.Text = "Сбросить";
+            resetButton.Text = "Отменить";
             resetButton.UseVisualStyleBackColor = false;
+            resetButton.Click += resetButton_Click;
+            // 
+            // menuLayoutPanel
+            // 
+            menuLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            menuLayoutPanel.AutoSize = true;
+            menuLayoutPanel.ColumnCount = 5;
+            menuLayoutPanel.ColumnStyles.Add(new ColumnStyle());
+            menuLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            menuLayoutPanel.ColumnStyles.Add(new ColumnStyle());
+            menuLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            menuLayoutPanel.ColumnStyles.Add(new ColumnStyle());
+            menuLayoutPanel.Controls.Add(dbLayoutPanel, 4, 0);
+            menuLayoutPanel.Controls.Add(clientsLayoutPanel, 2, 0);
+            menuLayoutPanel.Controls.Add(redirectLayoutPanel, 0, 0);
+            menuLayoutPanel.Location = new Point(23, 13);
+            menuLayoutPanel.Name = "menuLayoutPanel";
+            menuLayoutPanel.RowCount = 1;
+            menuLayoutPanel.RowStyles.Add(new RowStyle());
+            menuLayoutPanel.Size = new Size(914, 50);
+            menuLayoutPanel.TabIndex = 2;
+            // 
+            // dbLayoutPanel
+            // 
+            dbLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            dbLayoutPanel.AutoSize = true;
+            dbLayoutPanel.Controls.Add(addButton);
+            dbLayoutPanel.Controls.Add(editButton);
+            dbLayoutPanel.Controls.Add(deleteButton);
+            dbLayoutPanel.Location = new Point(454, 0);
+            dbLayoutPanel.Margin = new Padding(0);
+            dbLayoutPanel.Name = "dbLayoutPanel";
+            dbLayoutPanel.Size = new Size(460, 50);
+            dbLayoutPanel.TabIndex = 6;
+            // 
+            // addButton
+            // 
+            addButton.AutoSize = true;
+            addButton.BackColor = SystemColors.MenuHighlight;
+            addButton.Dock = DockStyle.Left;
+            addButton.FlatStyle = FlatStyle.Flat;
+            addButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            addButton.ForeColor = SystemColors.ButtonFace;
+            addButton.Location = new Point(0, 0);
+            addButton.Margin = new Padding(0);
+            addButton.Name = "addButton";
+            addButton.Size = new Size(140, 50);
+            addButton.TabIndex = 1;
+            addButton.Text = "Добавить";
+            addButton.UseVisualStyleBackColor = false;
+            addButton.Click += addButton_Click;
+            // 
+            // editButton
+            // 
+            editButton.AutoSize = true;
+            editButton.BackColor = SystemColors.MenuHighlight;
+            editButton.Dock = DockStyle.Left;
+            editButton.FlatStyle = FlatStyle.Flat;
+            editButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            editButton.ForeColor = SystemColors.ButtonFace;
+            editButton.Location = new Point(160, 0);
+            editButton.Margin = new Padding(20, 0, 20, 0);
+            editButton.Name = "editButton";
+            editButton.Size = new Size(140, 50);
+            editButton.TabIndex = 2;
+            editButton.Text = "Изменить";
+            editButton.UseVisualStyleBackColor = false;
+            editButton.Click += editButton_Click;
+            // 
+            // deleteButton
+            // 
+            deleteButton.AutoSize = true;
+            deleteButton.BackColor = SystemColors.MenuHighlight;
+            deleteButton.Dock = DockStyle.Left;
+            deleteButton.FlatStyle = FlatStyle.Flat;
+            deleteButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            deleteButton.ForeColor = SystemColors.ButtonFace;
+            deleteButton.Location = new Point(320, 0);
+            deleteButton.Margin = new Padding(0);
+            deleteButton.Name = "deleteButton";
+            deleteButton.Size = new Size(140, 50);
+            deleteButton.TabIndex = 3;
+            deleteButton.Text = "Удалить";
+            deleteButton.UseVisualStyleBackColor = false;
+            deleteButton.Click += deleteButton_Click;
+            // 
+            // clientsLayoutPanel
+            // 
+            clientsLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            clientsLayoutPanel.AutoSize = true;
+            clientsLayoutPanel.Controls.Add(ownersPicker);
+            clientsLayoutPanel.Controls.Add(carsPicker);
+            clientsLayoutPanel.Location = new Point(120, 11);
+            clientsLayoutPanel.Margin = new Padding(0);
+            clientsLayoutPanel.Name = "clientsLayoutPanel";
+            clientsLayoutPanel.Size = new Size(314, 27);
+            clientsLayoutPanel.TabIndex = 3;
+            // 
+            // ownersPicker
+            // 
+            ownersPicker.BackColor = Color.White;
+            ownersPicker.DataSource = ownerBindingSource;
+            ownersPicker.DisplayMember = "OwnerSurname";
+            ownersPicker.DropDownStyle = ComboBoxStyle.DropDownList;
+            ownersPicker.FlatStyle = FlatStyle.System;
+            ownersPicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            ownersPicker.FormattingEnabled = true;
+            ownersPicker.Location = new Point(0, 0);
+            ownersPicker.Margin = new Padding(0, 0, 10, 0);
+            ownersPicker.Name = "ownersPicker";
+            ownersPicker.Size = new Size(147, 27);
+            ownersPicker.TabIndex = 1;
+            ownersPicker.ValueMember = "Id";
+            // 
+            // ownerBindingSource
+            // 
+            ownerBindingSource.DataSource = typeof(Owner);
+            // 
+            // carsPicker
+            // 
+            carsPicker.BackColor = Color.White;
+            carsPicker.DataSource = carBindingSource;
+            carsPicker.DisplayMember = "LicensePlate";
+            carsPicker.DropDownStyle = ComboBoxStyle.DropDownList;
+            carsPicker.FlatStyle = FlatStyle.System;
+            carsPicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            carsPicker.FormattingEnabled = true;
+            carsPicker.Location = new Point(167, 0);
+            carsPicker.Margin = new Padding(10, 0, 0, 0);
+            carsPicker.Name = "carsPicker";
+            carsPicker.Size = new Size(147, 27);
+            carsPicker.TabIndex = 2;
+            carsPicker.ValueMember = "Id";
+            // 
+            // carBindingSource
+            // 
+            carBindingSource.DataSource = typeof(Car);
+            // 
+            // redirectLayoutPanel
+            // 
+            redirectLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            redirectLayoutPanel.AutoSize = true;
+            redirectLayoutPanel.Controls.Add(homeButton);
+            redirectLayoutPanel.Controls.Add(returnButton);
+            redirectLayoutPanel.Location = new Point(0, 5);
+            redirectLayoutPanel.Margin = new Padding(0);
+            redirectLayoutPanel.Name = "redirectLayoutPanel";
+            redirectLayoutPanel.Size = new Size(100, 40);
+            redirectLayoutPanel.TabIndex = 1;
+            // 
+            // homeButton
+            // 
+            homeButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            homeButton.BackColor = Color.Transparent;
+            homeButton.FlatAppearance.BorderSize = 0;
+            homeButton.FlatStyle = FlatStyle.Flat;
+            homeButton.Font = new Font("Segoe MDL2 Assets", 18F, FontStyle.Regular, GraphicsUnit.Pixel);
+            homeButton.ForeColor = SystemColors.WindowFrame;
+            homeButton.Location = new Point(0, 0);
+            homeButton.Margin = new Padding(0, 0, 10, 0);
+            homeButton.Name = "homeButton";
+            homeButton.Size = new Size(40, 40);
+            homeButton.TabIndex = 4;
+            homeButton.Text = "";
+            homeButton.UseVisualStyleBackColor = false;
+            homeButton.Click += homeButton_Click;
+            // 
+            // returnButton
+            // 
+            returnButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            returnButton.BackColor = Color.Transparent;
+            returnButton.FlatAppearance.BorderSize = 0;
+            returnButton.FlatStyle = FlatStyle.Flat;
+            returnButton.Font = new Font("Segoe MDL2 Assets", 18F, FontStyle.Regular, GraphicsUnit.Pixel);
+            returnButton.ForeColor = SystemColors.WindowFrame;
+            returnButton.Location = new Point(60, 0);
+            returnButton.Margin = new Padding(10, 0, 0, 0);
+            returnButton.Name = "returnButton";
+            returnButton.Size = new Size(40, 40);
+            returnButton.TabIndex = 5;
+            returnButton.Text = "";
+            returnButton.UseVisualStyleBackColor = false;
+            returnButton.Click += returnButton_Click;
             // 
             // ClientsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             ClientSize = new Size(960, 540);
             Controls.Add(formLayoutPanel);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -830,106 +925,116 @@ namespace App
             Name = "ClientsForm";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Клиенты автосервиса";
+            Text = "Информационная система: клиенты автосервиса";
             FormClosed += ClientsForm_FormClosed;
+            Load += ClientsForm_Load;
             formLayoutPanel.ResumeLayout(false);
             formLayoutPanel.PerformLayout();
-            menuLayoutPanel.ResumeLayout(false);
-            menuLayoutPanel.PerformLayout();
             tableLayoutPanel.ResumeLayout(false);
             controlsLayoutPanel.ResumeLayout(false);
+            controlsLayoutPanel.PerformLayout();
             inputsLayoutPanel.ResumeLayout(false);
-            textsLayoutPanel.ResumeLayout(false);
-            textsLayoutPanel.PerformLayout();
-            flowLayoutPanel4.ResumeLayout(false);
-            flowLayoutPanel4.PerformLayout();
-            flowLayoutPanel12.ResumeLayout(false);
-            flowLayoutPanel12.PerformLayout();
-            flowLayoutPanel2.ResumeLayout(false);
-            flowLayoutPanel2.PerformLayout();
-            flowLayoutPanel10.ResumeLayout(false);
-            flowLayoutPanel10.PerformLayout();
-            flowLayoutPanel11.ResumeLayout(false);
-            flowLayoutPanel11.PerformLayout();
-            flowLayoutPanel9.ResumeLayout(false);
+            inputsLayoutPanel.PerformLayout();
+            rightLayoutPanel.ResumeLayout(false);
+            rightLayoutPanel.PerformLayout();
+            brandLayoutPanel.ResumeLayout(false);
+            brandLayoutPanel.PerformLayout();
+            modelLayoutPanel.ResumeLayout(false);
+            modelLayoutPanel.PerformLayout();
+            VINLayoutPanel1.ResumeLayout(false);
+            VINLayoutPanel1.PerformLayout();
+            licenseLayoutPanel.ResumeLayout(false);
+            licenseLayoutPanel.PerformLayout();
+            yearLayoutPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)yearInput).EndInit();
             priceLayoutPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)priceInput).EndInit();
-            flowLayoutPanel1.ResumeLayout(false);
-            flowLayoutPanel1.PerformLayout();
+            leftLayoutPanel.ResumeLayout(false);
+            leftLayoutPanel.PerformLayout();
             surnameNumberLayoutPanel.ResumeLayout(false);
             surnameNumberLayoutPanel.PerformLayout();
             nameLayoutPanel.ResumeLayout(false);
             nameLayoutPanel.PerformLayout();
-            flowLayoutPanel3.ResumeLayout(false);
-            flowLayoutPanel3.PerformLayout();
-            flowLayoutPanel6.ResumeLayout(false);
-            flowLayoutPanel6.PerformLayout();
-            flowLayoutPanel8.ResumeLayout(false);
-            flowLayoutPanel8.PerformLayout();
-            flowLayoutPanel7.ResumeLayout(false);
-            flowLayoutPanel7.PerformLayout();
-            buttonsLayoutPanel2.ResumeLayout(false);
-            buttonsLayoutPanel2.PerformLayout();
-            flowLayoutPanel5.ResumeLayout(false);
+            patronymicLayoutPanel.ResumeLayout(false);
+            patronymicLayoutPanel.PerformLayout();
+            passportLayoutPanel.ResumeLayout(false);
+            passportLayoutPanel.PerformLayout();
+            telephoneLayoutPanel.ResumeLayout(false);
+            telephoneLayoutPanel.PerformLayout();
+            addressLayoutPanel.ResumeLayout(false);
+            addressLayoutPanel.PerformLayout();
+            buttonsLayoutPanel.ResumeLayout(false);
+            menuLayoutPanel.ResumeLayout(false);
+            menuLayoutPanel.PerformLayout();
+            dbLayoutPanel.ResumeLayout(false);
+            dbLayoutPanel.PerformLayout();
+            clientsLayoutPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)ownerBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)carBindingSource).EndInit();
+            redirectLayoutPanel.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
         private TableLayoutPanel formLayoutPanel;
-        private FlowLayoutPanel menuLayoutPanel;
-        private Button homeButton;
-        private Button returnButton;
-        private ComboBox employeesPicker;
-        private Button addButton;
-        private Button editButton;
-        private Button deleteButton;
         private FlowLayoutPanel tableLayoutPanel;
-        private Label divider1;
+        private Label divider;
         private TableLayoutPanel controlsLayoutPanel;
+        private FlowLayoutPanel buttonsLayoutPanel;
+        private Button acceptButton;
+        private Button resetButton;
         private TableLayoutPanel inputsLayoutPanel;
-        private TableLayoutPanel textsLayoutPanel;
-        private FlowLayoutPanel flowLayoutPanel4;
-        private FlowLayoutPanel flowLayoutPanel9;
-        private Label birthDateLabel;
-        private DateTimePicker birthDatePicker;
-        private FlowLayoutPanel flowLayoutPanel1;
+        private FlowLayoutPanel rightLayoutPanel;
+        private FlowLayoutPanel brandLayoutPanel;
+        private Label brandLabel;
+        private TextBox brandInput;
+        private FlowLayoutPanel modelLayoutPanel;
+        private Label modelLabel;
+        private TextBox modelInput;
+        private FlowLayoutPanel VINLayoutPanel1;
+        private Label VINLabel;
+        private TextBox VINInput;
+        private FlowLayoutPanel licenseLayoutPanel;
+        private Label licenseLabel;
+        private TextBox licenseInput;
+        private FlowLayoutPanel yearLayoutPanel;
+        private Label yearDateLabel;
+        private FlowLayoutPanel priceLayoutPanel;
+        private Label priceLabel;
+        private NumericUpDown priceInput;
+        private FlowLayoutPanel leftLayoutPanel;
         private FlowLayoutPanel surnameNumberLayoutPanel;
         private Label surnameLabel;
         private TextBox surnameInput;
         private FlowLayoutPanel nameLayoutPanel;
         private Label nameLabel;
         private TextBox nameInput;
-        private FlowLayoutPanel flowLayoutPanel3;
+        private FlowLayoutPanel patronymicLayoutPanel;
         private Label patronymicLabel;
         private TextBox patronymicInput;
-        private FlowLayoutPanel flowLayoutPanel6;
+        private FlowLayoutPanel passportLayoutPanel;
         private Label passportLabel;
         private TextBox passportInput;
-        private FlowLayoutPanel flowLayoutPanel8;
+        private FlowLayoutPanel telephoneLayoutPanel;
         private Label telephoneLabel;
         private TextBox telephoneInput;
-        private FlowLayoutPanel flowLayoutPanel7;
+        private FlowLayoutPanel addressLayoutPanel;
         private Label addressLabel;
         private TextBox addressInput;
-        private TableLayoutPanel buttonsLayoutPanel2;
-        private FlowLayoutPanel flowLayoutPanel5;
-        private Button acceptButton;
-        private Button resetButton;
-        private FlowLayoutPanel flowLayoutPanel12;
-        private Label label4;
-        private TextBox textBox4;
-        private FlowLayoutPanel flowLayoutPanel2;
-        private Label label1;
-        private TextBox textBox1;
-        private FlowLayoutPanel flowLayoutPanel10;
-        private Label label2;
-        private TextBox textBox2;
-        private FlowLayoutPanel flowLayoutPanel11;
-        private Label label3;
-        private TextBox textBox3;
-        private FlowLayoutPanel priceLayoutPanel;
-        private Label priceLabel;
-        private NumericUpDown priceInput;
+        private BindingSource ownerBindingSource;
+        private TableLayoutPanel menuLayoutPanel;
+        private FlowLayoutPanel dbLayoutPanel;
+        private Button addButton;
+        private Button editButton;
+        private Button deleteButton;
+        private FlowLayoutPanel clientsLayoutPanel;
+        private ComboBox ownersPicker;
+        private ComboBox carsPicker;
+        private FlowLayoutPanel redirectLayoutPanel;
+        private Button homeButton;
+        private Button returnButton;
+        private BindingSource carBindingSource;
+        private NumericUpDown yearInput;
     }
 }

@@ -29,6 +29,7 @@ namespace App
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             formLayoutPanel = new TableLayoutPanel();
             suppliesTable = new DataGridView();
             menuLayoutPanel = new FlowLayoutPanel();
@@ -38,54 +39,54 @@ namespace App
             editButton = new Button();
             deleteButton = new Button();
             controlsLayoutPanel = new TableLayoutPanel();
-            buttonsLayoutPanel = new FlowLayoutPanel();
-            buttonsLayoutPanel2 = new TableLayoutPanel();
-            flowLayoutPanel5 = new FlowLayoutPanel();
-            acceptButton = new Button();
-            resetButton = new Button();
-            tableLayoutPanel1 = new TableLayoutPanel();
-            tableLayoutPanel3 = new TableLayoutPanel();
+            inputsLayoutPanel = new TableLayoutPanel();
+            partsLayoutPanel = new TableLayoutPanel();
             amountLayoutPane = new FlowLayoutPanel();
             amountLabel = new Label();
             amountInput = new NumericUpDown();
             partLayoutPanel = new FlowLayoutPanel();
             partsLabel = new Label();
             partsPicker = new ComboBox();
-            tableLayoutPanel2 = new TableLayoutPanel();
+            personsLayoutPanel = new TableLayoutPanel();
             supplierLayoutPanel = new FlowLayoutPanel();
             suppliersLabel = new Label();
             suppliersPicker = new ComboBox();
             employeeLayoutPanel = new FlowLayoutPanel();
             employeeLabel = new Label();
             employeePicker = new ComboBox();
-            tableLayoutPanel4 = new TableLayoutPanel();
+            datesLayoutPanel = new TableLayoutPanel();
             deliveryDateLayoutPanel = new FlowLayoutPanel();
             deliveryDateLabel = new Label();
             deliveryDatePicker = new DateTimePicker();
             postDateLayoutPanel = new FlowLayoutPanel();
             postDateLabel = new Label();
             postDatePicker = new DateTimePicker();
-            deliveryStateLayoutPanel = new TableLayoutPanel();
             deliveryStateCheckBox = new CheckBox();
+            buttonsLayoutPanel = new FlowLayoutPanel();
+            acceptButton = new Button();
+            resetButton = new Button();
+            employeeBindingSource = new BindingSource(components);
+            supplierBindingSource = new BindingSource(components);
+            partBindingSource = new BindingSource(components);
             formLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)suppliesTable).BeginInit();
             menuLayoutPanel.SuspendLayout();
             controlsLayoutPanel.SuspendLayout();
-            buttonsLayoutPanel.SuspendLayout();
-            buttonsLayoutPanel2.SuspendLayout();
-            flowLayoutPanel5.SuspendLayout();
-            tableLayoutPanel1.SuspendLayout();
-            tableLayoutPanel3.SuspendLayout();
+            inputsLayoutPanel.SuspendLayout();
+            partsLayoutPanel.SuspendLayout();
             amountLayoutPane.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)amountInput).BeginInit();
             partLayoutPanel.SuspendLayout();
-            tableLayoutPanel2.SuspendLayout();
+            personsLayoutPanel.SuspendLayout();
             supplierLayoutPanel.SuspendLayout();
             employeeLayoutPanel.SuspendLayout();
-            tableLayoutPanel4.SuspendLayout();
+            datesLayoutPanel.SuspendLayout();
             deliveryDateLayoutPanel.SuspendLayout();
             postDateLayoutPanel.SuspendLayout();
-            deliveryStateLayoutPanel.SuspendLayout();
+            buttonsLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)employeeBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)supplierBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)partBindingSource).BeginInit();
             SuspendLayout();
             // 
             // formLayoutPanel
@@ -118,26 +119,27 @@ namespace App
             suppliesTable.BorderStyle = BorderStyle.None;
             suppliesTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             suppliesTable.Cursor = Cursors.Hand;
+            suppliesTable.Dock = DockStyle.Top;
             suppliesTable.GridColor = SystemColors.ControlDark;
             suppliesTable.Location = new Point(20, 80);
             suppliesTable.Margin = new Padding(0);
             suppliesTable.Name = "suppliesTable";
-            suppliesTable.Size = new Size(920, 234);
+            suppliesTable.Size = new Size(920, 225);
             suppliesTable.TabIndex = 2;
             // 
             // menuLayoutPanel
             // 
-            menuLayoutPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             menuLayoutPanel.AutoSize = true;
             menuLayoutPanel.Controls.Add(homeButton);
             menuLayoutPanel.Controls.Add(returnButton);
             menuLayoutPanel.Controls.Add(addButton);
             menuLayoutPanel.Controls.Add(editButton);
             menuLayoutPanel.Controls.Add(deleteButton);
+            menuLayoutPanel.Dock = DockStyle.Fill;
             menuLayoutPanel.Location = new Point(20, 10);
             menuLayoutPanel.Margin = new Padding(0);
             menuLayoutPanel.Name = "menuLayoutPanel";
-            menuLayoutPanel.Size = new Size(919, 50);
+            menuLayoutPanel.Size = new Size(920, 50);
             menuLayoutPanel.TabIndex = 0;
             // 
             // homeButton
@@ -224,121 +226,55 @@ namespace App
             // 
             // controlsLayoutPanel
             // 
+            controlsLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             controlsLayoutPanel.ColumnCount = 3;
             controlsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             controlsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
             controlsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F));
+            controlsLayoutPanel.Controls.Add(inputsLayoutPanel, 0, 0);
             controlsLayoutPanel.Controls.Add(buttonsLayoutPanel, 2, 0);
-            controlsLayoutPanel.Controls.Add(tableLayoutPanel1, 0, 0);
-            controlsLayoutPanel.Dock = DockStyle.Fill;
-            controlsLayoutPanel.Location = new Point(20, 334);
+            controlsLayoutPanel.Location = new Point(20, 325);
             controlsLayoutPanel.Margin = new Padding(0);
             controlsLayoutPanel.Name = "controlsLayoutPanel";
             controlsLayoutPanel.RowCount = 1;
             controlsLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            controlsLayoutPanel.Size = new Size(920, 190);
+            controlsLayoutPanel.Size = new Size(920, 197);
             controlsLayoutPanel.TabIndex = 1;
             // 
-            // buttonsLayoutPanel
+            // inputsLayoutPanel
             // 
-            buttonsLayoutPanel.Controls.Add(buttonsLayoutPanel2);
-            buttonsLayoutPanel.FlowDirection = FlowDirection.TopDown;
-            buttonsLayoutPanel.Location = new Point(770, 0);
-            buttonsLayoutPanel.Margin = new Padding(0);
-            buttonsLayoutPanel.Name = "buttonsLayoutPanel";
-            buttonsLayoutPanel.Size = new Size(150, 180);
-            buttonsLayoutPanel.TabIndex = 0;
+            inputsLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            inputsLayoutPanel.ColumnCount = 1;
+            inputsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            inputsLayoutPanel.Controls.Add(partsLayoutPanel, 0, 1);
+            inputsLayoutPanel.Controls.Add(personsLayoutPanel, 0, 0);
+            inputsLayoutPanel.Controls.Add(datesLayoutPanel, 0, 2);
+            inputsLayoutPanel.Location = new Point(0, 3);
+            inputsLayoutPanel.Margin = new Padding(0);
+            inputsLayoutPanel.Name = "inputsLayoutPanel";
+            inputsLayoutPanel.RowCount = 3;
+            inputsLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
+            inputsLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
+            inputsLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
+            inputsLayoutPanel.Size = new Size(760, 190);
+            inputsLayoutPanel.TabIndex = 2;
             // 
-            // buttonsLayoutPanel2
+            // partsLayoutPanel
             // 
-            buttonsLayoutPanel2.ColumnCount = 1;
-            buttonsLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            buttonsLayoutPanel2.Controls.Add(flowLayoutPanel5, 0, 1);
-            buttonsLayoutPanel2.Location = new Point(0, 0);
-            buttonsLayoutPanel2.Margin = new Padding(0);
-            buttonsLayoutPanel2.Name = "buttonsLayoutPanel2";
-            buttonsLayoutPanel2.RowCount = 3;
-            buttonsLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            buttonsLayoutPanel2.RowStyles.Add(new RowStyle());
-            buttonsLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            buttonsLayoutPanel2.Size = new Size(150, 190);
-            buttonsLayoutPanel2.TabIndex = 0;
-            // 
-            // flowLayoutPanel5
-            // 
-            flowLayoutPanel5.AutoSize = true;
-            flowLayoutPanel5.Controls.Add(acceptButton);
-            flowLayoutPanel5.Controls.Add(resetButton);
-            flowLayoutPanel5.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel5.Location = new Point(0, 40);
-            flowLayoutPanel5.Margin = new Padding(0);
-            flowLayoutPanel5.Name = "flowLayoutPanel5";
-            flowLayoutPanel5.Size = new Size(150, 110);
-            flowLayoutPanel5.TabIndex = 0;
-            // 
-            // acceptButton
-            // 
-            acceptButton.BackColor = SystemColors.MenuHighlight;
-            acceptButton.FlatStyle = FlatStyle.Flat;
-            acceptButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            acceptButton.ForeColor = SystemColors.ButtonFace;
-            acceptButton.Location = new Point(0, 0);
-            acceptButton.Margin = new Padding(0, 0, 0, 10);
-            acceptButton.Name = "acceptButton";
-            acceptButton.Size = new Size(150, 50);
-            acceptButton.TabIndex = 6;
-            acceptButton.Text = "Отправить";
-            acceptButton.UseVisualStyleBackColor = false;
-            // 
-            // resetButton
-            // 
-            resetButton.BackColor = SystemColors.ScrollBar;
-            resetButton.FlatAppearance.BorderSize = 0;
-            resetButton.FlatStyle = FlatStyle.Flat;
-            resetButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            resetButton.ForeColor = SystemColors.ControlText;
-            resetButton.Location = new Point(0, 60);
-            resetButton.Margin = new Padding(0);
-            resetButton.Name = "resetButton";
-            resetButton.Size = new Size(150, 50);
-            resetButton.TabIndex = 7;
-            resetButton.Text = "Сбросить";
-            resetButton.UseVisualStyleBackColor = false;
-            // 
-            // tableLayoutPanel1
-            // 
-            tableLayoutPanel1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            tableLayoutPanel1.ColumnCount = 1;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Controls.Add(tableLayoutPanel3, 0, 1);
-            tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 0);
-            tableLayoutPanel1.Controls.Add(tableLayoutPanel4, 0, 2);
-            tableLayoutPanel1.Location = new Point(0, 0);
-            tableLayoutPanel1.Margin = new Padding(0);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 3;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel1.Size = new Size(760, 190);
-            tableLayoutPanel1.TabIndex = 2;
-            // 
-            // tableLayoutPanel3
-            // 
-            tableLayoutPanel3.ColumnCount = 3;
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 550F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel3.Controls.Add(amountLayoutPane, 2, 0);
-            tableLayoutPanel3.Controls.Add(partLayoutPanel, 0, 0);
-            tableLayoutPanel3.Dock = DockStyle.Fill;
-            tableLayoutPanel3.Location = new Point(0, 63);
-            tableLayoutPanel3.Margin = new Padding(0);
-            tableLayoutPanel3.Name = "tableLayoutPanel3";
-            tableLayoutPanel3.RowCount = 1;
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel3.Size = new Size(760, 63);
-            tableLayoutPanel3.TabIndex = 1;
+            partsLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            partsLayoutPanel.ColumnCount = 3;
+            partsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 550F));
+            partsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
+            partsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            partsLayoutPanel.Controls.Add(amountLayoutPane, 2, 0);
+            partsLayoutPanel.Controls.Add(partLayoutPanel, 0, 0);
+            partsLayoutPanel.Location = new Point(0, 63);
+            partsLayoutPanel.Margin = new Padding(0);
+            partsLayoutPanel.Name = "partsLayoutPanel";
+            partsLayoutPanel.RowCount = 1;
+            partsLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            partsLayoutPanel.Size = new Size(760, 63);
+            partsLayoutPanel.TabIndex = 1;
             // 
             // amountLayoutPane
             // 
@@ -404,6 +340,8 @@ namespace App
             // 
             partsPicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             partsPicker.BackColor = Color.White;
+            partsPicker.DataSource = partBindingSource;
+            partsPicker.DisplayMember = "PartName";
             partsPicker.DropDownStyle = ComboBoxStyle.DropDownList;
             partsPicker.FlatStyle = FlatStyle.System;
             partsPicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -413,23 +351,24 @@ namespace App
             partsPicker.Name = "partsPicker";
             partsPicker.Size = new Size(550, 27);
             partsPicker.TabIndex = 1;
+            partsPicker.ValueMember = "PartId";
             // 
-            // tableLayoutPanel2
+            // personsLayoutPanel
             // 
-            tableLayoutPanel2.ColumnCount = 3;
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Controls.Add(supplierLayoutPanel, 2, 0);
-            tableLayoutPanel2.Controls.Add(employeeLayoutPanel, 0, 0);
-            tableLayoutPanel2.Dock = DockStyle.Fill;
-            tableLayoutPanel2.Location = new Point(0, 0);
-            tableLayoutPanel2.Margin = new Padding(0);
-            tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 1;
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new Size(760, 63);
-            tableLayoutPanel2.TabIndex = 0;
+            personsLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            personsLayoutPanel.ColumnCount = 3;
+            personsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            personsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
+            personsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            personsLayoutPanel.Controls.Add(supplierLayoutPanel, 2, 0);
+            personsLayoutPanel.Controls.Add(employeeLayoutPanel, 0, 0);
+            personsLayoutPanel.Location = new Point(0, 0);
+            personsLayoutPanel.Margin = new Padding(0);
+            personsLayoutPanel.Name = "personsLayoutPanel";
+            personsLayoutPanel.RowCount = 1;
+            personsLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            personsLayoutPanel.Size = new Size(760, 63);
+            personsLayoutPanel.TabIndex = 0;
             // 
             // supplierLayoutPanel
             // 
@@ -460,6 +399,8 @@ namespace App
             // 
             suppliersPicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             suppliersPicker.BackColor = Color.White;
+            suppliersPicker.DataSource = supplierBindingSource;
+            suppliersPicker.DisplayMember = "TaxpayerIdentificationNumber";
             suppliersPicker.DropDownStyle = ComboBoxStyle.DropDownList;
             suppliersPicker.FlatStyle = FlatStyle.System;
             suppliersPicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -469,6 +410,7 @@ namespace App
             suppliersPicker.Name = "suppliersPicker";
             suppliersPicker.Size = new Size(375, 27);
             suppliersPicker.TabIndex = 1;
+            suppliersPicker.ValueMember = "SupplierId";
             // 
             // employeeLayoutPanel
             // 
@@ -498,6 +440,8 @@ namespace App
             // 
             employeePicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             employeePicker.BackColor = Color.White;
+            employeePicker.DataSource = employeeBindingSource;
+            employeePicker.DisplayMember = "EmployeeSurname";
             employeePicker.DropDownStyle = ComboBoxStyle.DropDownList;
             employeePicker.FlatStyle = FlatStyle.System;
             employeePicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -507,26 +451,27 @@ namespace App
             employeePicker.Name = "employeePicker";
             employeePicker.Size = new Size(375, 27);
             employeePicker.TabIndex = 1;
+            employeePicker.ValueMember = "EmployeeId";
             // 
-            // tableLayoutPanel4
+            // datesLayoutPanel
             // 
-            tableLayoutPanel4.ColumnCount = 5;
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 320F));
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 320F));
-            tableLayoutPanel4.Controls.Add(deliveryDateLayoutPanel, 4, 0);
-            tableLayoutPanel4.Controls.Add(postDateLayoutPanel, 0, 0);
-            tableLayoutPanel4.Controls.Add(deliveryStateLayoutPanel, 2, 0);
-            tableLayoutPanel4.Dock = DockStyle.Fill;
-            tableLayoutPanel4.Location = new Point(0, 126);
-            tableLayoutPanel4.Margin = new Padding(0);
-            tableLayoutPanel4.Name = "tableLayoutPanel4";
-            tableLayoutPanel4.RowCount = 1;
-            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel4.Size = new Size(760, 64);
-            tableLayoutPanel4.TabIndex = 2;
+            datesLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            datesLayoutPanel.ColumnCount = 5;
+            datesLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 320F));
+            datesLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
+            datesLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            datesLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
+            datesLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 320F));
+            datesLayoutPanel.Controls.Add(deliveryDateLayoutPanel, 4, 0);
+            datesLayoutPanel.Controls.Add(postDateLayoutPanel, 0, 0);
+            datesLayoutPanel.Controls.Add(deliveryStateCheckBox, 2, 0);
+            datesLayoutPanel.Location = new Point(0, 126);
+            datesLayoutPanel.Margin = new Padding(0);
+            datesLayoutPanel.Name = "datesLayoutPanel";
+            datesLayoutPanel.RowCount = 1;
+            datesLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            datesLayoutPanel.Size = new Size(760, 64);
+            datesLayoutPanel.TabIndex = 2;
             // 
             // deliveryDateLayoutPanel
             // 
@@ -597,39 +542,80 @@ namespace App
             postDatePicker.Size = new Size(320, 26);
             postDatePicker.TabIndex = 1;
             // 
-            // deliveryStateLayoutPanel
-            // 
-            deliveryStateLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            deliveryStateLayoutPanel.ColumnCount = 1;
-            deliveryStateLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            deliveryStateLayoutPanel.Controls.Add(deliveryStateCheckBox, 0, 1);
-            deliveryStateLayoutPanel.Location = new Point(330, 0);
-            deliveryStateLayoutPanel.Margin = new Padding(0);
-            deliveryStateLayoutPanel.Name = "deliveryStateLayoutPanel";
-            deliveryStateLayoutPanel.RowCount = 2;
-            deliveryStateLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            deliveryStateLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            deliveryStateLayoutPanel.Size = new Size(100, 64);
-            deliveryStateLayoutPanel.TabIndex = 7;
-            // 
             // deliveryStateCheckBox
             // 
-            deliveryStateCheckBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            deliveryStateCheckBox.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             deliveryStateCheckBox.AutoSize = true;
             deliveryStateCheckBox.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             deliveryStateCheckBox.ImageAlign = ContentAlignment.MiddleRight;
-            deliveryStateCheckBox.Location = new Point(0, 36);
+            deliveryStateCheckBox.Location = new Point(330, 31);
             deliveryStateCheckBox.Margin = new Padding(0);
             deliveryStateCheckBox.Name = "deliveryStateCheckBox";
-            deliveryStateCheckBox.Size = new Size(100, 23);
-            deliveryStateCheckBox.TabIndex = 0;
+            deliveryStateCheckBox.Padding = new Padding(0, 5, 0, 5);
+            deliveryStateCheckBox.Size = new Size(100, 33);
+            deliveryStateCheckBox.TabIndex = 7;
             deliveryStateCheckBox.Text = "Прибыла";
             deliveryStateCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // buttonsLayoutPanel
+            // 
+            buttonsLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            buttonsLayoutPanel.AutoSize = true;
+            buttonsLayoutPanel.Controls.Add(acceptButton);
+            buttonsLayoutPanel.Controls.Add(resetButton);
+            buttonsLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            buttonsLayoutPanel.Location = new Point(770, 43);
+            buttonsLayoutPanel.Margin = new Padding(0);
+            buttonsLayoutPanel.Name = "buttonsLayoutPanel";
+            buttonsLayoutPanel.Size = new Size(150, 110);
+            buttonsLayoutPanel.TabIndex = 3;
+            // 
+            // acceptButton
+            // 
+            acceptButton.BackColor = SystemColors.MenuHighlight;
+            acceptButton.FlatStyle = FlatStyle.Flat;
+            acceptButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            acceptButton.ForeColor = SystemColors.ButtonFace;
+            acceptButton.Location = new Point(0, 0);
+            acceptButton.Margin = new Padding(0, 0, 0, 10);
+            acceptButton.Name = "acceptButton";
+            acceptButton.Size = new Size(150, 50);
+            acceptButton.TabIndex = 6;
+            acceptButton.Text = "Отправить";
+            acceptButton.UseVisualStyleBackColor = false;
+            // 
+            // resetButton
+            // 
+            resetButton.BackColor = SystemColors.ScrollBar;
+            resetButton.FlatAppearance.BorderSize = 0;
+            resetButton.FlatStyle = FlatStyle.Flat;
+            resetButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            resetButton.ForeColor = SystemColors.ControlText;
+            resetButton.Location = new Point(0, 60);
+            resetButton.Margin = new Padding(0);
+            resetButton.Name = "resetButton";
+            resetButton.Size = new Size(150, 50);
+            resetButton.TabIndex = 7;
+            resetButton.Text = "Сбросить";
+            resetButton.UseVisualStyleBackColor = false;
+            // 
+            // employeeBindingSource
+            // 
+            employeeBindingSource.DataSource = typeof(Employee);
+            // 
+            // supplierBindingSource
+            // 
+            supplierBindingSource.DataSource = typeof(Supplier);
+            // 
+            // partBindingSource
+            // 
+            partBindingSource.DataSource = typeof(Part);
             // 
             // LogisticsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             ClientSize = new Size(960, 540);
             Controls.Add(formLayoutPanel);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -637,35 +623,33 @@ namespace App
             Name = "LogisticsForm";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Логистика: поставки запчастей";
+            Text = "Информационная система: логистика - поставки запчастей";
             FormClosed += LogisticsForm_FormClosed;
-            Load += LogisticsForm_Load;
             formLayoutPanel.ResumeLayout(false);
             formLayoutPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)suppliesTable).EndInit();
             menuLayoutPanel.ResumeLayout(false);
             menuLayoutPanel.PerformLayout();
             controlsLayoutPanel.ResumeLayout(false);
-            buttonsLayoutPanel.ResumeLayout(false);
-            buttonsLayoutPanel2.ResumeLayout(false);
-            buttonsLayoutPanel2.PerformLayout();
-            flowLayoutPanel5.ResumeLayout(false);
-            tableLayoutPanel1.ResumeLayout(false);
-            tableLayoutPanel3.ResumeLayout(false);
-            tableLayoutPanel3.PerformLayout();
+            controlsLayoutPanel.PerformLayout();
+            inputsLayoutPanel.ResumeLayout(false);
+            partsLayoutPanel.ResumeLayout(false);
+            partsLayoutPanel.PerformLayout();
             amountLayoutPane.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)amountInput).EndInit();
             partLayoutPanel.ResumeLayout(false);
-            tableLayoutPanel2.ResumeLayout(false);
-            tableLayoutPanel2.PerformLayout();
+            personsLayoutPanel.ResumeLayout(false);
+            personsLayoutPanel.PerformLayout();
             supplierLayoutPanel.ResumeLayout(false);
             employeeLayoutPanel.ResumeLayout(false);
-            tableLayoutPanel4.ResumeLayout(false);
-            tableLayoutPanel4.PerformLayout();
+            datesLayoutPanel.ResumeLayout(false);
+            datesLayoutPanel.PerformLayout();
             deliveryDateLayoutPanel.ResumeLayout(false);
             postDateLayoutPanel.ResumeLayout(false);
-            deliveryStateLayoutPanel.ResumeLayout(false);
-            deliveryStateLayoutPanel.PerformLayout();
+            buttonsLayoutPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)employeeBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)supplierBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)partBindingSource).EndInit();
             ResumeLayout(false);
         }
 
@@ -679,35 +663,35 @@ namespace App
         private Button editButton;
         private Button deleteButton;
         private TableLayoutPanel controlsLayoutPanel;
-        private FlowLayoutPanel buttonsLayoutPanel;
-        private TableLayoutPanel buttonsLayoutPanel2;
-        private FlowLayoutPanel flowLayoutPanel5;
-        private Button acceptButton;
-        private Button resetButton;
-        private TableLayoutPanel tableLayoutPanel1;
-        private TableLayoutPanel tableLayoutPanel3;
+        private TableLayoutPanel inputsLayoutPanel;
+        private TableLayoutPanel partsLayoutPanel;
         private FlowLayoutPanel amountLayoutPane;
         private Label amountLabel;
         private NumericUpDown amountInput;
         private FlowLayoutPanel partLayoutPanel;
         private Label partsLabel;
         private ComboBox partsPicker;
-        private TableLayoutPanel tableLayoutPanel2;
+        private TableLayoutPanel personsLayoutPanel;
         private FlowLayoutPanel supplierLayoutPanel;
         private Label suppliersLabel;
         private ComboBox suppliersPicker;
         private FlowLayoutPanel employeeLayoutPanel;
         private Label employeeLabel;
         private ComboBox employeePicker;
-        private TableLayoutPanel tableLayoutPanel4;
+        private TableLayoutPanel datesLayoutPanel;
         private FlowLayoutPanel deliveryDateLayoutPanel;
         private Label deliveryDateLabel;
         private DateTimePicker deliveryDatePicker;
         private FlowLayoutPanel postDateLayoutPanel;
         private Label postDateLabel;
         private DateTimePicker postDatePicker;
-        private TableLayoutPanel deliveryStateLayoutPanel;
-        private CheckBox deliveryStateCheckBox;
         private DataGridView suppliesTable;
+        private FlowLayoutPanel buttonsLayoutPanel;
+        private Button acceptButton;
+        private Button resetButton;
+        private CheckBox deliveryStateCheckBox;
+        private BindingSource supplierBindingSource;
+        private BindingSource employeeBindingSource;
+        private BindingSource partBindingSource;
     }
 }

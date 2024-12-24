@@ -16,10 +16,10 @@ namespace App
         public int EmployeeId { get; set; }
         public virtual Employee? Employee { get; set; }
 
-        public DateTime RequestDate { get; set; }
-        public DateTime StartDate { get; set; }
+        public DateTime? RequestDate { get; set; }
+        public DateTime? StartDate { get; set; }
         public bool Completed { get; set; }
-        public DateTime CompleteDate { get; set; }
+        public DateTime? CompleteDate { get; set; }
     }
 
     // Класс проводимой работы

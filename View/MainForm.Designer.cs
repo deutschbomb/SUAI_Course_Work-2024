@@ -105,10 +105,10 @@ namespace App
             employeesButton.FlatStyle = FlatStyle.Flat;
             employeesButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             employeesButton.ForeColor = SystemColors.ButtonFace;
-            employeesButton.Location = new Point(390, 47);
+            employeesButton.Location = new Point(385, 47);
             employeesButton.Margin = new Padding(0, 5, 0, 5);
             employeesButton.Name = "employeesButton";
-            employeesButton.Size = new Size(140, 50);
+            employeesButton.Size = new Size(150, 50);
             employeesButton.TabIndex = 1;
             employeesButton.Text = "Сотрудники";
             employeesButton.UseVisualStyleBackColor = false;
