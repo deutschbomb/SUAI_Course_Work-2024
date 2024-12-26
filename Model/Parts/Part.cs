@@ -29,6 +29,16 @@ namespace App
         public virtual List<Work> Works { get; set; } // проводимые работы
         public virtual List<Order> Orders { get; set; } // заказ-наряд
 
+        public string PartInfo
+        {
+            get
+            {
+                if (this.PartName is not null)
+                    return this.CatalogueNumber + " - " + this.PartName;
+                else return this.ToString();
+            }
+        }
+
         public override string ToString()
         {
             if (this.CatalogueNumber is not null) return this.CatalogueNumber;

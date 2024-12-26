@@ -72,7 +72,7 @@ namespace App
 
             this.employeesPicker.SelectedIndex = -1;
             this.suppliersPicker.SelectedIndex = -1;
-            this.partsPicker.SelectedIndex = -1;
+            this.partsPicker.DataSource = null;
 
             this.amountInput.Value = 0;
             this.deliveryStateCheckBox.Checked = false;
@@ -129,10 +129,10 @@ namespace App
             Supply supply = this.Presenter.SuppliesFind(index1);
 
             this.employeesPicker.SelectedValue = supply.EmployeeId;
-            this.suppliersPicker.SelectedValue = supply.SupplyId;
+            this.suppliersPicker.SelectedValue = supply.SupplierId;
 
             this.partsPicker.DataSource = supply.Parts;
-            this.partsPicker.DisplayMember = "CatalogueNumber";
+            this.partsPicker.DisplayMember = "PartInfo";
             this.partsPicker.ValueMember = "PartId";
 
             int index2 = (int)this.partsPicker.SelectedValue;
@@ -273,7 +273,7 @@ namespace App
             int index = (int)this.suppliersPicker.SelectedValue;
             this.partsPicker.DataSource = this.Presenter.NomenclatureFind(index);
 
-            this.partsPicker.DisplayMember = "CatalogueNumber";
+            this.partsPicker.DisplayMember = "PartInfo";
             this.partsPicker.ValueMember = "PartId";
 
             this.partsPicker.SelectedIndex = -1;
