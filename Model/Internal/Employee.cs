@@ -1,14 +1,11 @@
 ﻿
-using System.Reflection.Metadata.Ecma335;
-using System.Windows.Forms.VisualStyles;
-
 namespace App
 {
     // Класс должности
     public class Specialty
     {
         public int SpecialtyId { get; set; } // PrimaryKey
-        public string? SpecialtyName {  get; set; }
+        public string? SpecialtyName { get; set; }
 
         // Навигационные свойства
         public virtual List<Employee> Employees { get; set; } // сотрудники, занимающие должности
@@ -36,40 +33,37 @@ namespace App
         public string? EmployeeAddress { get; set; }
         public string? EmployeeTelephone { get; set; }
         public DateTime? DateOfEmployment { get; set; }
-
-        public string EmployeeFullName
+        public string GetEmployee
         {
             get
             {
-                return this.EmployeeSurname + " "
-                        + this.EmployeeName + " "
-                        + this.EmployeePatronymic;
+                if (this.EmployeeName is not null)
+                    if (this.EmployeePatronymic is not null)
+                        return String.Format("{0}: {1} {2}. {3}.",
+                                this.EmployeeId, this.EmployeeSurname, this.EmployeeName[0], this.EmployeePatronymic[0]);
+                    else return String.Format("{0}: {1} {2}.", this.EmployeeId, this.EmployeeSurname, this.EmployeeName[0]);
+                else return String.Format("{0}: {1}", this.EmployeeId, this.EmployeeSurname);
             }
         }
 
         // Навигационные свойства
         public virtual List<Request> Requests { get; set; } // заявки на ремонт
         public virtual List<Supply> Supplies { get; set; } // поставки, оформляемые кладовщиком
-        /// <summary>
-        /// M:M - заказ-наряд
-        /// </summary>
-        public virtual List<Part> Parts { get; set; } // установленные запчасти
-        public virtual List<Work> Works { get; set; } // проводимые работы
-        public virtual List<Order> Orders { get; set; } // заказ-наряд
-
+        
         public override string ToString()
         {
-            return EmployeeFullName;
+            if (this.EmployeeName is not null)
+                if (this.EmployeePatronymic is not null)
+                    return String.Format("{0} {1}. {2}.",
+                            this.EmployeeSurname, this.EmployeeName[0], this.EmployeePatronymic[0]);
+                else return String.Format("{0} {1}.", this.EmployeeSurname, this.EmployeeName[0]);
+            else return this.EmployeeSurname;
         }
 
         public Employee()
         {
             this.Requests = new List<Request>();
             this.Supplies = new List<Supply>();
-
-            this.Parts = new List<Part>();
-            this.Works = new List<Work>();
-            this.Orders = new List<Order>();
         }
     }
 }

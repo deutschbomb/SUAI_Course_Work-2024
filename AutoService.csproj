@@ -27,9 +27,6 @@
     <Compile Update="View\StorageForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="View\OrderForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="View\RequestsForm.cs">
       <SubType>Form</SubType>
     </Compile>

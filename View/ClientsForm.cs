@@ -1,7 +1,5 @@
 
 using EntityFramework.Exceptions.Common;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
@@ -9,25 +7,26 @@ namespace App
 {
     public partial class ClientsForm : Form, IView, IViewDefault, IViewDefaultClients, IViewControls
     {
-        private bool ADD_OWNER_FLAG;
-        private bool EDIT_OWNER_FLAG;
-
-        private bool ADD_CAR_FLAG;
-        private bool EDIT_CAR_FLAG;
-
         Presenter Presenter;
         MainForm home;
+
+        public void InitializeData(Presenter? presenter = null, MainForm? home = null)
+        {
+            this.Presenter = presenter;
+            this.home = home;
+            this.Presenter.ContextLoad();
+
+            this.Presenter.OwnersTableLoad();
+            this.Presenter.CarsTableLoad();
+
+            this.ownerBindingSource.DataSource = this.Presenter.OwnersTableToList();
+            this.carBindingSource.DataSource = this.Presenter.CarsTableToList();
+        }
 
         public ClientsForm(ref Presenter Presenter, MainForm home)
         {
             InitializeComponent();
-            this.Presenter = Presenter;
-            this.home = home;
-
-            this.Presenter.db.Owners.Load();
-            this.ownerBindingSource.DataSource = this.Presenter.db.Owners.Local.ToList();
-            this.Presenter.db.Cars.Load();
-            this.carBindingSource.DataSource = this.Presenter.db.Cars.Local.ToList();
+            InitializeData(Presenter, home);
         }
 
         public DialogResult ResultDialog(string message, string head)
@@ -49,7 +48,7 @@ namespace App
                 MessageBoxIcon.Error);
         }
 
-        public void clientControls_toDefault()
+        public void ownerControls_toDefault()
         {
             this.ownersPicker.SelectedIndex = -1;
 
@@ -76,7 +75,9 @@ namespace App
 
         public void Controls_toDefault()
         {
-            clientControls_toDefault();
+            this.controlsLayoutPanel.Enabled = !this.controlsLayoutPanel.Enabled;
+            this.dbLayoutPanel.Enabled = !this.dbLayoutPanel.Enabled;
+            ownerControls_toDefault();
             carControls_toDefault();
         }
 
@@ -84,14 +85,22 @@ namespace App
         {
             this.Controls_toDefault();
 
-            this.ADD_OWNER_FLAG =
-                this.EDIT_OWNER_FLAG =
-                this.ADD_CAR_FLAG =
-                this.EDIT_CAR_FLAG = false;
+            this.acceptButton.Visible = true;
+            this.editButton.Visible = false;
+        }
 
-            this. controlsLayoutPanel.Enabled = 
-                this.clientLayoutPanel.Enabled = this.carLayoutPanel.Enabled = false;
-            this.dbLayoutPanel.Enabled = true;
+        private void ClientsForm_Load(object sender, EventArgs e)
+        {
+            this.yearInput.Maximum = DateTime.Now.Year;
+            this.priceInput.Maximum = int.MaxValue;
+
+            this.Controls_toDefault();
+        }
+
+        private void ClientsForm_FormClosed(object sender, EventArgs e)
+        {
+            this.Presenter.ContextDispose();
+            this.home.Show();
         }
 
         private void homeButton_Click(object sender, EventArgs e)
@@ -104,46 +113,25 @@ namespace App
             this.Close();
         }
 
-        private void ClientsForm_Load(object sender, EventArgs e)
-        {
-            this. controlsLayoutPanel.Enabled = 
-                this.clientLayoutPanel.Enabled = this.carLayoutPanel.Enabled = false;
-
-            this.yearInput.Maximum = DateTime.Now.Year;
-            this.priceInput.Maximum = int.MaxValue;
-
-            this.Controls_toDefault();
-        }
-
-        private void ClientsForm_FormClosed(object sender, EventArgs e)
-        {
-            this.home.Show();
-        }
-
         private void addButton_Click(object sender, EventArgs e)
         {
-            this. controlsLayoutPanel.Enabled = 
-                this.clientLayoutPanel.Enabled = this.carLayoutPanel.Enabled = true;
-            this.dbLayoutPanel.Enabled = false;
-
             this.Controls_toDefault();
-
-            this.ADD_OWNER_FLAG = this.ADD_CAR_FLAG = true;
         }
 
-        private void editButton_Click(object sender, EventArgs e)
+        private void openButton_Click(object sender, EventArgs e)
         {
             if (this.ownersPicker.SelectedIndex == -1 && this.carsPicker.SelectedIndex == -1) return;
 
-            this.controlsLayoutPanel.Enabled = true;
-            this.dbLayoutPanel.Enabled = false;
+            this.controlsLayoutPanel.Enabled = !this.controlsLayoutPanel.Enabled;
+            this.dbLayoutPanel.Enabled = !this.dbLayoutPanel.Enabled;
 
             if (this.ownersPicker.SelectedIndex != -1)
             {
-                this.clientLayoutPanel.Enabled = true;
+                this.carLayoutPanel.Enabled = !this.carLayoutPanel.Enabled;
+
                 int index = (int)this.ownersPicker.SelectedValue;
 
-                Owner owner = this.Presenter.db.Owners.Find(index);
+                Owner owner = this.Presenter.OwnersFind(index);
 
                 this.nameInput.Text = owner.OwnerName;
                 this.surnameInput.Text = owner.OwnerSurname;
@@ -151,27 +139,27 @@ namespace App
                 this.passportInput.Text = owner.OwnerPassportNumber;
                 this.addressInput.Text = owner.OwnerAddress;
                 this.telephoneInput.Text = owner.OwnerTelephone;
-
-                this.EDIT_OWNER_FLAG = true;
             }
 
             if (this.carsPicker.SelectedIndex != -1)
             {
-                this.carLayoutPanel.Enabled = true;
+                this.ownerLayoutPanel.Enabled = !this.ownerLayoutPanel.Enabled;
+
                 int index = (int)this.carsPicker.SelectedValue;
 
-                Car car = this.Presenter.db.Cars.Find(index);
+                Car car = this.Presenter.CarsFind(index);
 
                 this.brandInput.Text = car.BrandName;
                 this.modelInput.Text = car.ModelName;
                 this.VINInput.Text = car.VehicleIdentificationNumber;
                 this.licenseInput.Text = car.LicensePlate;
-                
+
                 this.yearInput.Value = Convert.ToInt32(car.Year);
                 this.priceInput.Value = Convert.ToInt32(car.Price);
-
-                this.EDIT_CAR_FLAG = true;
             }
+
+            this.acceptButton.Visible = false;
+            this.editButton.Visible = true;
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
@@ -180,17 +168,17 @@ namespace App
 
             if (this.ownersPicker.SelectedIndex != -1)
             {
-                int index = (int)this.ownersPicker.SelectedValue;
-
                 if (ResultDialog("Вы уверены, что хотите удалить выбранную запись о владельце?",
                     "Удалить запись") == DialogResult.No) return;
 
-                Owner owner = this.Presenter.db.Owners.Find(index);
+                int index = (int)this.ownersPicker.SelectedValue;
 
-                this.Presenter.db.Owners.Remove(owner);
-                this.Presenter.db.SaveChanges();
+                Owner owner = this.Presenter.OwnersFind(index);
 
-                this.ownerBindingSource.DataSource = this.Presenter.db.Owners.Local.ToList();
+                this.Presenter.OwnersRemove(owner);
+                this.Presenter.ContextSaveChanges();
+
+                this.ownerBindingSource.DataSource = this.Presenter.OwnersTableToList();
 
                 this.ownersPicker.SelectedIndex = -1;
 
@@ -199,17 +187,17 @@ namespace App
 
             if (this.carsPicker.SelectedIndex != -1)
             {
-                int index = (int)this.ownersPicker.SelectedValue;
-
                 if (ResultDialog("Вы уверены, что хотите удалить выбранную запись об автомобиле?",
                     "Удалить запись") == DialogResult.No) return;
 
-                Car car = this.Presenter.db.Cars.Find(index);
+                int index = (int)this.ownersPicker.SelectedValue;
 
-                this.Presenter.db.Cars.Remove(car);
-                this.Presenter.db.SaveChanges();
+                Car car = this.Presenter.CarsFind(index);
 
-                this.ownerBindingSource.DataSource = this.Presenter.db.Cars.Local.ToList();
+                this.Presenter.CarsRemove(car);
+                this.Presenter.ContextSaveChanges();
+
+                this.ownerBindingSource.DataSource = this.Presenter.CarsTableToList();
 
                 this.carsPicker.SelectedIndex = -1;
 
@@ -219,7 +207,7 @@ namespace App
 
         private void acceptButton_Click(object sender, EventArgs e)
         {
-            if (ADD_OWNER_FLAG)
+            if (this.ownerLayoutPanel.Enabled)
             {
                 if (ResultDialog("Вы уверены, что хотите добавить новую запись о владельце?",
                     "Добавить запись") == DialogResult.No) return;
@@ -240,26 +228,27 @@ namespace App
 
                 try
                 {
-                    this.Presenter.db.Owners.Add(owner);
-                    this.Presenter.db.SaveChanges();
+                    this.Presenter.OwnersAdd(owner);
+                    this.Presenter.ContextSaveChanges();
+                }
+                catch (Exception ex) when (ex is CannotInsertNullException || ex is ReferenceConstraintException)
+                {
+                    this.Presenter.OwnersRemove(owner);
 
-                    this.ownersPicker.DataSource = this.Presenter.db.Owners.Local.ToList();
-                    MessageBox.Show("Запись о владельце успешно добавлена в базу данных!");
-                    this.clientControls_toDefault();
+                    if (ex is CannotInsertNullException)
+                        ErrorDialog(ex.InnerException.Message, "Обязательное поле не заполнено!");
+                    if (ex is ReferenceConstraintException)
+                        ErrorDialog(ex.InnerException.Message, "Значение указано неверно!");
+                    return;
                 }
-                catch (CannotInsertNullException cine)
-                {
-                    this.Presenter.db.Owners.Remove(owner);
-                    ErrorDialog(cine.InnerException.Message, "Обязательное поле не заполнено!");
-                }
-                catch (ReferenceConstraintException rce)
-                {
-                    this.Presenter.db.Owners.Remove(owner);
-                    ErrorDialog(rce.InnerException.Message, "Значение указано неверно!");
-                }
+
+                this.ownersPicker.DataSource = this.Presenter.OwnersTableToList();
+
+                MessageBox.Show("Запись о владельце успешно добавлена в базу данных!");
+                this.ownerControls_toDefault();
             }
 
-            if (ADD_CAR_FLAG)
+            if (this.carLayoutPanel.Enabled)
             {
                 if (ResultDialog("Вы уверены, что хотите добавить новую запись об автомобиле?",
                     "Добавить запись") == DialogResult.No) return;
@@ -280,33 +269,37 @@ namespace App
 
                 try
                 {
-                    this.Presenter.db.Cars.Add(car);
-                    this.Presenter.db.SaveChanges();
+                    this.Presenter.CarsAdd(car);
+                    this.Presenter.ContextSaveChanges();
+                }
+                catch (Exception ex) when (ex is CannotInsertNullException || ex is ReferenceConstraintException)
+                {
+                    this.Presenter.CarsRemove(car);
 
-                    this.carsPicker.DataSource = this.Presenter.db.Cars.Local.ToList();
-                    MessageBox.Show("Запись об автомобиле успешно добавлена в базу данных!");
-                    this.carControls_toDefault();
+                    if (ex is CannotInsertNullException)
+                        ErrorDialog(ex.InnerException.Message, "Обязательное поле не заполнено!");
+                    if (ex is ReferenceConstraintException)
+                        ErrorDialog(ex.InnerException.Message, "Значение указано неверно!");
+                    return;
                 }
-                catch (CannotInsertNullException cine)
-                {
-                    this.Presenter.db.Cars.Remove(car);
-                    ErrorDialog(cine.InnerException.Message, "Обязательное поле не заполнено!");
-                }
-                catch (ReferenceConstraintException rce)
-                {
-                    this.Presenter.db.Cars.Remove(car);
-                    ErrorDialog(rce.InnerException.Message, "Значение указано неверно!");
-                }
+
+                this.carsPicker.DataSource = this.Presenter.CarsTableToList();
+
+                MessageBox.Show("Запись об автомобиле успешно добавлена в базу данных!");
+                this.carControls_toDefault();
             }
+        }
 
-            if (EDIT_OWNER_FLAG)
+        private void editButton_Click(object sender, EventArgs e)
+        {
+            if (this.ownerLayoutPanel.Enabled)
             {
                 if (ResultDialog("Вы уверены, что хотите изменить существующую запись о владельце?",
                     "Измененить запись") == DialogResult.No) return;
 
                 int index = (int)this.ownersPicker.SelectedValue;
 
-                Owner owner = this.Presenter.db.Owners.Find(index);
+                Owner owner = this.Presenter.OwnersFind(index);
 
                 owner.OwnerName = this.nameInput.Text != "" ? this.nameInput.Text : null;
                 owner.OwnerSurname = this.surnameInput.Text != "" ? this.surnameInput.Text : null;
@@ -322,33 +315,33 @@ namespace App
 
                 try
                 {
-                    this.Presenter.db.Entry(owner).State = EntityState.Modified;
-                    this.Presenter.db.SaveChanges();
+                    this.Presenter.OwnersEntry(owner);
+                    this.Presenter.ContextSaveChanges();
+                }
+                catch (Exception ex) when (ex is CannotInsertNullException || ex is ReferenceConstraintException)
+                {
+                    this.Presenter.OwnersRemove(owner);
 
-                    this.ownersPicker.DataSource = this.Presenter.db.Owners.Local.ToList();
-                    MessageBox.Show("Запись о владельце успешно изменена в базе данных!");
-                    this.Return();
+                    if (ex is CannotInsertNullException)
+                        ErrorDialog(ex.InnerException.Message, "Обязательное поле не заполнено!");
+                    if (ex is ReferenceConstraintException)
+                        ErrorDialog(ex.InnerException.Message, "Значение указано неверно!");
+                    return;
                 }
-                catch (CannotInsertNullException cine)
-                {
-                    this.Presenter.db.Owners.Remove(owner);
-                    ErrorDialog(cine.InnerException.Message, "Обязательное поле не заполнено!");
-                }
-                catch (ReferenceConstraintException rce)
-                {
-                    this.Presenter.db.Owners.Remove(owner);
-                    ErrorDialog(rce.InnerException.Message, "Значение указано неверно!");
-                }
+
+                this.ownersPicker.DataSource = this.Presenter.OwnersTableToList();
+
+                MessageBox.Show("Запись о владельце успешно изменена в базе данных!");
             }
 
-            if (EDIT_CAR_FLAG)
+            if (this.carLayoutPanel.Enabled)
             {
                 if (ResultDialog("Вы уверены, что хотите изменить существующую запись об автомобиле?",
                     "Измененить запись") == DialogResult.No) return;
 
                 int index = (int)this.carsPicker.SelectedValue;
 
-                Car car = this.Presenter.db.Cars.Find(index);
+                Car car = this.Presenter.CarsFind(index);
 
                 car.BrandName = this.brandInput.Text != "" ? this.brandInput.Text : null;
                 car.ModelName = this.modelInput.Text != "" ? this.modelInput.Text : null;
@@ -364,24 +357,26 @@ namespace App
 
                 try
                 {
-                    this.Presenter.db.Entry(car).State = EntityState.Modified;
-                    this.Presenter.db.SaveChanges();
+                    this.Presenter.CarsEntry(car);
+                    this.Presenter.ContextSaveChanges();
+                }
+                catch (Exception ex) when (ex is CannotInsertNullException || ex is ReferenceConstraintException)
+                {
+                    this.Presenter.CarsRemove(car);
 
-                    this.carsPicker.DataSource = this.Presenter.db.Cars.Local.ToList();
-                    MessageBox.Show("Запись об автомобиле успешно изменена в базе данных!");
-                    this.Return();
+                    if (ex is CannotInsertNullException)
+                        ErrorDialog(ex.InnerException.Message, "Обязательное поле не заполнено!");
+                    if (ex is ReferenceConstraintException)
+                        ErrorDialog(ex.InnerException.Message, "Значение указано неверно!");
+                    return;
                 }
-                catch (CannotInsertNullException cine)
-                {
-                    this.Presenter.db.Cars.Remove(car);
-                    ErrorDialog(cine.InnerException.Message, "Обязательное поле не заполнено!");
-                }
-                catch (ReferenceConstraintException rce)
-                {
-                    this.Presenter.db.Cars.Remove(car);
-                    ErrorDialog(rce.InnerException.Message, "Значение указано неверно!");
-                }
+
+                this.carsPicker.DataSource = this.Presenter.CarsTableToList();
+
+                MessageBox.Show("Запись об автомобиле успешно изменена в базе данных!");
             }
+
+            this.Return();
         }
 
         private void resetButton_Click(object sender, EventArgs e)
@@ -404,7 +399,7 @@ namespace App
 
         private void VINInput_Enter(object sender, EventArgs e)
         {
-            this.VINInput.Text = VINInput.Text.Replace(" ", "");
+            this.VINInput.Text = this.VINInput.Text.Replace(" ", "");
         }
 
         private void VINInput_Leave(object sender, EventArgs e)
@@ -428,8 +423,7 @@ namespace App
         {
             this.licenseInput.Text = Regex.IsMatch(this.licenseInput.Text,
                 @"([АВЕКМНОРСТУХ]{1}) (\d{3}) ([АВЕКМНОРСТУХ]{2})") ?
-                    Regex.Replace(this.licenseInput.Text,
-                        @"([АВЕКМНОРСТУХ]{1}) (\d{3}) ([АВЕКМНОРСТУХ]{2})", @"$1$2$3") : "";
+                    this.licenseInput.Text.Replace(" ", "") : "";
         }
 
         private void licenseInputInput_Leave(object sender, EventArgs e)

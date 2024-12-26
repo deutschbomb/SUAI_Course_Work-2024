@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using System.Text.RegularExpressions;
 
 namespace App
 {
@@ -16,9 +13,26 @@ namespace App
         public string? OwnerPassportNumber { get; set; }
         public string? OwnerAddress { get; set; }
         public string? OwnerTelephone { get; set; }
+        public string GetOwner
+        {
+            get
+            {
+                if (this.OwnerName is not null)
+                    if (this.OwnerPatronymic is not null)
+                        return String.Format("{0}: {1} {2}. {3}.",
+                                this.OwnerPassportNumber, this.OwnerSurname, this.OwnerName[0], this.OwnerPatronymic[0]);
+                    else return String.Format("{0}: {1} {2}.", this.OwnerPassportNumber, this.OwnerSurname, this.OwnerName[0]);
+                else return String.Format("{0}: {1}", this.OwnerPassportNumber, this.OwnerSurname);
+            }
+        }
 
         // Навигационные свойства
         public virtual List<Request> Requests { get; set; } // заявки владельца на ремонт
+
+        public override string ToString()
+        {
+            return Regex.Replace(this.OwnerPassportNumber, @"(\d{4})(\d{6})", @"$1 $2");
+        }
 
         public Owner()
         {
@@ -43,9 +57,22 @@ namespace App
         public byte? Facelift { get; set; }
         public int Year { get; set; }
         public decimal Price { get; set; }
+        public string GetCar
+        {
+            get
+            {
+                return this.ModelName + ": " + Regex.Replace(this.VehicleIdentificationNumber,
+                    @"([АВЕКМНОРСТУХ]{1})(\d{3})([АВЕКМНОРСТУХ]{2})", @"$1 $2 $3");
+            }
+        }
 
         // Навигационные свойства
         public virtual List<Request> Requests { get; set; } // заявки на ремонт автомобиля
+
+        public override string ToString()
+        {
+            return Regex.Replace(this.VehicleIdentificationNumber, @"(\d{3})(\d{6})(\d{8})", @"$1 $2 $3");
+        }
 
         public Car()
         {

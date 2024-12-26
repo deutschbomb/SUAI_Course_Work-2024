@@ -21,41 +21,4 @@ namespace App
         public bool Completed { get; set; }
         public DateTime? CompleteDate { get; set; }
     }
-
-    // Класс проводимой работы
-    public class Work
-    {
-        public int WorkId { get; set; } // PrimaryKey
-        public string? WorkType { get; set; }
-        public string? WorkDescription { get; set; }
-        public decimal WorkPrice { get; set; }
-
-        // Навигационные свойства
-        /// <summary>
-        /// M:M - заказ-наряд
-        /// </summary>
-        public virtual List<Part> Parts { get; set; } // установленные запчасти
-        public virtual List<Employee> Employees { get; set; } // механики
-        public virtual List<Order> Orders { get; set; } // заказ-наряд
-
-        public Work()
-        {
-            this.Parts = new List<Part>();
-            this.Employees = new List<Employee>();
-            this.Orders = new List<Order>();
-        }
-    }
-
-    public class Order
-    {
-        // Ссылка на работу, проводимую механиком
-        public int WorkId { get; set; }
-        public virtual Work? Work { get; set; }
-        // Ссылка на механика, проводившего работу
-        public int EmployeeId { get; set; }
-        public virtual Employee? Employee { get; set; }
-        // Ссылка на установленную запчасть
-        public int PartId { get; set; }
-        public virtual Part? Part { get; set; }
-    }
 }

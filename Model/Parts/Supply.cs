@@ -7,28 +7,26 @@ namespace App
         public int SupplierId { get; set; } // PrimaryKey
         public string? TaxpayerIdentificationNumber { get; set; }
         public string? SupplierName { get; set; }
-
-        // Навигационные свойства
-        public virtual List<Supply> Supplies { get; set; } // осуществляемые поставки
-        /// <summary>
-        /// M:M - номенклатура
-        /// </summary>
-        public virtual List<Part> Parts { get; set; } // поставляемые запчасти
-
-        public string SupplierInfo
+        public string GetSupplier
         {
-            get {
+            get
+            {
                 if (this.SupplierName is not null)
-                    return this.TaxpayerIdentificationNumber + " - " + this.SupplierName;
-                else return this.ToString();
+                    return this.TaxpayerIdentificationNumber + ": " + this.SupplierName;
+                return this.TaxpayerIdentificationNumber;
             }
         }
 
+        // Навигационные свойства
+        public virtual List<Supply> Supplies { get; set; } // осуществляемые поставки
+        /*
+         * M:M - номенклатура
+         */
+        public virtual List<Part> Parts { get; set; } // поставляемые запчасти
+
         public override string ToString()
         {
-            if (this.TaxpayerIdentificationNumber is not null)
-                return this.TaxpayerIdentificationNumber;
-            else return base.ToString();
+            return this.TaxpayerIdentificationNumber;
         }
 
         public Supplier()
@@ -43,7 +41,7 @@ namespace App
     {
         public int SupplyId { get; set; } // PrimaryKey
 
-        // Ссылка на поставщика, совершающего поставку
+        // Ссылка на поставщика, доставляющего поставку
         public int SupplierId { get; set; }
         public virtual Supplier? Supplier { get; set; }
         // Ссылка на кладовщика, сопровождающего поставку
@@ -55,9 +53,9 @@ namespace App
         public DateTime? DateOfDelivery { get; set; }
 
         // Навигационные свойства
-        /// <summary>
-        /// M:M - запчасти в поставке
-        /// </summary>
+        /*
+         * M:M - запчасти в поставке
+         */
         public virtual List<Part> Parts { get; set; } // запчасти в поставке
         public virtual List<Position> Positions { get; set; } // позиции поставки
         
@@ -65,7 +63,7 @@ namespace App
         {
             this.Parts = new List<Part>();
             this.Positions = new List<Position>();
-    }
+        }
     }
 
     // Класс позиций поставок с количеством запчастей

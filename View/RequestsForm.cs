@@ -1,32 +1,35 @@
 
 using EntityFramework.Exceptions.Common;
-using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace App
 {
-    public partial class RequestsForm : Form, IView, IViewDefault
+    public partial class RequestsForm : Form, IView, IViewDefault, IViewControls
     {
-        private bool ADD_FLAG;
-        private bool EDIT_FLAG;
-
         Presenter Presenter;
         MainForm home;
+
+        public void InitializeData(Presenter? presenter = null, MainForm? home = null)
+        {
+            this.Presenter = presenter;
+            this.home = home;
+            this.Presenter.ContextLoad();
+
+            this.Presenter.RequestsTableLoad();
+            this.Presenter.EmployeesBySpecialtyLoad(1);
+            this.Presenter.OwnersTableLoad();
+            this.Presenter.CarsTableLoad();
+
+            this.requestBindingSource.DataSource = this.Presenter.RequestsTableToList();
+            this.employeeBindingSource.DataSource = this.Presenter.EmployeesTableToList();
+            this.ownerBindingSource.DataSource = this.Presenter.OwnersTableToList();
+            this.carBindingSource.DataSource = this.Presenter.CarsTableToList();
+        }
 
         public RequestsForm(ref Presenter Presenter, MainForm home)
         {
             InitializeComponent();
-            this.Presenter = Presenter;
-            this.home = home;
-
-            this.Presenter.db.Requests.Load();
-            this.Presenter.db.Employees.Where(e => e.SpecialtyId == 1).Load();
-            this.Presenter.db.Owners.Load();
-            this.Presenter.db.Cars.Load();
-
-            this.requestBindingSource.DataSource = this.Presenter.db.Requests.Local.ToList();
-            this.employeeBindingSource.DataSource = this.Presenter.db.Employees.Local.ToList();
-            this.ownerBindingSource.DataSource = this.Presenter.db.Owners.Local.ToList();
-            this.carBindingSource.DataSource = this.Presenter.db.Cars.Local.ToList();
+            InitializeData(Presenter, home);
         }
 
         public DialogResult ResultDialog(string message, string head)
@@ -50,6 +53,9 @@ namespace App
 
         public void Controls_toDefault()
         {
+            this.controlsLayoutPanel.Enabled = !this.controlsLayoutPanel.Enabled;
+            this.dbLayoutPanel.Enabled = !this.dbLayoutPanel.Enabled;
+
             this.employeesPicker.SelectedIndex = -1;
             this.ownersPicker.SelectedIndex = -1;
             this.carsPicker.SelectedIndex = -1;
@@ -65,21 +71,18 @@ namespace App
         {
             this.Controls_toDefault();
 
-            this.ADD_FLAG = this.EDIT_FLAG = false;
-
-            this.controlsLayoutPanel.Enabled = false;
-            this.dbLayoutPanel.Enabled = true;
+            this.acceptButton.Visible = true;
+            this.editButton.Visible = false;
         }
 
         private void RequestsForm_Load(object sender, EventArgs e)
         {
-            this.controlsLayoutPanel.Enabled = false;
-
             this.Controls_toDefault();
         }
 
         private void RequestsForm_FormClosed(object sender, EventArgs e)
         {
+            this.Presenter.ContextDispose();
             this.home.Show();
         }
 
@@ -93,33 +96,26 @@ namespace App
             this.Close();
         }
 
-        private void toOrdersButton_Click(object sender, EventArgs e)
-        {
-            OrderForm order = new OrderForm(ref Presenter, home, this);
-            this.Hide();
-            order.Show();
-        }
-
         private void addButton_Click(object sender, EventArgs e)
         {
-            this.controlsLayoutPanel.Enabled = true;
-            this.dbLayoutPanel.Enabled = false;
-
             this.Controls_toDefault();
-
-            this.ADD_FLAG = true;
         }
 
         private void openButton_Click(object sender, EventArgs e)
         {
-            this.controlsLayoutPanel.Enabled = true;
-            this.dbLayoutPanel.Enabled = false;
-            this.requestsTable.Enabled = false;
+            if (this.requestsTable.CurrentRow is null) return;
+
+            this.controlsLayoutPanel.Enabled = !this.controlsLayoutPanel.Enabled;
+            this.dbLayoutPanel.Enabled = !this.dbLayoutPanel.Enabled;
 
             int index = (int)this.requestsTable
                 [0, this.requestsTable.CurrentRow.Index].Value;
 
-            Request request = this.Presenter.db.Requests.Find(index);
+            Request request = this.Presenter.RequestsFind(index);
+
+            this.employeesPicker.SelectedValue = request.EmployeeId;
+            this.ownersPicker.SelectedValue = request.OwnerId;
+            this.carsPicker.SelectedValue = request.CarId;
 
             this.postDatePicker.Value = (DateTime)request.RequestDate;
             this.startDatePicker.Value = (DateTime)request.StartDate;
@@ -127,108 +123,109 @@ namespace App
 
             this.completedCheckBox.Checked = request.Completed;
 
-            this.EDIT_FLAG = true;
+            this.acceptButton.Visible = false;
+            this.editButton.Visible = true;
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            int index = (int)this.requestsTable
-                [0, this.requestsTable.CurrentRow.Index].Value;
+            if (this.requestsTable.CurrentRow is null) return;
 
             if (ResultDialog("Вы уверены, что хотите удалить выбранную запись о заявке на ремонт?",
                 "Удалить запись") == DialogResult.No) return;
 
-            Request request = this.Presenter.db.Requests.Find(index);
+            int index = (int)this.requestsTable
+                [0, this.requestsTable.CurrentRow.Index].Value;
 
-            this.Presenter.db.Requests.Remove(request);
-            this.Presenter.db.SaveChanges();
+            Request request = this.Presenter.RequestsFind(index);
 
-            this.requestBindingSource.DataSource = this.Presenter.db.Requests.Local.ToList();
+            this.Presenter.RequestsRemove(request);
+            this.Presenter.ContextSaveChanges();
+
+            this.requestBindingSource.DataSource = this.Presenter.RequestsTableToList();
 
             MessageBox.Show("Запись о заявке на ремонт успешно удалена из базы данных!");
         }
 
         private void acceptButton_Click(object sender, EventArgs e)
         {
-            if (ADD_FLAG)
+            if (ResultDialog("Вы уверены, что хотите добавить новую запись о заявке на ремонт?",
+                "Добавить запись") == DialogResult.No) return;
+
+            Request request = new Request();
+
+            request.Employee = (Employee)this.employeesPicker.SelectedItem;
+            request.Owner = (Owner)this.ownersPicker.SelectedItem;
+            request.Car = (Car)this.carsPicker.SelectedItem;
+
+            request.RequestDate = this.postDatePicker.Checked == true ? this.postDatePicker.Value : null;
+            request.StartDate = this.startDatePicker.Checked == true ? this.startDatePicker.Value : null;
+            request.CompleteDate = this.completeDatePicker.Checked == true ? this.completeDatePicker.Value : null;
+
+            request.Completed = this.completedCheckBox.Checked;
+
+            try
             {
-                if (ResultDialog("Вы уверены, что хотите добавить новую запись о заявке на ремонт?",
-                    "Добавить запись") == DialogResult.No) return;
+                this.Presenter.RequestsAdd(request);
+                this.Presenter.ContextSaveChanges();
+            }
+            catch (Exception ex) when (ex is CannotInsertNullException || ex is ReferenceConstraintException)
+            {
+                this.Presenter.RequestsRemove(request);
 
-                Request request = new Request();
-
-                request.Employee = (Employee)this.employeesPicker.SelectedItem;
-                request.Owner = (Owner)this.ownersPicker.SelectedItem;
-                request.Car = (Car)this.carsPicker.SelectedItem;
-
-                request.RequestDate = this.postDatePicker.Checked == true ? this.postDatePicker.Value : null;
-                request.StartDate = this.startDatePicker.Checked == true ? this.startDatePicker.Value : null;
-                request.CompleteDate = this.completeDatePicker.Checked == true ? this.completeDatePicker.Value : null;
-
-                request.Completed = this.completedCheckBox.Checked;
-
-                try
-                {
-                    this.Presenter.db.Requests.Add(request);
-                    this.Presenter.db.SaveChanges();
-
-                    this.requestBindingSource.DataSource = this.Presenter.db.Requests.Local.ToList();
-                    MessageBox.Show("Запись о заявке на ремонт успешно добавлена в базу данных!");
-                    this.Controls_toDefault();
-                }
-                catch (CannotInsertNullException cine)
-                {
-                    this.Presenter.db.Requests.Remove(request);
-                    ErrorDialog(cine.InnerException.Message, "Обязательное поле не заполнено!");
-                }
-                catch (ReferenceConstraintException rce)
-                {
-                    this.Presenter.db.Requests.Remove(request);
-                    ErrorDialog(rce.InnerException.Message, "Значение указано неверно!");
-                }
-
-                this.Controls_toDefault();
+                if (ex is CannotInsertNullException)
+                    ErrorDialog(ex.InnerException.Message, "Обязательное поле не заполнено!");
+                if (ex is ReferenceConstraintException)
+                    ErrorDialog(ex.InnerException.Message, "Значение указано неверно!");
+                return;
             }
 
-            if (EDIT_FLAG)
+            this.requestBindingSource.DataSource = this.Presenter.RequestsTableToList();
+
+            MessageBox.Show("Запись о заявке на ремонт успешно добавлена в базу данных!");
+            this.Controls_toDefault();
+        }
+
+        private void editButton_Click(object sender, EventArgs e)
+        {
+            if (ResultDialog("Вы уверены, что хотите изменить существующую запись о заявке на ремонт?",
+                "Измененить запись") == DialogResult.No) return;
+
+            int index = (int)this.requestsTable
+                [0, this.requestsTable.CurrentRow.Index].Value;
+
+            Request request = this.Presenter.RequestsFind(index);
+
+            request.Employee = (Employee)this.employeesPicker.SelectedValue;
+            request.Owner = (Owner)this.ownersPicker.SelectedValue;
+            request.Car = (Car)this.carsPicker.SelectedValue;
+
+            request.RequestDate = this.postDatePicker.Checked == true ? this.postDatePicker.Value : null;
+            request.StartDate = this.startDatePicker.Checked == true ? this.startDatePicker.Value : null;
+            request.CompleteDate = this.completeDatePicker.Checked == true ? this.completeDatePicker.Value : null;
+
+            request.Completed = this.completedCheckBox.Checked;
+
+            try
             {
-                int index = (int)this.requestsTable
-                    [0, this.requestsTable.CurrentRow.Index].Value;
-
-                if (ResultDialog("Вы уверены, что хотите изменить существующую запись о заявке на ремонт?",
-                    "Измененить запись") == DialogResult.No) return;
-
-                Request request = this.Presenter.db.Requests.Find(index);
-
-                request.Employee = (Employee)this.employeesPicker.SelectedValue;
-                request.Owner = (Owner)this.ownersPicker.SelectedValue;
-                request.Car = (Car)this.carsPicker.SelectedValue;
-
-                request.RequestDate = this.postDatePicker.Checked == true ? this.postDatePicker.Value : null;
-                request.StartDate = this.startDatePicker.Checked == true ? this.startDatePicker.Value : null;
-                request.CompleteDate = this.completeDatePicker.Checked == true ? this.completeDatePicker.Value : null;
-
-                request.Completed = this.completedCheckBox.Checked;
-
-                try
-                {
-                    this.Presenter.db.Entry(request).State = EntityState.Modified;
-                    this.Presenter.db.SaveChanges();
-
-                    this.requestBindingSource.DataSource = this.Presenter.db.Requests.Local.ToList();
-                    MessageBox.Show("Запись о заявке на ремонт успешно изменена в базе данных!");
-                }
-                catch (CannotInsertNullException cine)
-                {
-                    this.Presenter.db.Requests.Remove(request);
-                    ErrorDialog(cine.InnerException.Message, "Обязательное поле не заполнено!");
-                }
-                catch (ReferenceConstraintException rce)
-                {
-                    this.Presenter.db.Requests.Remove(request);
-                    ErrorDialog(rce.InnerException.Message, "Значение указано неверно!");
-                }
+                this.Presenter.RequestsEntry(request);
+                this.Presenter.ContextSaveChanges();
             }
+            catch (Exception ex) when (ex is CannotInsertNullException || ex is ReferenceConstraintException)
+            {
+                this.Presenter.RequestsRemove(request);
+
+                if (ex is CannotInsertNullException)
+                    ErrorDialog(ex.InnerException.Message, "Обязательное поле не заполнено!");
+                if (ex is ReferenceConstraintException)
+                    ErrorDialog(ex.InnerException.Message, "Значение указано неверно!");
+                return;
+            }
+
+            this.requestBindingSource.DataSource = this.Presenter.RequestsTableToList();
+
+            MessageBox.Show("Запись о заявке на ремонт успешно изменена в базе данных!");
+            this.Return();
         }
 
         private void resetButton_Click(object sender, EventArgs e)
@@ -237,6 +234,29 @@ namespace App
                 "Отмена операции") == DialogResult.No) return;
 
             this.Return();
+        }
+
+        public void comboBox_DropDown(object sender, EventArgs e)
+        {
+            var cb = sender as ComboBox;
+
+            int widestStringInPixels = 0;
+            foreach (Object o in cb.Items)
+            {
+                string toCheck;
+                PropertyInfo pinfo;
+                Type objectType = o.GetType();
+                if (cb.DisplayMember.CompareTo("") == 0) toCheck = o.ToString();
+                else
+                {
+                    pinfo = objectType.GetProperty(cb.DisplayMember);
+                    toCheck = pinfo.GetValue(o, null).ToString();
+
+                }
+                if (TextRenderer.MeasureText(toCheck, cb.Font).Width > widestStringInPixels)
+                    widestStringInPixels = TextRenderer.MeasureText(toCheck, cb.Font).Width;
+            }
+            cb.DropDownWidth = widestStringInPixels + 15;
         }
     }
 }

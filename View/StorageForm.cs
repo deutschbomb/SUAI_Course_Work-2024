@@ -9,10 +9,9 @@ namespace App
         Presenter Presenter;
         MainForm home;
 
-        public StorageForm(ref Presenter Presenter, MainForm home)
+        public void InitializeData(Presenter? presenter = null, MainForm? home = null)
         {
-            InitializeComponent();
-            this.Presenter = Presenter;
+            this.Presenter = presenter;
             this.home = home;
             this.Presenter.ContextLoad();
 
@@ -21,6 +20,12 @@ namespace App
 
             this.accountingBindingSource.DataSource = this.Presenter.StoragePartsTableToList();
             this.partBindingSource.DataSource = this.Presenter.PartsTableToList();
+        }
+
+        public StorageForm(ref Presenter Presenter, MainForm home)
+        {
+            InitializeComponent();
+            InitializeData(Presenter, home);
         }
 
         public DialogResult ResultDialog(string message, string head)
@@ -128,7 +133,7 @@ namespace App
 
             int index = (int)this.storageTable[0, storageTable.CurrentCellAddress.Y].Value;
 
-            Accounting accounting = this.Presenter.db.StorageParts.Find(index);
+            Accounting accounting = this.Presenter.StoragePartsFind(index);
 
             this.Presenter.StoragePartsRemove(accounting);
             this.Presenter.PartsRemove(accounting.Part);
@@ -162,11 +167,6 @@ namespace App
             {
                 this.Presenter.StoragePartsAdd(accounting);
                 this.Presenter.ContextSaveChanges();
-
-                this.accountingBindingSource.DataSource = this.Presenter.StoragePartsTableToList();
-                this.partBindingSource.DataSource = this.Presenter.PartsTableToList();
-
-                MessageBox.Show("Запись о запчасти успешно добавлена в базу данных!");
             }
             catch (Exception ex) when (ex is CannotInsertNullException || ex is ReferenceConstraintException)
             {
@@ -177,21 +177,24 @@ namespace App
                     ErrorDialog(ex.InnerException.Message, "Обязательное поле не заполнено!");
                 if (ex is ReferenceConstraintException)
                     ErrorDialog(ex.InnerException.Message, "Значение указано неверно!");
+                return;
             }
 
+            this.accountingBindingSource.DataSource = this.Presenter.StoragePartsTableToList();
+            this.partBindingSource.DataSource = this.Presenter.PartsTableToList();
+
+            MessageBox.Show("Запись о запчасти успешно добавлена в базу данных!");
             this.Controls_toDefault();
         }
 
         private void editButton_Click(object sender, EventArgs e)
         {
-            if (this.storageTable.CurrentRow is null) return;
-            
             if (ResultDialog("Вы уверены, что хотите изменить существующую запись о запчасти?",
                 "Измененить запись") == DialogResult.No) return;
 
             int index = (int)this.storageTable[0, storageTable.CurrentCellAddress.Y].Value;
 
-            Accounting accounting = this.Presenter.db.StorageParts.Find(index);
+            Accounting accounting = this.Presenter.StoragePartsFind(index);
 
             accounting.Part.CatalogueNumber = this.catalogueNumberInput.Text != "" ?
                     Regex.Replace(this.catalogueNumberInput.Text, @"(\W)", @"") : null;
@@ -205,11 +208,6 @@ namespace App
             {
                 this.Presenter.StoragePartsEntry(accounting);
                 this.Presenter.ContextSaveChanges();
-
-                this.accountingBindingSource.DataSource = this.Presenter.StoragePartsTableToList();
-                this.partBindingSource.DataSource = this.Presenter.PartsTableToList();
-
-                MessageBox.Show("Запись о запчасти успешно изменена в базе данных!");
             }
             catch (Exception ex) when (ex is CannotInsertNullException || ex is ReferenceConstraintException)
             {
@@ -220,8 +218,13 @@ namespace App
                     ErrorDialog(ex.InnerException.Message, "Обязательное поле не заполнено!");
                 if (ex is ReferenceConstraintException)
                     ErrorDialog(ex.InnerException.Message, "Значение указано неверно!");
+                return;
             }
 
+            this.accountingBindingSource.DataSource = this.Presenter.StoragePartsTableToList();
+            this.partBindingSource.DataSource = this.Presenter.PartsTableToList();
+
+            MessageBox.Show("Запись о запчасти успешно изменена в базе данных!");
             this.Return();
         }
 

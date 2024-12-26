@@ -30,16 +30,12 @@ namespace App
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
             formLayoutPanel = new TableLayoutPanel();
             suppliesTable = new DataGridView();
-            supplyIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            employeeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            supplierDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            dateOfPostDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            deliveredDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
-            dateOfDeliveryDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             supplyBindingSource = new BindingSource(components);
             controlsLayoutPanel = new TableLayoutPanel();
             inputsLayoutPanel = new TableLayoutPanel();
@@ -81,6 +77,12 @@ namespace App
             returnButton = new Button();
             positionBindingSource = new BindingSource(components);
             partBindingSource = new BindingSource(components);
+            supplyIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            employeeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            supplierDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dateOfPostDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            deliveredDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
+            dateOfDeliveryDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             formLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)suppliesTable).BeginInit();
             ((System.ComponentModel.ISupportInitialize)supplyBindingSource).BeginInit();
@@ -140,28 +142,28 @@ namespace App
             suppliesTable.BorderStyle = BorderStyle.None;
             suppliesTable.CellBorderStyle = DataGridViewCellBorderStyle.None;
             suppliesTable.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Pixel);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlDarkDark;
-            dataGridViewCellStyle1.Padding = new Padding(12, 7, 12, 6);
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.ControlLight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            suppliesTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = SystemColors.Window;
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Pixel);
+            dataGridViewCellStyle5.ForeColor = SystemColors.ControlDarkDark;
+            dataGridViewCellStyle5.Padding = new Padding(12, 7, 12, 6);
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.ControlLight;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
+            suppliesTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             suppliesTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             suppliesTable.Columns.AddRange(new DataGridViewColumn[] { supplyIdDataGridViewTextBoxColumn, employeeDataGridViewTextBoxColumn, supplierDataGridViewTextBoxColumn, dateOfPostDataGridViewTextBoxColumn, deliveredDataGridViewCheckBoxColumn, dateOfDeliveryDataGridViewTextBoxColumn });
             suppliesTable.Cursor = Cursors.Hand;
             suppliesTable.DataSource = supplyBindingSource;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.White;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlDarkDark;
-            dataGridViewCellStyle2.Padding = new Padding(12, 0, 12, 0);
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.ControlLight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            suppliesTable.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = Color.White;
+            dataGridViewCellStyle8.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            dataGridViewCellStyle8.ForeColor = SystemColors.ControlDarkDark;
+            dataGridViewCellStyle8.Padding = new Padding(12, 0, 12, 0);
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.ControlLight;
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
+            suppliesTable.DefaultCellStyle = dataGridViewCellStyle8;
             suppliesTable.Dock = DockStyle.Fill;
             suppliesTable.EditMode = DataGridViewEditMode.EditProgrammatically;
             suppliesTable.EnableHeadersVisualStyles = false;
@@ -178,64 +180,6 @@ namespace App
             suppliesTable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             suppliesTable.Size = new Size(920, 225);
             suppliesTable.TabIndex = 2;
-            // 
-            // supplyIdDataGridViewTextBoxColumn
-            // 
-            supplyIdDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            supplyIdDataGridViewTextBoxColumn.DataPropertyName = "SupplyId";
-            supplyIdDataGridViewTextBoxColumn.HeaderText = "ИД";
-            supplyIdDataGridViewTextBoxColumn.Name = "supplyIdDataGridViewTextBoxColumn";
-            supplyIdDataGridViewTextBoxColumn.ReadOnly = true;
-            supplyIdDataGridViewTextBoxColumn.ToolTipText = "Идентификатор поставки в таблице";
-            supplyIdDataGridViewTextBoxColumn.Width = 72;
-            // 
-            // employeeDataGridViewTextBoxColumn
-            // 
-            employeeDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            employeeDataGridViewTextBoxColumn.DataPropertyName = "Employee";
-            employeeDataGridViewTextBoxColumn.HeaderText = "Ответственный";
-            employeeDataGridViewTextBoxColumn.Name = "employeeDataGridViewTextBoxColumn";
-            employeeDataGridViewTextBoxColumn.ReadOnly = true;
-            employeeDataGridViewTextBoxColumn.ToolTipText = "Кладовщик, ответственный за поставку";
-            // 
-            // supplierDataGridViewTextBoxColumn
-            // 
-            supplierDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            supplierDataGridViewTextBoxColumn.DataPropertyName = "Supplier";
-            supplierDataGridViewTextBoxColumn.HeaderText = "Поставщик";
-            supplierDataGridViewTextBoxColumn.Name = "supplierDataGridViewTextBoxColumn";
-            supplierDataGridViewTextBoxColumn.ReadOnly = true;
-            supplierDataGridViewTextBoxColumn.ToolTipText = "Поставщик, доставляющий запчасть";
-            // 
-            // dateOfPostDataGridViewTextBoxColumn
-            // 
-            dateOfPostDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dateOfPostDataGridViewTextBoxColumn.DataPropertyName = "DateOfPost";
-            dateOfPostDataGridViewTextBoxColumn.HeaderText = "Дата оформления";
-            dateOfPostDataGridViewTextBoxColumn.Name = "dateOfPostDataGridViewTextBoxColumn";
-            dateOfPostDataGridViewTextBoxColumn.ReadOnly = true;
-            dateOfPostDataGridViewTextBoxColumn.ToolTipText = "Дата оформления поставки";
-            dateOfPostDataGridViewTextBoxColumn.Width = 155;
-            // 
-            // deliveredDataGridViewCheckBoxColumn
-            // 
-            deliveredDataGridViewCheckBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            deliveredDataGridViewCheckBoxColumn.DataPropertyName = "Delivered";
-            deliveredDataGridViewCheckBoxColumn.HeaderText = "Доставлено";
-            deliveredDataGridViewCheckBoxColumn.Name = "deliveredDataGridViewCheckBoxColumn";
-            deliveredDataGridViewCheckBoxColumn.ReadOnly = true;
-            deliveredDataGridViewCheckBoxColumn.ToolTipText = "Состояние поставки";
-            deliveredDataGridViewCheckBoxColumn.Width = 101;
-            // 
-            // dateOfDeliveryDataGridViewTextBoxColumn
-            // 
-            dateOfDeliveryDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dateOfDeliveryDataGridViewTextBoxColumn.DataPropertyName = "DateOfDelivery";
-            dateOfDeliveryDataGridViewTextBoxColumn.HeaderText = "Дата доставки";
-            dateOfDeliveryDataGridViewTextBoxColumn.Name = "dateOfDeliveryDataGridViewTextBoxColumn";
-            dateOfDeliveryDataGridViewTextBoxColumn.ReadOnly = true;
-            dateOfDeliveryDataGridViewTextBoxColumn.ToolTipText = "Дата доставки запчасти на склад";
-            dateOfDeliveryDataGridViewTextBoxColumn.Width = 132;
             // 
             // supplyBindingSource
             // 
@@ -417,7 +361,7 @@ namespace App
             suppliersPicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             suppliersPicker.BackColor = Color.White;
             suppliersPicker.DataSource = supplierBindingSource;
-            suppliersPicker.DisplayMember = "SupplierInfo";
+            suppliersPicker.DisplayMember = "GetSupplier";
             suppliersPicker.DropDownStyle = ComboBoxStyle.DropDownList;
             suppliersPicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             suppliersPicker.FormattingEnabled = true;
@@ -462,7 +406,7 @@ namespace App
             employeesPicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             employeesPicker.BackColor = Color.White;
             employeesPicker.DataSource = employeeBindingSource;
-            employeesPicker.DisplayMember = "EmployeeFullName";
+            employeesPicker.DisplayMember = "GetEmployee";
             employeesPicker.DropDownStyle = ComboBoxStyle.DropDownList;
             employeesPicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             employeesPicker.FormattingEnabled = true;
@@ -598,6 +542,7 @@ namespace App
             // editButton
             // 
             editButton.BackColor = SystemColors.Highlight;
+            editButton.Dock = DockStyle.Fill;
             editButton.FlatStyle = FlatStyle.Flat;
             editButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             editButton.ForeColor = SystemColors.ButtonFace;
@@ -614,6 +559,7 @@ namespace App
             // acceptButton
             // 
             acceptButton.BackColor = SystemColors.Highlight;
+            acceptButton.Dock = DockStyle.Fill;
             acceptButton.FlatStyle = FlatStyle.Flat;
             acceptButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             acceptButton.ForeColor = SystemColors.ButtonFace;
@@ -628,6 +574,8 @@ namespace App
             // 
             // resetButton
             // 
+            resetButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            resetButton.AutoSize = true;
             resetButton.BackColor = SystemColors.ScrollBar;
             resetButton.FlatAppearance.BorderSize = 0;
             resetButton.FlatStyle = FlatStyle.Flat;
@@ -779,6 +727,68 @@ namespace App
             // 
             partBindingSource.DataSource = typeof(Part);
             // 
+            // supplyIdDataGridViewTextBoxColumn
+            // 
+            supplyIdDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            supplyIdDataGridViewTextBoxColumn.DataPropertyName = "SupplyId";
+            supplyIdDataGridViewTextBoxColumn.HeaderText = "ИД";
+            supplyIdDataGridViewTextBoxColumn.Name = "supplyIdDataGridViewTextBoxColumn";
+            supplyIdDataGridViewTextBoxColumn.ReadOnly = true;
+            supplyIdDataGridViewTextBoxColumn.ToolTipText = "Идентификатор поставки в таблице";
+            supplyIdDataGridViewTextBoxColumn.Width = 72;
+            // 
+            // employeeDataGridViewTextBoxColumn
+            // 
+            employeeDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            employeeDataGridViewTextBoxColumn.DataPropertyName = "Employee";
+            employeeDataGridViewTextBoxColumn.HeaderText = "Ответственный";
+            employeeDataGridViewTextBoxColumn.Name = "employeeDataGridViewTextBoxColumn";
+            employeeDataGridViewTextBoxColumn.ReadOnly = true;
+            employeeDataGridViewTextBoxColumn.ToolTipText = "Кладовщик, ответственный за поставку";
+            // 
+            // supplierDataGridViewTextBoxColumn
+            // 
+            supplierDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            supplierDataGridViewTextBoxColumn.DataPropertyName = "Supplier";
+            supplierDataGridViewTextBoxColumn.HeaderText = "Поставщик";
+            supplierDataGridViewTextBoxColumn.Name = "supplierDataGridViewTextBoxColumn";
+            supplierDataGridViewTextBoxColumn.ReadOnly = true;
+            supplierDataGridViewTextBoxColumn.ToolTipText = "Поставщик, доставляющий запчасть";
+            // 
+            // dateOfPostDataGridViewTextBoxColumn
+            // 
+            dateOfPostDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dateOfPostDataGridViewTextBoxColumn.DataPropertyName = "DateOfPost";
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
+            dateOfPostDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle6;
+            dateOfPostDataGridViewTextBoxColumn.HeaderText = "Дата оформления";
+            dateOfPostDataGridViewTextBoxColumn.Name = "dateOfPostDataGridViewTextBoxColumn";
+            dateOfPostDataGridViewTextBoxColumn.ReadOnly = true;
+            dateOfPostDataGridViewTextBoxColumn.ToolTipText = "Дата оформления поставки";
+            dateOfPostDataGridViewTextBoxColumn.Width = 155;
+            // 
+            // deliveredDataGridViewCheckBoxColumn
+            // 
+            deliveredDataGridViewCheckBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            deliveredDataGridViewCheckBoxColumn.DataPropertyName = "Delivered";
+            deliveredDataGridViewCheckBoxColumn.HeaderText = "Доставлено";
+            deliveredDataGridViewCheckBoxColumn.Name = "deliveredDataGridViewCheckBoxColumn";
+            deliveredDataGridViewCheckBoxColumn.ReadOnly = true;
+            deliveredDataGridViewCheckBoxColumn.ToolTipText = "Состояние поставки";
+            deliveredDataGridViewCheckBoxColumn.Width = 101;
+            // 
+            // dateOfDeliveryDataGridViewTextBoxColumn
+            // 
+            dateOfDeliveryDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dateOfDeliveryDataGridViewTextBoxColumn.DataPropertyName = "DateOfDelivery";
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
+            dateOfDeliveryDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle7;
+            dateOfDeliveryDataGridViewTextBoxColumn.HeaderText = "Дата доставки";
+            dateOfDeliveryDataGridViewTextBoxColumn.Name = "dateOfDeliveryDataGridViewTextBoxColumn";
+            dateOfDeliveryDataGridViewTextBoxColumn.ReadOnly = true;
+            dateOfDeliveryDataGridViewTextBoxColumn.ToolTipText = "Дата доставки запчасти на склад";
+            dateOfDeliveryDataGridViewTextBoxColumn.Width = 132;
+            // 
             // LogisticsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -817,6 +827,7 @@ namespace App
             deliveryDateLayoutPanel.ResumeLayout(false);
             postDateLayoutPanel.ResumeLayout(false);
             buttonsLayoutPanel.ResumeLayout(false);
+            buttonsLayoutPanel.PerformLayout();
             menuLayoutPanel.ResumeLayout(false);
             menuLayoutPanel.PerformLayout();
             dbLayoutPanel.ResumeLayout(false);
@@ -870,14 +881,14 @@ namespace App
         private Button returnButton;
         private DataGridViewTextBoxColumn employeeIdDataGridViewTextBoxColumn;
         private BindingSource supplyBindingSource;
+        private BindingSource positionBindingSource;
+        private Button editButton;
+        private BindingSource supplierBindingSource;
         private DataGridViewTextBoxColumn supplyIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn employeeDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn supplierDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn dateOfPostDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn deliveredDataGridViewCheckBoxColumn;
         private DataGridViewTextBoxColumn dateOfDeliveryDataGridViewTextBoxColumn;
-        private BindingSource positionBindingSource;
-        private Button editButton;
-        private BindingSource supplierBindingSource;
     }
 }

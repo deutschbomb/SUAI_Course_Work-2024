@@ -10,10 +10,9 @@ namespace App
         private Presenter Presenter;
         private MainForm home;
 
-        public EmployeesForm(ref Presenter Presenter, MainForm home)
+        public void InitializeData(Presenter? presenter = null, MainForm? home = null)
         {
-            InitializeComponent();
-            this.Presenter = Presenter;
+            this.Presenter = presenter;
             this.home = home;
             this.Presenter.ContextLoad();
 
@@ -24,11 +23,17 @@ namespace App
             this.specialtyBindingSource.DataSource = this.Presenter.SpecialtiesTableToList();
         }
 
-        public DialogResult ResultDialog(string message, string head)
+        public EmployeesForm(ref Presenter Presenter, MainForm home)
+        {
+            InitializeComponent();
+            InitializeData(Presenter, home);
+        }
+
+        public DialogResult ResultDialog(string message, string header)
         {
             DialogResult result = MessageBox.Show(
                 message,
-                head,
+                header,
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
             return result;
@@ -142,10 +147,10 @@ namespace App
         {
             if (this.employeesPicker.SelectedIndex == -1) return;
 
-            int index = (int)this.employeesPicker.SelectedValue;
-
             if (ResultDialog("¬ы уверены, что хотите удалить выбранную запись о сотруднике?",
                 "”далить запись") == DialogResult.No) return;
+
+            int index = (int)this.employeesPicker.SelectedValue;
 
             Employee employee = this.Presenter.EmployeesFind(index);
 
@@ -156,7 +161,7 @@ namespace App
 
             this.employeesPicker.SelectedIndex = -1;
 
-            MessageBox.Show("«апись успешно удалена из базы данных!");
+            MessageBox.Show("«апись о сотруднике успешно удалена из базы данных!");
         }
 
         private void acceptButton_Click(object sender, EventArgs e)
@@ -187,10 +192,6 @@ namespace App
             {
                 this.Presenter.EmployeesAdd(employee);
                 this.Presenter.ContextSaveChanges();
-
-                this.employeeBindingSource.DataSource = this.Presenter.EmployeesTableToList();
-                MessageBox.Show("«апись о сотруднике успешно добавлена в базу данных!");
-                this.Controls_toDefault();
             }
             catch (Exception ex) when (ex is CannotInsertNullException || ex is ReferenceConstraintException)
             {
@@ -200,7 +201,13 @@ namespace App
                     ErrorDialog(ex.InnerException.Message, "ќб€зательное поле не заполнено!");
                 if (ex is ReferenceConstraintException)
                     ErrorDialog(ex.InnerException.Message, "«начение указано неверно!");
+                return;
             }
+
+            this.employeeBindingSource.DataSource = this.Presenter.EmployeesTableToList();
+
+            MessageBox.Show("«апись о сотруднике успешно добавлена в базу данных!");
+            this.Controls_toDefault();
         }
 
         private void editButton_Click(object sender, EventArgs e)
@@ -226,17 +233,13 @@ namespace App
             employee.EmployeeTelephone = this.telephoneInput.Text != "" ?
                 Regex.Replace(this.telephoneInput.Text, @"(\D)", @"").Insert(0, "+") : null;
 
-            employee.DateOfBirth = this.birthDatePicker.Value;
-            employee.DateOfEmployment = this.employmentDatePicker.Checked == true ? this.employmentDatePicker.Value : null;
+            employee.DateOfEmployment = this.employmentDatePicker.Value;
+            employee.DateOfBirth = this.birthDatePicker.Checked == true ? this.birthDatePicker.Value : null;
 
             try
             {
                 this.Presenter.EmployeesEntry(employee);
                 this.Presenter.ContextSaveChanges();
-
-                this.employeeBindingSource.DataSource = this.Presenter.EmployeesTableToList();
-                MessageBox.Show("«апись о сотруднике успешно изменена в базе данных!");
-                this.Return();
             }
             catch (Exception ex) when (ex is CannotInsertNullException || ex is ReferenceConstraintException)
             {
@@ -246,7 +249,13 @@ namespace App
                     ErrorDialog(ex.InnerException.Message, "ќб€зательное поле не заполнено!");
                 if (ex is ReferenceConstraintException)
                     ErrorDialog(ex.InnerException.Message, "«начение указано неверно!");
+                return;
             }
+
+            this.employeeBindingSource.DataSource = this.Presenter.EmployeesTableToList();
+
+            MessageBox.Show("«апись о сотруднике успешно изменена в базе данных!");
+            this.Return();
         }
 
         private void resetButton_Click(object sender, EventArgs e)

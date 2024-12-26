@@ -5,10 +5,15 @@ namespace App
     {
         private Presenter Presenter;
 
+        public void InitializeData(Presenter? presenter = null, MainForm? home = null)
+        {
+            this.Presenter = new Presenter(this);
+        }
+
         public MainForm()
         {
             InitializeComponent();
-            Presenter = new Presenter(this);
+            InitializeData();
         }
 
         private void employeesButton_Click(object sender, EventArgs e)
@@ -48,8 +53,7 @@ namespace App
 
         private void MainForm_FormClosed(object sender, EventArgs e)
         {
-            //this.Presenter.db.Dispose();
-            //this.Presenter.db = null;
+
         }
     }
 }

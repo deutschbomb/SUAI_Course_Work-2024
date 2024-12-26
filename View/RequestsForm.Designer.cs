@@ -31,10 +31,15 @@ namespace App
         {
             components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             formLayoutPanel = new TableLayoutPanel();
+            requestsTable = new DataGridView();
+            requestBindingSource = new BindingSource(components);
             controlsLayoutPanel = new TableLayoutPanel();
             inputsLayoutPanel = new TableLayoutPanel();
             pickersLayoutPanel = new TableLayoutPanel();
@@ -62,28 +67,28 @@ namespace App
             postDatePicker = new DateTimePicker();
             completedCheckBox = new CheckBox();
             buttonsLayoutPanel = new FlowLayoutPanel();
+            editButton = new Button();
             acceptButton = new Button();
             resetButton = new Button();
-            toOrdersButton = new Button();
-            requestBindingSource = new BindingSource(components);
             menuLayoutPanel = new TableLayoutPanel();
             dbLayoutPanel = new FlowLayoutPanel();
             addButton = new Button();
-            editButton = new Button();
+            openButton = new Button();
             deleteButton = new Button();
             redirectLayoutPanel = new FlowLayoutPanel();
             homeButton = new Button();
             returnButton = new Button();
-            requestsTable = new DataGridView();
             requestIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            employeeIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             ownerIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             carIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            employeeIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             requestDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             startDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             completedDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
             completeDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             formLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)requestsTable).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)requestBindingSource).BeginInit();
             controlsLayoutPanel.SuspendLayout();
             inputsLayoutPanel.SuspendLayout();
             pickersLayoutPanel.SuspendLayout();
@@ -98,11 +103,9 @@ namespace App
             startDateLayoutPanel.SuspendLayout();
             postDateLayoutPanel.SuspendLayout();
             buttonsLayoutPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)requestBindingSource).BeginInit();
             menuLayoutPanel.SuspendLayout();
             dbLayoutPanel.SuspendLayout();
             redirectLayoutPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)requestsTable).BeginInit();
             SuspendLayout();
             // 
             // formLayoutPanel
@@ -126,6 +129,70 @@ namespace App
             formLayoutPanel.RowStyles.Add(new RowStyle());
             formLayoutPanel.Size = new Size(960, 540);
             formLayoutPanel.TabIndex = 3;
+            // 
+            // requestsTable
+            // 
+            requestsTable.AllowUserToAddRows = false;
+            requestsTable.AllowUserToDeleteRows = false;
+            requestsTable.AllowUserToResizeColumns = false;
+            requestsTable.AllowUserToResizeRows = false;
+            requestsTable.AutoGenerateColumns = false;
+            requestsTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            requestsTable.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            requestsTable.BackgroundColor = Color.White;
+            requestsTable.BorderStyle = BorderStyle.None;
+            requestsTable.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            requestsTable.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.White;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Pixel);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlDarkDark;
+            dataGridViewCellStyle1.Padding = new Padding(12, 7, 12, 6);
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.ControlLight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            requestsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            requestsTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            requestsTable.Columns.AddRange(new DataGridViewColumn[] { requestIdDataGridViewTextBoxColumn, employeeIdDataGridViewTextBoxColumn, ownerIdDataGridViewTextBoxColumn, carIdDataGridViewTextBoxColumn, requestDateDataGridViewTextBoxColumn, startDateDataGridViewTextBoxColumn, completedDataGridViewCheckBoxColumn, completeDateDataGridViewTextBoxColumn });
+            requestsTable.Cursor = Cursors.Hand;
+            requestsTable.DataSource = requestBindingSource;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.White;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            dataGridViewCellStyle6.ForeColor = SystemColors.ControlDarkDark;
+            dataGridViewCellStyle6.Padding = new Padding(12, 0, 12, 0);
+            dataGridViewCellStyle6.SelectionBackColor = SystemColors.ControlLight;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
+            requestsTable.DefaultCellStyle = dataGridViewCellStyle6;
+            requestsTable.Dock = DockStyle.Fill;
+            requestsTable.EditMode = DataGridViewEditMode.EditProgrammatically;
+            requestsTable.EnableHeadersVisualStyles = false;
+            requestsTable.GridColor = SystemColors.ControlDark;
+            requestsTable.Location = new Point(20, 86);
+            requestsTable.Margin = new Padding(0);
+            requestsTable.MultiSelect = false;
+            requestsTable.Name = "requestsTable";
+            requestsTable.ReadOnly = true;
+            requestsTable.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = SystemColors.Control;
+            dataGridViewCellStyle7.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
+            requestsTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            requestsTable.RowHeadersVisible = false;
+            requestsTable.RowHeadersWidth = 23;
+            requestsTable.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            requestsTable.RowTemplate.Height = 32;
+            requestsTable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            requestsTable.Size = new Size(920, 242);
+            requestsTable.TabIndex = 5;
+            // 
+            // requestBindingSource
+            // 
+            requestBindingSource.DataSource = typeof(Request);
             // 
             // controlsLayoutPanel
             // 
@@ -211,7 +278,7 @@ namespace App
             carsPicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             carsPicker.BackColor = Color.White;
             carsPicker.DataSource = carBindingSource;
-            carsPicker.DisplayMember = "LicensePlate";
+            carsPicker.DisplayMember = "GetCar";
             carsPicker.DropDownStyle = ComboBoxStyle.DropDownList;
             carsPicker.FlatStyle = FlatStyle.System;
             carsPicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -222,6 +289,7 @@ namespace App
             carsPicker.Size = new Size(245, 27);
             carsPicker.TabIndex = 1;
             carsPicker.ValueMember = "Id";
+            carsPicker.DropDown += comboBox_DropDown;
             // 
             // carBindingSource
             // 
@@ -256,7 +324,7 @@ namespace App
             ownersPicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             ownersPicker.BackColor = Color.White;
             ownersPicker.DataSource = ownerBindingSource;
-            ownersPicker.DisplayMember = "OwnerPassportNumber";
+            ownersPicker.DisplayMember = "GetOwner";
             ownersPicker.DropDownStyle = ComboBoxStyle.DropDownList;
             ownersPicker.FlatStyle = FlatStyle.System;
             ownersPicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -267,6 +335,7 @@ namespace App
             ownersPicker.Size = new Size(245, 27);
             ownersPicker.TabIndex = 1;
             ownersPicker.ValueMember = "Id";
+            ownersPicker.DropDown += comboBox_DropDown;
             // 
             // ownerBindingSource
             // 
@@ -301,7 +370,7 @@ namespace App
             employeesPicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             employeesPicker.BackColor = Color.White;
             employeesPicker.DataSource = employeeBindingSource;
-            employeesPicker.DisplayMember = "EmployeeSurname";
+            employeesPicker.DisplayMember = "GetEmployee";
             employeesPicker.DropDownStyle = ComboBoxStyle.DropDownList;
             employeesPicker.FlatStyle = FlatStyle.System;
             employeesPicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -312,6 +381,7 @@ namespace App
             employeesPicker.Size = new Size(245, 27);
             employeesPicker.TabIndex = 1;
             employeesPicker.ValueMember = "EmployeeId";
+            employeesPicker.DropDown += comboBox_DropDown;
             // 
             // employeeBindingSource
             // 
@@ -458,9 +528,9 @@ namespace App
             // 
             buttonsLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             buttonsLayoutPanel.AutoSize = true;
+            buttonsLayoutPanel.Controls.Add(editButton);
             buttonsLayoutPanel.Controls.Add(acceptButton);
             buttonsLayoutPanel.Controls.Add(resetButton);
-            buttonsLayoutPanel.Controls.Add(toOrdersButton);
             buttonsLayoutPanel.FlowDirection = FlowDirection.TopDown;
             buttonsLayoutPanel.Location = new Point(770, 10);
             buttonsLayoutPanel.Margin = new Padding(0);
@@ -468,13 +538,31 @@ namespace App
             buttonsLayoutPanel.Size = new Size(150, 170);
             buttonsLayoutPanel.TabIndex = 2;
             // 
+            // editButton
+            // 
+            editButton.BackColor = SystemColors.Highlight;
+            editButton.Dock = DockStyle.Fill;
+            editButton.FlatStyle = FlatStyle.Flat;
+            editButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            editButton.ForeColor = SystemColors.ButtonFace;
+            editButton.Location = new Point(0, 0);
+            editButton.Margin = new Padding(0);
+            editButton.Name = "editButton";
+            editButton.Size = new Size(150, 50);
+            editButton.TabIndex = 6;
+            editButton.Text = "Изменить";
+            editButton.UseVisualStyleBackColor = false;
+            editButton.Visible = false;
+            editButton.Click += editButton_Click;
+            // 
             // acceptButton
             // 
             acceptButton.BackColor = SystemColors.Highlight;
+            acceptButton.Dock = DockStyle.Fill;
             acceptButton.FlatStyle = FlatStyle.Flat;
             acceptButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             acceptButton.ForeColor = SystemColors.ButtonFace;
-            acceptButton.Location = new Point(0, 0);
+            acceptButton.Location = new Point(0, 50);
             acceptButton.Margin = new Padding(0);
             acceptButton.Name = "acceptButton";
             acceptButton.Size = new Size(150, 50);
@@ -490,7 +578,7 @@ namespace App
             resetButton.FlatStyle = FlatStyle.Flat;
             resetButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             resetButton.ForeColor = SystemColors.ControlText;
-            resetButton.Location = new Point(0, 60);
+            resetButton.Location = new Point(0, 110);
             resetButton.Margin = new Padding(0, 10, 0, 10);
             resetButton.Name = "resetButton";
             resetButton.Size = new Size(150, 50);
@@ -498,25 +586,6 @@ namespace App
             resetButton.Text = "Отменить";
             resetButton.UseVisualStyleBackColor = false;
             resetButton.Click += resetButton_Click;
-            // 
-            // toOrdersButton
-            // 
-            toOrdersButton.BackColor = SystemColors.MenuHighlight;
-            toOrdersButton.FlatStyle = FlatStyle.Flat;
-            toOrdersButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            toOrdersButton.ForeColor = SystemColors.ButtonFace;
-            toOrdersButton.Location = new Point(0, 120);
-            toOrdersButton.Margin = new Padding(0);
-            toOrdersButton.Name = "toOrdersButton";
-            toOrdersButton.Size = new Size(150, 50);
-            toOrdersButton.TabIndex = 6;
-            toOrdersButton.Text = "К заказ-наряду";
-            toOrdersButton.UseVisualStyleBackColor = false;
-            toOrdersButton.Click += toOrdersButton_Click;
-            // 
-            // requestBindingSource
-            // 
-            requestBindingSource.DataSource = typeof(Request);
             // 
             // menuLayoutPanel
             // 
@@ -540,8 +609,9 @@ namespace App
             dbLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dbLayoutPanel.AutoSize = true;
             dbLayoutPanel.Controls.Add(addButton);
-            dbLayoutPanel.Controls.Add(editButton);
+            dbLayoutPanel.Controls.Add(openButton);
             dbLayoutPanel.Controls.Add(deleteButton);
+            dbLayoutPanel.Enabled = false;
             dbLayoutPanel.Location = new Point(120, 0);
             dbLayoutPanel.Margin = new Padding(0);
             dbLayoutPanel.Name = "dbLayoutPanel";
@@ -565,22 +635,22 @@ namespace App
             addButton.UseVisualStyleBackColor = false;
             addButton.Click += addButton_Click;
             // 
-            // editButton
+            // openButton
             // 
-            editButton.AutoSize = true;
-            editButton.BackColor = SystemColors.Highlight;
-            editButton.Dock = DockStyle.Left;
-            editButton.FlatStyle = FlatStyle.Flat;
-            editButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            editButton.ForeColor = SystemColors.ButtonFace;
-            editButton.Location = new Point(271, 0);
-            editButton.Margin = new Padding(20, 0, 20, 0);
-            editButton.Name = "editButton";
-            editButton.Size = new Size(251, 50);
-            editButton.TabIndex = 2;
-            editButton.Text = "Изменить";
-            editButton.UseVisualStyleBackColor = false;
-            editButton.Click += openButton_Click;
+            openButton.AutoSize = true;
+            openButton.BackColor = SystemColors.Highlight;
+            openButton.Dock = DockStyle.Left;
+            openButton.FlatStyle = FlatStyle.Flat;
+            openButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            openButton.ForeColor = SystemColors.ButtonFace;
+            openButton.Location = new Point(271, 0);
+            openButton.Margin = new Padding(20, 0, 20, 0);
+            openButton.Name = "openButton";
+            openButton.Size = new Size(251, 50);
+            openButton.TabIndex = 2;
+            openButton.Text = "Просмотр";
+            openButton.UseVisualStyleBackColor = false;
+            openButton.Click += openButton_Click;
             // 
             // deleteButton
             // 
@@ -645,66 +715,9 @@ namespace App
             returnButton.UseVisualStyleBackColor = false;
             returnButton.Click += returnButton_Click;
             // 
-            // requestsTable
-            // 
-            requestsTable.AllowUserToAddRows = false;
-            requestsTable.AllowUserToDeleteRows = false;
-            requestsTable.AllowUserToResizeColumns = false;
-            requestsTable.AllowUserToResizeRows = false;
-            requestsTable.AutoGenerateColumns = false;
-            requestsTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            requestsTable.BackgroundColor = Color.White;
-            requestsTable.BorderStyle = BorderStyle.None;
-            requestsTable.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            requestsTable.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.White;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Pixel);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlDarkDark;
-            dataGridViewCellStyle1.Padding = new Padding(0, 7, 0, 7);
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.ControlLight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            requestsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            requestsTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            requestsTable.Columns.AddRange(new DataGridViewColumn[] { requestIdDataGridViewTextBoxColumn, ownerIdDataGridViewTextBoxColumn, carIdDataGridViewTextBoxColumn, employeeIdDataGridViewTextBoxColumn, requestDateDataGridViewTextBoxColumn, startDateDataGridViewTextBoxColumn, completedDataGridViewCheckBoxColumn, completeDateDataGridViewTextBoxColumn });
-            requestsTable.Cursor = Cursors.Hand;
-            requestsTable.DataSource = requestBindingSource;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            dataGridViewCellStyle3.ForeColor = SystemColors.ControlDarkDark;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.ControlLight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            requestsTable.DefaultCellStyle = dataGridViewCellStyle3;
-            requestsTable.Dock = DockStyle.Fill;
-            requestsTable.EditMode = DataGridViewEditMode.EditProgrammatically;
-            requestsTable.EnableHeadersVisualStyles = false;
-            requestsTable.GridColor = SystemColors.ControlDark;
-            requestsTable.Location = new Point(20, 86);
-            requestsTable.Margin = new Padding(0);
-            requestsTable.MultiSelect = false;
-            requestsTable.Name = "requestsTable";
-            requestsTable.ReadOnly = true;
-            requestsTable.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = SystemColors.Control;
-            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            requestsTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            requestsTable.RowHeadersVisible = false;
-            requestsTable.RowHeadersWidth = 23;
-            requestsTable.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            requestsTable.RowTemplate.Height = 32;
-            requestsTable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            requestsTable.Size = new Size(920, 242);
-            requestsTable.TabIndex = 5;
-            // 
             // requestIdDataGridViewTextBoxColumn
             // 
+            requestIdDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             requestIdDataGridViewTextBoxColumn.DataPropertyName = "RequestId";
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = SystemColors.Window;
@@ -717,10 +730,21 @@ namespace App
             requestIdDataGridViewTextBoxColumn.Name = "requestIdDataGridViewTextBoxColumn";
             requestIdDataGridViewTextBoxColumn.ReadOnly = true;
             requestIdDataGridViewTextBoxColumn.ToolTipText = "Идентификатор заявки";
+            requestIdDataGridViewTextBoxColumn.Width = 72;
+            // 
+            // employeeIdDataGridViewTextBoxColumn
+            // 
+            employeeIdDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            employeeIdDataGridViewTextBoxColumn.DataPropertyName = "Employee";
+            employeeIdDataGridViewTextBoxColumn.HeaderText = "Менеджер";
+            employeeIdDataGridViewTextBoxColumn.Name = "employeeIdDataGridViewTextBoxColumn";
+            employeeIdDataGridViewTextBoxColumn.ReadOnly = true;
+            employeeIdDataGridViewTextBoxColumn.ToolTipText = "Работник, принявший заявку";
             // 
             // ownerIdDataGridViewTextBoxColumn
             // 
-            ownerIdDataGridViewTextBoxColumn.DataPropertyName = "OwnerId";
+            ownerIdDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ownerIdDataGridViewTextBoxColumn.DataPropertyName = "Owner";
             ownerIdDataGridViewTextBoxColumn.HeaderText = "Владелец";
             ownerIdDataGridViewTextBoxColumn.Name = "ownerIdDataGridViewTextBoxColumn";
             ownerIdDataGridViewTextBoxColumn.ReadOnly = true;
@@ -728,51 +752,58 @@ namespace App
             // 
             // carIdDataGridViewTextBoxColumn
             // 
-            carIdDataGridViewTextBoxColumn.DataPropertyName = "CarId";
+            carIdDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            carIdDataGridViewTextBoxColumn.DataPropertyName = "Car";
             carIdDataGridViewTextBoxColumn.HeaderText = "Автомобиль";
             carIdDataGridViewTextBoxColumn.Name = "carIdDataGridViewTextBoxColumn";
             carIdDataGridViewTextBoxColumn.ReadOnly = true;
             carIdDataGridViewTextBoxColumn.ToolTipText = "Ремонтируемый автомобиль";
             // 
-            // employeeIdDataGridViewTextBoxColumn
-            // 
-            employeeIdDataGridViewTextBoxColumn.DataPropertyName = "EmployeeId";
-            employeeIdDataGridViewTextBoxColumn.HeaderText = "Менеджер";
-            employeeIdDataGridViewTextBoxColumn.Name = "employeeIdDataGridViewTextBoxColumn";
-            employeeIdDataGridViewTextBoxColumn.ReadOnly = true;
-            employeeIdDataGridViewTextBoxColumn.ToolTipText = "Работник, принявший заявку";
-            // 
             // requestDateDataGridViewTextBoxColumn
             // 
+            requestDateDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             requestDateDataGridViewTextBoxColumn.DataPropertyName = "RequestDate";
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            requestDateDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
             requestDateDataGridViewTextBoxColumn.HeaderText = "Дата поступления";
             requestDateDataGridViewTextBoxColumn.Name = "requestDateDataGridViewTextBoxColumn";
             requestDateDataGridViewTextBoxColumn.ReadOnly = true;
             requestDateDataGridViewTextBoxColumn.ToolTipText = "Дата обращения на сервис";
+            requestDateDataGridViewTextBoxColumn.Width = 143;
             // 
             // startDateDataGridViewTextBoxColumn
             // 
+            startDateDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             startDateDataGridViewTextBoxColumn.DataPropertyName = "StartDate";
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            startDateDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
             startDateDataGridViewTextBoxColumn.HeaderText = "Дата начала";
             startDateDataGridViewTextBoxColumn.Name = "startDateDataGridViewTextBoxColumn";
             startDateDataGridViewTextBoxColumn.ReadOnly = true;
             startDateDataGridViewTextBoxColumn.ToolTipText = "Дата начала ремонтных работ";
+            startDateDataGridViewTextBoxColumn.Width = 114;
             // 
             // completedDataGridViewCheckBoxColumn
             // 
+            completedDataGridViewCheckBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             completedDataGridViewCheckBoxColumn.DataPropertyName = "Completed";
             completedDataGridViewCheckBoxColumn.HeaderText = "Завершено";
             completedDataGridViewCheckBoxColumn.Name = "completedDataGridViewCheckBoxColumn";
             completedDataGridViewCheckBoxColumn.ReadOnly = true;
             completedDataGridViewCheckBoxColumn.ToolTipText = "Статус работы";
+            completedDataGridViewCheckBoxColumn.Width = 99;
             // 
             // completeDateDataGridViewTextBoxColumn
             // 
+            completeDateDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             completeDateDataGridViewTextBoxColumn.DataPropertyName = "CompleteDate";
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            completeDateDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
             completeDateDataGridViewTextBoxColumn.HeaderText = "Дата завершения";
             completeDateDataGridViewTextBoxColumn.Name = "completeDateDataGridViewTextBoxColumn";
             completeDateDataGridViewTextBoxColumn.ReadOnly = true;
             completeDateDataGridViewTextBoxColumn.ToolTipText = "Дата завершения ремонтных работ";
+            completeDateDataGridViewTextBoxColumn.Width = 139;
             // 
             // RequestsForm
             // 
@@ -793,6 +824,8 @@ namespace App
             Load += RequestsForm_Load;
             formLayoutPanel.ResumeLayout(false);
             formLayoutPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)requestsTable).EndInit();
+            ((System.ComponentModel.ISupportInitialize)requestBindingSource).EndInit();
             controlsLayoutPanel.ResumeLayout(false);
             controlsLayoutPanel.PerformLayout();
             inputsLayoutPanel.ResumeLayout(false);
@@ -811,13 +844,11 @@ namespace App
             startDateLayoutPanel.ResumeLayout(false);
             postDateLayoutPanel.ResumeLayout(false);
             buttonsLayoutPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)requestBindingSource).EndInit();
             menuLayoutPanel.ResumeLayout(false);
             menuLayoutPanel.PerformLayout();
             dbLayoutPanel.ResumeLayout(false);
             dbLayoutPanel.PerformLayout();
             redirectLayoutPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)requestsTable).EndInit();
             ResumeLayout(false);
         }
 
@@ -849,7 +880,6 @@ namespace App
         private FlowLayoutPanel buttonsLayoutPanel;
         private Button acceptButton;
         private Button resetButton;
-        private Button toOrdersButton;
         private CheckBox completedCheckBox;
         private BindingSource requestBindingSource;
         private BindingSource ownerBindingSource;
@@ -858,16 +888,17 @@ namespace App
         private TableLayoutPanel menuLayoutPanel;
         private FlowLayoutPanel dbLayoutPanel;
         private Button addButton;
-        private Button editButton;
+        private Button openButton;
         private Button deleteButton;
         private FlowLayoutPanel redirectLayoutPanel;
         private Button homeButton;
         private Button returnButton;
         private DataGridView requestsTable;
+        private Button editButton;
         private DataGridViewTextBoxColumn requestIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn employeeIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn ownerIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn carIdDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn employeeIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn requestDateDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn startDateDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn completedDataGridViewCheckBoxColumn;

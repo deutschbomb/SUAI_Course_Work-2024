@@ -54,7 +54,7 @@ namespace App
             priceLayoutPanel = new FlowLayoutPanel();
             priceLabel = new Label();
             priceInput = new NumericUpDown();
-            clientLayoutPanel = new FlowLayoutPanel();
+            ownerLayoutPanel = new FlowLayoutPanel();
             surnameNumberLayoutPanel = new FlowLayoutPanel();
             surnameLabel = new Label();
             surnameInput = new TextBox();
@@ -74,6 +74,7 @@ namespace App
             addressLabel = new Label();
             addressInput = new TextBox();
             buttonsLayoutPanel = new FlowLayoutPanel();
+            editButton = new Button();
             acceptButton = new Button();
             resetButton = new Button();
             menuLayoutPanel = new TableLayoutPanel();
@@ -83,7 +84,7 @@ namespace App
             carsPicker = new ComboBox();
             carBindingSource = new BindingSource(components);
             addButton = new Button();
-            editButton = new Button();
+            openButton = new Button();
             deleteButton = new Button();
             redirectLayoutPanel = new FlowLayoutPanel();
             homeButton = new Button();
@@ -101,7 +102,7 @@ namespace App
             ((System.ComponentModel.ISupportInitialize)yearInput).BeginInit();
             priceLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)priceInput).BeginInit();
-            clientLayoutPanel.SuspendLayout();
+            ownerLayoutPanel.SuspendLayout();
             surnameNumberLayoutPanel.SuspendLayout();
             nameLayoutPanel.SuspendLayout();
             patronymicLayoutPanel.SuspendLayout();
@@ -184,7 +185,7 @@ namespace App
             inputsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
             inputsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             inputsLayoutPanel.Controls.Add(carLayoutPanel, 2, 0);
-            inputsLayoutPanel.Controls.Add(clientLayoutPanel, 0, 0);
+            inputsLayoutPanel.Controls.Add(ownerLayoutPanel, 0, 0);
             inputsLayoutPanel.Location = new Point(0, 41);
             inputsLayoutPanel.Margin = new Padding(0);
             inputsLayoutPanel.Name = "inputsLayoutPanel";
@@ -359,7 +360,7 @@ namespace App
             licenseInput.Margin = new Padding(0);
             licenseInput.MaxLength = 6;
             licenseInput.Name = "licenseInput";
-            licenseInput.PlaceholderText = "A000AA";
+            licenseInput.PlaceholderText = "A 000 AA";
             licenseInput.Size = new Size(375, 26);
             licenseInput.TabIndex = 1;
             licenseInput.Enter += licenseInputeInput_Enter;
@@ -441,21 +442,21 @@ namespace App
             priceInput.TabIndex = 2;
             priceInput.ThousandsSeparator = true;
             // 
-            // clientLayoutPanel
+            // ownerLayoutPanel
             // 
-            clientLayoutPanel.AutoSize = true;
-            clientLayoutPanel.Controls.Add(surnameNumberLayoutPanel);
-            clientLayoutPanel.Controls.Add(nameLayoutPanel);
-            clientLayoutPanel.Controls.Add(patronymicLayoutPanel);
-            clientLayoutPanel.Controls.Add(passportLayoutPanel);
-            clientLayoutPanel.Controls.Add(telephoneLayoutPanel);
-            clientLayoutPanel.Controls.Add(addressLayoutPanel);
-            clientLayoutPanel.FlowDirection = FlowDirection.TopDown;
-            clientLayoutPanel.Location = new Point(0, 0);
-            clientLayoutPanel.Margin = new Padding(0);
-            clientLayoutPanel.Name = "clientLayoutPanel";
-            clientLayoutPanel.Size = new Size(375, 366);
-            clientLayoutPanel.TabIndex = 0;
+            ownerLayoutPanel.AutoSize = true;
+            ownerLayoutPanel.Controls.Add(surnameNumberLayoutPanel);
+            ownerLayoutPanel.Controls.Add(nameLayoutPanel);
+            ownerLayoutPanel.Controls.Add(patronymicLayoutPanel);
+            ownerLayoutPanel.Controls.Add(passportLayoutPanel);
+            ownerLayoutPanel.Controls.Add(telephoneLayoutPanel);
+            ownerLayoutPanel.Controls.Add(addressLayoutPanel);
+            ownerLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            ownerLayoutPanel.Location = new Point(0, 0);
+            ownerLayoutPanel.Margin = new Padding(0);
+            ownerLayoutPanel.Name = "ownerLayoutPanel";
+            ownerLayoutPanel.Size = new Size(375, 366);
+            ownerLayoutPanel.TabIndex = 0;
             // 
             // surnameNumberLayoutPanel
             // 
@@ -693,23 +694,42 @@ namespace App
             // 
             buttonsLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             buttonsLayoutPanel.AutoSize = true;
+            buttonsLayoutPanel.Controls.Add(editButton);
             buttonsLayoutPanel.Controls.Add(acceptButton);
             buttonsLayoutPanel.Controls.Add(resetButton);
             buttonsLayoutPanel.FlowDirection = FlowDirection.TopDown;
-            buttonsLayoutPanel.Location = new Point(770, 169);
+            buttonsLayoutPanel.Location = new Point(770, 144);
             buttonsLayoutPanel.Margin = new Padding(0);
             buttonsLayoutPanel.Name = "buttonsLayoutPanel";
-            buttonsLayoutPanel.Size = new Size(150, 110);
+            buttonsLayoutPanel.Size = new Size(150, 160);
             buttonsLayoutPanel.TabIndex = 2;
+            // 
+            // editButton
+            // 
+            editButton.BackColor = SystemColors.MenuHighlight;
+            editButton.Dock = DockStyle.Fill;
+            editButton.FlatStyle = FlatStyle.Flat;
+            editButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            editButton.ForeColor = SystemColors.ButtonFace;
+            editButton.Location = new Point(0, 0);
+            editButton.Margin = new Padding(0);
+            editButton.Name = "editButton";
+            editButton.Size = new Size(150, 50);
+            editButton.TabIndex = 6;
+            editButton.Text = "Изменить";
+            editButton.UseVisualStyleBackColor = false;
+            editButton.Visible = false;
+            editButton.Click += editButton_Click;
             // 
             // acceptButton
             // 
             acceptButton.BackColor = SystemColors.MenuHighlight;
+            acceptButton.Dock = DockStyle.Fill;
             acceptButton.FlatStyle = FlatStyle.Flat;
             acceptButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             acceptButton.ForeColor = SystemColors.ButtonFace;
-            acceptButton.Location = new Point(0, 0);
-            acceptButton.Margin = new Padding(0, 0, 0, 10);
+            acceptButton.Location = new Point(0, 50);
+            acceptButton.Margin = new Padding(0);
             acceptButton.Name = "acceptButton";
             acceptButton.Size = new Size(150, 50);
             acceptButton.TabIndex = 6;
@@ -719,13 +739,14 @@ namespace App
             // 
             // resetButton
             // 
+            resetButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             resetButton.BackColor = SystemColors.ScrollBar;
             resetButton.FlatAppearance.BorderSize = 0;
             resetButton.FlatStyle = FlatStyle.Flat;
             resetButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             resetButton.ForeColor = SystemColors.ControlText;
-            resetButton.Location = new Point(0, 60);
-            resetButton.Margin = new Padding(0);
+            resetButton.Location = new Point(0, 110);
+            resetButton.Margin = new Padding(0, 10, 0, 0);
             resetButton.Name = "resetButton";
             resetButton.Size = new Size(150, 50);
             resetButton.TabIndex = 7;
@@ -759,8 +780,9 @@ namespace App
             dbLayoutPanel.Controls.Add(ownersPicker);
             dbLayoutPanel.Controls.Add(carsPicker);
             dbLayoutPanel.Controls.Add(addButton);
-            dbLayoutPanel.Controls.Add(editButton);
+            dbLayoutPanel.Controls.Add(openButton);
             dbLayoutPanel.Controls.Add(deleteButton);
+            dbLayoutPanel.Enabled = false;
             dbLayoutPanel.Location = new Point(120, 0);
             dbLayoutPanel.Margin = new Padding(0);
             dbLayoutPanel.Name = "dbLayoutPanel";
@@ -772,7 +794,8 @@ namespace App
             ownersPicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             ownersPicker.BackColor = Color.White;
             ownersPicker.DataSource = ownerBindingSource;
-            ownersPicker.DisplayMember = "OwnerSurname";
+            ownersPicker.DisplayMember = "GetOwner";
+            ownersPicker.DropDownStyle = ComboBoxStyle.DropDownList;
             ownersPicker.FlatStyle = FlatStyle.System;
             ownersPicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             ownersPicker.FormattingEnabled = true;
@@ -793,7 +816,8 @@ namespace App
             carsPicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             carsPicker.BackColor = Color.White;
             carsPicker.DataSource = carBindingSource;
-            carsPicker.DisplayMember = "LicensePlate";
+            carsPicker.DisplayMember = "GetCar";
+            carsPicker.DropDownStyle = ComboBoxStyle.DropDownList;
             carsPicker.FlatStyle = FlatStyle.System;
             carsPicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             carsPicker.FormattingEnabled = true;
@@ -826,22 +850,22 @@ namespace App
             addButton.UseVisualStyleBackColor = false;
             addButton.Click += addButton_Click;
             // 
-            // editButton
+            // openButton
             // 
-            editButton.AutoSize = true;
-            editButton.BackColor = SystemColors.MenuHighlight;
-            editButton.Dock = DockStyle.Left;
-            editButton.FlatStyle = FlatStyle.Flat;
-            editButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            editButton.ForeColor = SystemColors.ButtonFace;
-            editButton.Location = new Point(494, 0);
-            editButton.Margin = new Padding(20, 0, 20, 0);
-            editButton.Name = "editButton";
-            editButton.Size = new Size(140, 50);
-            editButton.TabIndex = 2;
-            editButton.Text = "Изменить";
-            editButton.UseVisualStyleBackColor = false;
-            editButton.Click += editButton_Click;
+            openButton.AutoSize = true;
+            openButton.BackColor = SystemColors.MenuHighlight;
+            openButton.Dock = DockStyle.Left;
+            openButton.FlatStyle = FlatStyle.Flat;
+            openButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            openButton.ForeColor = SystemColors.ButtonFace;
+            openButton.Location = new Point(494, 0);
+            openButton.Margin = new Padding(20, 0, 20, 0);
+            openButton.Name = "openButton";
+            openButton.Size = new Size(140, 50);
+            openButton.TabIndex = 2;
+            openButton.Text = "Просмотр";
+            openButton.UseVisualStyleBackColor = false;
+            openButton.Click += openButton_Click;
             // 
             // deleteButton
             // 
@@ -943,8 +967,8 @@ namespace App
             ((System.ComponentModel.ISupportInitialize)yearInput).EndInit();
             priceLayoutPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)priceInput).EndInit();
-            clientLayoutPanel.ResumeLayout(false);
-            clientLayoutPanel.PerformLayout();
+            ownerLayoutPanel.ResumeLayout(false);
+            ownerLayoutPanel.PerformLayout();
             surnameNumberLayoutPanel.ResumeLayout(false);
             surnameNumberLayoutPanel.PerformLayout();
             nameLayoutPanel.ResumeLayout(false);
@@ -996,7 +1020,7 @@ namespace App
         private FlowLayoutPanel priceLayoutPanel;
         private Label priceLabel;
         private NumericUpDown priceInput;
-        private FlowLayoutPanel clientLayoutPanel;
+        private FlowLayoutPanel ownerLayoutPanel;
         private FlowLayoutPanel surnameNumberLayoutPanel;
         private Label surnameLabel;
         private TextBox surnameInput;
@@ -1015,11 +1039,10 @@ namespace App
         private FlowLayoutPanel addressLayoutPanel;
         private Label addressLabel;
         private TextBox addressInput;
-        private BindingSource ownerBindingSource;
         private TableLayoutPanel menuLayoutPanel;
         private FlowLayoutPanel dbLayoutPanel;
         private Button addButton;
-        private Button editButton;
+        private Button openButton;
         private Button deleteButton;
         private ComboBox ownersPicker;
         private ComboBox carsPicker;
@@ -1028,5 +1051,7 @@ namespace App
         private Button returnButton;
         private BindingSource carBindingSource;
         private NumericUpDown yearInput;
+        private BindingSource ownerBindingSource;
+        private Button editButton;
     }
 }

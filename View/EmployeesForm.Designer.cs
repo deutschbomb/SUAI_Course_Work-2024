@@ -658,7 +658,7 @@ namespace App
             employeesPicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             employeesPicker.BackColor = Color.White;
             employeesPicker.DataSource = employeeBindingSource;
-            employeesPicker.DisplayMember = "EmployeeFullName";
+            employeesPicker.DisplayMember = "GetEmployee";
             employeesPicker.DropDownStyle = ComboBoxStyle.DropDownList;
             employeesPicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             employeesPicker.FormattingEnabled = true;

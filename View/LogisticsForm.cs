@@ -1,6 +1,5 @@
 
 using EntityFramework.Exceptions.Common;
-using Microsoft.EntityFrameworkCore;
 
 namespace App
 {
@@ -10,15 +9,15 @@ namespace App
         MainForm home;
         Form previous;
 
-        private void InitializeData(Presenter Presenter, MainForm home)
+        public void InitializeData(Presenter? presenter = null, MainForm? home = null)
         {
-            this.Presenter = Presenter;
+            this.Presenter = presenter;
             this.home = home;
             this.previous = this.home;
             this.Presenter.ContextLoad();
 
             this.Presenter.SuppliesTableLoad();
-            this.Presenter.db.Employees.Where(e => e.SpecialtyId == 3).Load();
+            this.Presenter.EmployeesBySpecialtyLoad(3);
             this.Presenter.SuppliersTableLoad();
 
             this.Presenter.PartsTableLoad();
@@ -36,7 +35,6 @@ namespace App
         {
             InitializeComponent();
             InitializeData(Presenter, home);
-            this.previous = this.home;
         }
 
         public LogisticsForm(ref Presenter Presenter, MainForm home, StorageForm prev)
@@ -132,7 +130,7 @@ namespace App
             this.suppliersPicker.SelectedValue = supply.SupplierId;
 
             this.partsPicker.DataSource = supply.Parts;
-            this.partsPicker.DisplayMember = "PartInfo";
+            this.partsPicker.DisplayMember = "GetPart";
             this.partsPicker.ValueMember = "PartId";
 
             int index2 = (int)this.partsPicker.SelectedValue;
@@ -195,10 +193,6 @@ namespace App
                 this.Presenter.SuppliesAdd(supply);
                 this.Presenter.PositionsAdd(position);
                 this.Presenter.ContextSaveChanges();
-
-                this.supplyBindingSource.DataSource = this.Presenter.SuppliesTableToList();
-
-                MessageBox.Show("«апись о поставке успешно добавлена в базу данных!");
             }
             catch (Exception ex) when (ex is CannotInsertNullException || ex is ReferenceConstraintException)
             {
@@ -210,8 +204,12 @@ namespace App
                     ErrorDialog(ex.InnerException.Message, "ќб€зательное поле не заполнено!");
                 if (ex is ReferenceConstraintException)
                     ErrorDialog(ex.InnerException.Message, "«начение указано неверно!");
+                return;
             }
 
+            this.supplyBindingSource.DataSource = this.Presenter.SuppliesTableToList();
+
+            MessageBox.Show("«апись о поставке успешно добавлена в базу данных!");
             this.Controls_toDefault();
         }
 
@@ -241,11 +239,8 @@ namespace App
             try
             {
                 this.Presenter.SuppliesEntry(supply);
+                this.Presenter.PositionsEntry(position);
                 this.Presenter.ContextSaveChanges();
-
-                this.supplyBindingSource.DataSource = this.Presenter.StoragePartsTableToList();
-
-                MessageBox.Show("«апись о поставке успешно изменена в базе данных!");
             }
             catch (Exception ex) when (ex is CannotInsertNullException || ex is ReferenceConstraintException)
             {
@@ -257,7 +252,13 @@ namespace App
                     ErrorDialog(ex.InnerException.Message, "ќб€зательное поле не заполнено!");
                 if (ex is ReferenceConstraintException)
                     ErrorDialog(ex.InnerException.Message, "«начение указано неверно!");
+                return;
             }
+
+            this.supplyBindingSource.DataSource = this.Presenter.SuppliesTableToList();
+
+            MessageBox.Show("«апись о поставке успешно изменена в базе данных!");
+            this.Return();
         }
 
         private void resetButton_Click(object sender, EventArgs e)
@@ -271,9 +272,9 @@ namespace App
         private void suppliersPicker_SelectionChangeCommitted(object sender, EventArgs e)
         {
             int index = (int)this.suppliersPicker.SelectedValue;
-            this.partsPicker.DataSource = this.Presenter.NomenclatureFind(index);
+            this.partsPicker.DataSource = this.Presenter.NomenclatureToList(index);
 
-            this.partsPicker.DisplayMember = "PartInfo";
+            this.partsPicker.DisplayMember = "GetPart";
             this.partsPicker.ValueMember = "PartId";
 
             this.partsPicker.SelectedIndex = -1;

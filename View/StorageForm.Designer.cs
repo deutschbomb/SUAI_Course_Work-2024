@@ -225,8 +225,8 @@ namespace App
             buttonsLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             buttonsLayoutPanel.AutoScroll = true;
             buttonsLayoutPanel.AutoSize = true;
-            buttonsLayoutPanel.Controls.Add(acceptButton);
             buttonsLayoutPanel.Controls.Add(editButton);
+            buttonsLayoutPanel.Controls.Add(acceptButton);
             buttonsLayoutPanel.Controls.Add(resetButton);
             buttonsLayoutPanel.FlowDirection = FlowDirection.TopDown;
             buttonsLayoutPanel.Location = new Point(770, 15);
@@ -242,7 +242,7 @@ namespace App
             acceptButton.FlatStyle = FlatStyle.Flat;
             acceptButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             acceptButton.ForeColor = SystemColors.ButtonFace;
-            acceptButton.Location = new Point(0, 0);
+            acceptButton.Location = new Point(0, 50);
             acceptButton.Margin = new Padding(0);
             acceptButton.Name = "acceptButton";
             acceptButton.Size = new Size(150, 50);
@@ -258,7 +258,7 @@ namespace App
             editButton.FlatStyle = FlatStyle.Flat;
             editButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             editButton.ForeColor = SystemColors.ButtonFace;
-            editButton.Location = new Point(0, 50);
+            editButton.Location = new Point(0, 0);
             editButton.Margin = new Padding(0);
             editButton.Name = "editButton";
             editButton.Size = new Size(150, 50);
