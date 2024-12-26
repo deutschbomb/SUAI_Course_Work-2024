@@ -1,4 +1,7 @@
 ﻿
+using System.Reflection.Metadata.Ecma335;
+using System.Windows.Forms.VisualStyles;
+
 namespace App
 {
     // Класс должности
@@ -34,6 +37,16 @@ namespace App
         public string? EmployeeTelephone { get; set; }
         public DateTime? DateOfEmployment { get; set; }
 
+        public string EmployeeFullName
+        {
+            get
+            {
+                return this.EmployeeSurname + " "
+                        + this.EmployeeName + " "
+                        + this.EmployeePatronymic;
+            }
+        }
+
         // Навигационные свойства
         public virtual List<Request> Requests { get; set; } // заявки на ремонт
         public virtual List<Supply> Supplies { get; set; } // поставки, оформляемые кладовщиком
@@ -43,6 +56,11 @@ namespace App
         public virtual List<Part> Parts { get; set; } // установленные запчасти
         public virtual List<Work> Works { get; set; } // проводимые работы
         public virtual List<Order> Orders { get; set; } // заказ-наряд
+
+        public override string ToString()
+        {
+            return EmployeeFullName;
+        }
 
         public Employee()
         {

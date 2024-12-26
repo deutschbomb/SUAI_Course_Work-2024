@@ -1,4 +1,6 @@
 ﻿
+using System.Windows.Forms.VisualStyles;
+
 namespace App
 {
     partial class StorageForm
@@ -30,6 +32,8 @@ namespace App
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             formLayoutPanel = new TableLayoutPanel();
             controlsLayoutPanel = new TableLayoutPanel();
             longLayoutPanel2 = new FlowLayoutPanel();
@@ -41,6 +45,7 @@ namespace App
             nameInput = new TextBox();
             buttonsLayoutPanel = new FlowLayoutPanel();
             acceptButton = new Button();
+            editButton = new Button();
             resetButton = new Button();
             shortLayoutPanel = new FlowLayoutPanel();
             balanceLayoutPanel = new FlowLayoutPanel();
@@ -51,13 +56,14 @@ namespace App
             priceInput = new NumericUpDown();
             storageTable = new DataGridView();
             partIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            Balance = new DataGridViewTextBoxColumn();
-            PartPrice = new DataGridViewTextBoxColumn();
+            partDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            balanceDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            partPriceDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             accountingBindingSource = new BindingSource(components);
             menuLayoutPanel = new TableLayoutPanel();
             dbLayoutPanel = new FlowLayoutPanel();
             addButton = new Button();
-            editButton = new Button();
+            openButton = new Button();
             deleteButton = new Button();
             redirectLayoutPanel = new FlowLayoutPanel();
             homeButton = new Button();
@@ -220,29 +226,47 @@ namespace App
             buttonsLayoutPanel.AutoScroll = true;
             buttonsLayoutPanel.AutoSize = true;
             buttonsLayoutPanel.Controls.Add(acceptButton);
+            buttonsLayoutPanel.Controls.Add(editButton);
             buttonsLayoutPanel.Controls.Add(resetButton);
             buttonsLayoutPanel.FlowDirection = FlowDirection.TopDown;
-            buttonsLayoutPanel.Location = new Point(770, 40);
+            buttonsLayoutPanel.Location = new Point(770, 15);
             buttonsLayoutPanel.Margin = new Padding(0);
             buttonsLayoutPanel.Name = "buttonsLayoutPanel";
-            buttonsLayoutPanel.Size = new Size(150, 110);
+            buttonsLayoutPanel.Size = new Size(150, 160);
             buttonsLayoutPanel.TabIndex = 8;
             // 
             // acceptButton
             // 
-            acceptButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            acceptButton.BackColor = SystemColors.MenuHighlight;
+            acceptButton.BackColor = SystemColors.Highlight;
+            acceptButton.Dock = DockStyle.Fill;
             acceptButton.FlatStyle = FlatStyle.Flat;
             acceptButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             acceptButton.ForeColor = SystemColors.ButtonFace;
             acceptButton.Location = new Point(0, 0);
-            acceptButton.Margin = new Padding(0, 0, 0, 5);
+            acceptButton.Margin = new Padding(0);
             acceptButton.Name = "acceptButton";
             acceptButton.Size = new Size(150, 50);
             acceptButton.TabIndex = 2;
             acceptButton.Text = "Принять";
             acceptButton.UseVisualStyleBackColor = false;
             acceptButton.Click += acceptButton_Click;
+            // 
+            // editButton
+            // 
+            editButton.BackColor = SystemColors.Highlight;
+            editButton.Dock = DockStyle.Fill;
+            editButton.FlatStyle = FlatStyle.Flat;
+            editButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            editButton.ForeColor = SystemColors.ButtonFace;
+            editButton.Location = new Point(0, 50);
+            editButton.Margin = new Padding(0);
+            editButton.Name = "editButton";
+            editButton.Size = new Size(150, 50);
+            editButton.TabIndex = 2;
+            editButton.Text = "Изменить";
+            editButton.UseVisualStyleBackColor = false;
+            editButton.Visible = false;
+            editButton.Click += editButton_Click;
             // 
             // resetButton
             // 
@@ -252,12 +276,12 @@ namespace App
             resetButton.FlatStyle = FlatStyle.Flat;
             resetButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             resetButton.ForeColor = SystemColors.ControlText;
-            resetButton.Location = new Point(0, 60);
-            resetButton.Margin = new Padding(0, 5, 0, 0);
+            resetButton.Location = new Point(0, 110);
+            resetButton.Margin = new Padding(0, 10, 0, 0);
             resetButton.Name = "resetButton";
             resetButton.Size = new Size(150, 50);
             resetButton.TabIndex = 3;
-            resetButton.Text = "Отменить";
+            resetButton.Text = "Сбросить";
             resetButton.UseVisualStyleBackColor = false;
             resetButton.Click += resetButton_Click;
             // 
@@ -361,36 +385,86 @@ namespace App
             storageTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             storageTable.BackgroundColor = Color.White;
             storageTable.BorderStyle = BorderStyle.None;
+            storageTable.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            storageTable.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.White;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Pixel);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlDarkDark;
+            dataGridViewCellStyle1.Padding = new Padding(12, 7, 12, 6);
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.ControlLight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            storageTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             storageTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            storageTable.Columns.AddRange(new DataGridViewColumn[] { partIdDataGridViewTextBoxColumn, Balance, PartPrice });
+            storageTable.Columns.AddRange(new DataGridViewColumn[] { partIdDataGridViewTextBoxColumn, partDataGridViewTextBoxColumn, balanceDataGridViewTextBoxColumn, partPriceDataGridViewTextBoxColumn });
             storageTable.Cursor = Cursors.Hand;
             storageTable.DataSource = accountingBindingSource;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.White;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlDarkDark;
+            dataGridViewCellStyle2.Padding = new Padding(12, 0, 12, 0);
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.ControlLight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            storageTable.DefaultCellStyle = dataGridViewCellStyle2;
             storageTable.Dock = DockStyle.Fill;
             storageTable.EditMode = DataGridViewEditMode.EditProgrammatically;
+            storageTable.EnableHeadersVisualStyles = false;
             storageTable.GridColor = SystemColors.ControlDark;
             storageTable.Location = new Point(20, 80);
             storageTable.Margin = new Padding(0);
+            storageTable.MultiSelect = false;
             storageTable.Name = "storageTable";
+            storageTable.ReadOnly = true;
+            storageTable.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            storageTable.RowHeadersVisible = false;
+            storageTable.RowHeadersWidth = 23;
+            storageTable.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            storageTable.RowTemplate.Height = 32;
+            storageTable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             storageTable.Size = new Size(920, 242);
             storageTable.TabIndex = 2;
             // 
             // partIdDataGridViewTextBoxColumn
             // 
+            partIdDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             partIdDataGridViewTextBoxColumn.DataPropertyName = "PartId";
-            partIdDataGridViewTextBoxColumn.HeaderText = "PartId";
+            partIdDataGridViewTextBoxColumn.HeaderText = "ИД";
             partIdDataGridViewTextBoxColumn.Name = "partIdDataGridViewTextBoxColumn";
+            partIdDataGridViewTextBoxColumn.ReadOnly = true;
+            partIdDataGridViewTextBoxColumn.ToolTipText = "Идентификатор запчасти в таблице";
+            partIdDataGridViewTextBoxColumn.Width = 72;
             // 
-            // Balance
+            // partDataGridViewTextBoxColumn
             // 
-            Balance.DataPropertyName = "Balance";
-            Balance.HeaderText = "Balance";
-            Balance.Name = "Balance";
+            partDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            partDataGridViewTextBoxColumn.DataPropertyName = "Part";
+            partDataGridViewTextBoxColumn.HeaderText = "Наименование";
+            partDataGridViewTextBoxColumn.Name = "partDataGridViewTextBoxColumn";
+            partDataGridViewTextBoxColumn.ReadOnly = true;
+            partDataGridViewTextBoxColumn.ToolTipText = "Название запчасти";
             // 
-            // PartPrice
+            // balanceDataGridViewTextBoxColumn
             // 
-            PartPrice.DataPropertyName = "PartPrice";
-            PartPrice.HeaderText = "PartPrice";
-            PartPrice.Name = "PartPrice";
+            balanceDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            balanceDataGridViewTextBoxColumn.DataPropertyName = "Balance";
+            balanceDataGridViewTextBoxColumn.HeaderText = "Остаток, шт.";
+            balanceDataGridViewTextBoxColumn.Name = "balanceDataGridViewTextBoxColumn";
+            balanceDataGridViewTextBoxColumn.ReadOnly = true;
+            balanceDataGridViewTextBoxColumn.ToolTipText = "Остаток запчастей на складе";
+            balanceDataGridViewTextBoxColumn.Width = 124;
+            // 
+            // partPriceDataGridViewTextBoxColumn
+            // 
+            partPriceDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            partPriceDataGridViewTextBoxColumn.DataPropertyName = "PartPrice";
+            partPriceDataGridViewTextBoxColumn.HeaderText = "Цена, руб.";
+            partPriceDataGridViewTextBoxColumn.Name = "partPriceDataGridViewTextBoxColumn";
+            partPriceDataGridViewTextBoxColumn.ReadOnly = true;
+            partPriceDataGridViewTextBoxColumn.ToolTipText = "Цена запчасти за один экземпляр";
+            partPriceDataGridViewTextBoxColumn.Width = 112;
             // 
             // accountingBindingSource
             // 
@@ -417,9 +491,10 @@ namespace App
             // 
             dbLayoutPanel.AutoSize = true;
             dbLayoutPanel.Controls.Add(addButton);
-            dbLayoutPanel.Controls.Add(editButton);
+            dbLayoutPanel.Controls.Add(openButton);
             dbLayoutPanel.Controls.Add(deleteButton);
             dbLayoutPanel.Dock = DockStyle.Fill;
+            dbLayoutPanel.Enabled = false;
             dbLayoutPanel.Location = new Point(120, 0);
             dbLayoutPanel.Margin = new Padding(0);
             dbLayoutPanel.Name = "dbLayoutPanel";
@@ -429,7 +504,7 @@ namespace App
             // addButton
             // 
             addButton.AutoSize = true;
-            addButton.BackColor = SystemColors.MenuHighlight;
+            addButton.BackColor = SystemColors.Highlight;
             addButton.Dock = DockStyle.Left;
             addButton.FlatStyle = FlatStyle.Flat;
             addButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -443,27 +518,27 @@ namespace App
             addButton.UseVisualStyleBackColor = false;
             addButton.Click += addButton_Click;
             // 
-            // editButton
+            // openButton
             // 
-            editButton.AutoSize = true;
-            editButton.BackColor = SystemColors.MenuHighlight;
-            editButton.Dock = DockStyle.Left;
-            editButton.FlatStyle = FlatStyle.Flat;
-            editButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            editButton.ForeColor = SystemColors.ButtonFace;
-            editButton.Location = new Point(273, 0);
-            editButton.Margin = new Padding(20, 0, 20, 0);
-            editButton.Name = "editButton";
-            editButton.Size = new Size(253, 50);
-            editButton.TabIndex = 2;
-            editButton.Text = "Изменить";
-            editButton.UseVisualStyleBackColor = false;
-            editButton.Click += editButton_Click;
+            openButton.AutoSize = true;
+            openButton.BackColor = SystemColors.Highlight;
+            openButton.Dock = DockStyle.Left;
+            openButton.FlatStyle = FlatStyle.Flat;
+            openButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            openButton.ForeColor = SystemColors.ButtonFace;
+            openButton.Location = new Point(273, 0);
+            openButton.Margin = new Padding(20, 0, 20, 0);
+            openButton.Name = "openButton";
+            openButton.Size = new Size(253, 50);
+            openButton.TabIndex = 2;
+            openButton.Text = "Просмотр";
+            openButton.UseVisualStyleBackColor = false;
+            openButton.Click += openButton_Click;
             // 
             // deleteButton
             // 
             deleteButton.AutoSize = true;
-            deleteButton.BackColor = SystemColors.MenuHighlight;
+            deleteButton.BackColor = SystemColors.Highlight;
             deleteButton.Dock = DockStyle.Left;
             deleteButton.FlatStyle = FlatStyle.Flat;
             deleteButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -531,6 +606,7 @@ namespace App
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.White;
             ClientSize = new Size(960, 540);
             Controls.Add(formLayoutPanel);
@@ -593,16 +669,18 @@ namespace App
         private TextBox nameInput;
         private BindingSource accountingBindingSource;
         private BindingSource partBindingSource;
-        private DataGridViewTextBoxColumn partIdDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn Balance;
-        private DataGridViewTextBoxColumn PartPrice;
         private TableLayoutPanel menuLayoutPanel;
         private FlowLayoutPanel dbLayoutPanel;
         private Button addButton;
-        private Button editButton;
+        private Button openButton;
         private Button deleteButton;
         private FlowLayoutPanel redirectLayoutPanel;
         private Button homeButton;
         private Button returnButton;
+        private DataGridViewTextBoxColumn partIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn partDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn balanceDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn partPriceDataGridViewTextBoxColumn;
+        private Button editButton;
     }
 }

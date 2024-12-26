@@ -30,13 +30,11 @@ namespace App
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             formLayoutPanel = new TableLayoutPanel();
-            menuLayoutPanel = new FlowLayoutPanel();
-            homeButton = new Button();
-            returnButton = new Button();
-            addButton = new Button();
-            editButton = new Button();
-            deleteButton = new Button();
             controlsLayoutPanel = new TableLayoutPanel();
             inputsLayoutPanel = new TableLayoutPanel();
             pickersLayoutPanel = new TableLayoutPanel();
@@ -50,24 +48,34 @@ namespace App
             ownerBindingSource = new BindingSource(components);
             employeeLayoutPanel = new FlowLayoutPanel();
             employeeLabel = new Label();
-            employeePicker = new ComboBox();
+            employeesPicker = new ComboBox();
             employeeBindingSource = new BindingSource(components);
             datesLayoutPanel = new TableLayoutPanel();
-            endDateLayoutPanel = new FlowLayoutPanel();
-            endDateLabel = new Label();
-            endDatePicker = new DateTimePicker();
+            completeDateLayoutPanel = new FlowLayoutPanel();
+            completeDateLabel = new Label();
+            completeDatePicker = new DateTimePicker();
             startDateLayoutPanel = new FlowLayoutPanel();
             startDateLabel = new Label();
             startDatePicker = new DateTimePicker();
             postDateLayoutPanel = new FlowLayoutPanel();
             postDateLabel = new Label();
             postDatePicker = new DateTimePicker();
-            endedCheckBox = new CheckBox();
+            completedCheckBox = new CheckBox();
             buttonsLayoutPanel = new FlowLayoutPanel();
             acceptButton = new Button();
             resetButton = new Button();
             toOrdersButton = new Button();
+            requestBindingSource = new BindingSource(components);
+            menuLayoutPanel = new TableLayoutPanel();
+            dbLayoutPanel = new FlowLayoutPanel();
+            addButton = new Button();
+            editButton = new Button();
+            deleteButton = new Button();
+            redirectLayoutPanel = new FlowLayoutPanel();
+            homeButton = new Button();
+            returnButton = new Button();
             requestsTable = new DataGridView();
+            requestIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             ownerIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             carIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             employeeIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -75,9 +83,7 @@ namespace App
             startDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             completedDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
             completeDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            requestBindingSource = new BindingSource(components);
             formLayoutPanel.SuspendLayout();
-            menuLayoutPanel.SuspendLayout();
             controlsLayoutPanel.SuspendLayout();
             inputsLayoutPanel.SuspendLayout();
             pickersLayoutPanel.SuspendLayout();
@@ -88,12 +94,15 @@ namespace App
             employeeLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)employeeBindingSource).BeginInit();
             datesLayoutPanel.SuspendLayout();
-            endDateLayoutPanel.SuspendLayout();
+            completeDateLayoutPanel.SuspendLayout();
             startDateLayoutPanel.SuspendLayout();
             postDateLayoutPanel.SuspendLayout();
             buttonsLayoutPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)requestsTable).BeginInit();
             ((System.ComponentModel.ISupportInitialize)requestBindingSource).BeginInit();
+            menuLayoutPanel.SuspendLayout();
+            dbLayoutPanel.SuspendLayout();
+            redirectLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)requestsTable).BeginInit();
             SuspendLayout();
             // 
             // formLayoutPanel
@@ -101,9 +110,9 @@ namespace App
             formLayoutPanel.BackColor = Color.Transparent;
             formLayoutPanel.ColumnCount = 1;
             formLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            formLayoutPanel.Controls.Add(menuLayoutPanel, 0, 0);
-            formLayoutPanel.Controls.Add(controlsLayoutPanel, 0, 4);
             formLayoutPanel.Controls.Add(requestsTable, 0, 2);
+            formLayoutPanel.Controls.Add(controlsLayoutPanel, 0, 4);
+            formLayoutPanel.Controls.Add(menuLayoutPanel, 0, 0);
             formLayoutPanel.Dock = DockStyle.Fill;
             formLayoutPanel.Location = new Point(0, 0);
             formLayoutPanel.Margin = new Padding(0);
@@ -118,106 +127,6 @@ namespace App
             formLayoutPanel.Size = new Size(960, 540);
             formLayoutPanel.TabIndex = 3;
             // 
-            // menuLayoutPanel
-            // 
-            menuLayoutPanel.AutoSize = true;
-            menuLayoutPanel.Controls.Add(homeButton);
-            menuLayoutPanel.Controls.Add(returnButton);
-            menuLayoutPanel.Controls.Add(addButton);
-            menuLayoutPanel.Controls.Add(editButton);
-            menuLayoutPanel.Controls.Add(deleteButton);
-            menuLayoutPanel.Dock = DockStyle.Fill;
-            menuLayoutPanel.Location = new Point(20, 10);
-            menuLayoutPanel.Margin = new Padding(0);
-            menuLayoutPanel.Name = "menuLayoutPanel";
-            menuLayoutPanel.Size = new Size(920, 50);
-            menuLayoutPanel.TabIndex = 0;
-            // 
-            // homeButton
-            // 
-            homeButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            homeButton.BackColor = Color.Transparent;
-            homeButton.FlatAppearance.BorderSize = 0;
-            homeButton.FlatStyle = FlatStyle.Flat;
-            homeButton.Font = new Font("Segoe MDL2 Assets", 18F, FontStyle.Regular, GraphicsUnit.Pixel);
-            homeButton.ForeColor = SystemColors.WindowFrame;
-            homeButton.Location = new Point(0, 5);
-            homeButton.Margin = new Padding(0, 0, 10, 0);
-            homeButton.Name = "homeButton";
-            homeButton.Size = new Size(40, 40);
-            homeButton.TabIndex = 4;
-            homeButton.Text = "";
-            homeButton.UseVisualStyleBackColor = false;
-            homeButton.Click += homeButton_Click;
-            // 
-            // returnButton
-            // 
-            returnButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            returnButton.BackColor = Color.Transparent;
-            returnButton.FlatAppearance.BorderSize = 0;
-            returnButton.FlatStyle = FlatStyle.Flat;
-            returnButton.Font = new Font("Segoe MDL2 Assets", 18F, FontStyle.Regular, GraphicsUnit.Pixel);
-            returnButton.ForeColor = SystemColors.WindowFrame;
-            returnButton.Location = new Point(60, 5);
-            returnButton.Margin = new Padding(10, 0, 10, 0);
-            returnButton.Name = "returnButton";
-            returnButton.Size = new Size(40, 40);
-            returnButton.TabIndex = 5;
-            returnButton.Text = "";
-            returnButton.UseVisualStyleBackColor = false;
-            returnButton.Click += returnButton_Click;
-            // 
-            // addButton
-            // 
-            addButton.AutoSize = true;
-            addButton.BackColor = SystemColors.MenuHighlight;
-            addButton.Dock = DockStyle.Left;
-            addButton.FlatStyle = FlatStyle.Flat;
-            addButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            addButton.ForeColor = SystemColors.ButtonFace;
-            addButton.Location = new Point(120, 0);
-            addButton.Margin = new Padding(10, 0, 10, 0);
-            addButton.Name = "addButton";
-            addButton.Size = new Size(253, 50);
-            addButton.TabIndex = 1;
-            addButton.Text = "Добавить";
-            addButton.UseVisualStyleBackColor = false;
-            addButton.Click += addButton_Click;
-            // 
-            // editButton
-            // 
-            editButton.AutoSize = true;
-            editButton.BackColor = SystemColors.MenuHighlight;
-            editButton.Dock = DockStyle.Left;
-            editButton.FlatStyle = FlatStyle.Flat;
-            editButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            editButton.ForeColor = SystemColors.ButtonFace;
-            editButton.Location = new Point(393, 0);
-            editButton.Margin = new Padding(10, 0, 10, 0);
-            editButton.Name = "editButton";
-            editButton.Size = new Size(253, 50);
-            editButton.TabIndex = 2;
-            editButton.Text = "Изменить";
-            editButton.UseVisualStyleBackColor = false;
-            editButton.Click += editButton_Click;
-            // 
-            // deleteButton
-            // 
-            deleteButton.AutoSize = true;
-            deleteButton.BackColor = SystemColors.MenuHighlight;
-            deleteButton.Dock = DockStyle.Left;
-            deleteButton.FlatStyle = FlatStyle.Flat;
-            deleteButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            deleteButton.ForeColor = SystemColors.ButtonFace;
-            deleteButton.Location = new Point(666, 0);
-            deleteButton.Margin = new Padding(10, 0, 0, 0);
-            deleteButton.Name = "deleteButton";
-            deleteButton.Size = new Size(253, 50);
-            deleteButton.TabIndex = 3;
-            deleteButton.Text = "Удалить";
-            deleteButton.UseVisualStyleBackColor = false;
-            deleteButton.Click += deleteButton_Click;
-            // 
             // controlsLayoutPanel
             // 
             controlsLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
@@ -227,7 +136,7 @@ namespace App
             controlsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F));
             controlsLayoutPanel.Controls.Add(inputsLayoutPanel, 0, 0);
             controlsLayoutPanel.Controls.Add(buttonsLayoutPanel, 2, 0);
-            controlsLayoutPanel.Location = new Point(20, 340);
+            controlsLayoutPanel.Location = new Point(20, 348);
             controlsLayoutPanel.Margin = new Padding(0);
             controlsLayoutPanel.Name = "controlsLayoutPanel";
             controlsLayoutPanel.RowCount = 1;
@@ -368,7 +277,7 @@ namespace App
             employeeLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             employeeLayoutPanel.AutoSize = true;
             employeeLayoutPanel.Controls.Add(employeeLabel);
-            employeeLayoutPanel.Controls.Add(employeePicker);
+            employeeLayoutPanel.Controls.Add(employeesPicker);
             employeeLayoutPanel.FlowDirection = FlowDirection.TopDown;
             employeeLayoutPanel.Location = new Point(0, 0);
             employeeLayoutPanel.Margin = new Padding(0);
@@ -387,22 +296,22 @@ namespace App
             employeeLabel.TabIndex = 0;
             employeeLabel.Text = "Заявку принял";
             // 
-            // employeePicker
+            // employeesPicker
             // 
-            employeePicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            employeePicker.BackColor = Color.White;
-            employeePicker.DataSource = employeeBindingSource;
-            employeePicker.DisplayMember = "EmployeePassportNumber";
-            employeePicker.DropDownStyle = ComboBoxStyle.DropDownList;
-            employeePicker.FlatStyle = FlatStyle.System;
-            employeePicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            employeePicker.FormattingEnabled = true;
-            employeePicker.Location = new Point(0, 30);
-            employeePicker.Margin = new Padding(0);
-            employeePicker.Name = "employeePicker";
-            employeePicker.Size = new Size(245, 27);
-            employeePicker.TabIndex = 1;
-            employeePicker.ValueMember = "EmployeeId";
+            employeesPicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            employeesPicker.BackColor = Color.White;
+            employeesPicker.DataSource = employeeBindingSource;
+            employeesPicker.DisplayMember = "EmployeeSurname";
+            employeesPicker.DropDownStyle = ComboBoxStyle.DropDownList;
+            employeesPicker.FlatStyle = FlatStyle.System;
+            employeesPicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            employeesPicker.FormattingEnabled = true;
+            employeesPicker.Location = new Point(0, 30);
+            employeesPicker.Margin = new Padding(0);
+            employeesPicker.Name = "employeesPicker";
+            employeesPicker.Size = new Size(245, 27);
+            employeesPicker.TabIndex = 1;
+            employeesPicker.ValueMember = "EmployeeId";
             // 
             // employeeBindingSource
             // 
@@ -415,10 +324,10 @@ namespace App
             datesLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             datesLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
             datesLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            datesLayoutPanel.Controls.Add(endDateLayoutPanel, 2, 1);
+            datesLayoutPanel.Controls.Add(completeDateLayoutPanel, 2, 1);
             datesLayoutPanel.Controls.Add(startDateLayoutPanel, 0, 1);
             datesLayoutPanel.Controls.Add(postDateLayoutPanel, 0, 0);
-            datesLayoutPanel.Controls.Add(endedCheckBox, 2, 0);
+            datesLayoutPanel.Controls.Add(completedCheckBox, 2, 0);
             datesLayoutPanel.Location = new Point(0, 62);
             datesLayoutPanel.Margin = new Padding(0);
             datesLayoutPanel.Name = "datesLayoutPanel";
@@ -428,39 +337,39 @@ namespace App
             datesLayoutPanel.Size = new Size(760, 122);
             datesLayoutPanel.TabIndex = 1;
             // 
-            // endDateLayoutPanel
+            // completeDateLayoutPanel
             // 
-            endDateLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            endDateLayoutPanel.AutoSize = true;
-            endDateLayoutPanel.Controls.Add(endDateLabel);
-            endDateLayoutPanel.Controls.Add(endDatePicker);
-            endDateLayoutPanel.FlowDirection = FlowDirection.TopDown;
-            endDateLayoutPanel.Location = new Point(385, 61);
-            endDateLayoutPanel.Margin = new Padding(0);
-            endDateLayoutPanel.Name = "endDateLayoutPanel";
-            endDateLayoutPanel.Padding = new Padding(0, 5, 0, 5);
-            endDateLayoutPanel.Size = new Size(375, 61);
-            endDateLayoutPanel.TabIndex = 8;
+            completeDateLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            completeDateLayoutPanel.AutoSize = true;
+            completeDateLayoutPanel.Controls.Add(completeDateLabel);
+            completeDateLayoutPanel.Controls.Add(completeDatePicker);
+            completeDateLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            completeDateLayoutPanel.Location = new Point(385, 61);
+            completeDateLayoutPanel.Margin = new Padding(0);
+            completeDateLayoutPanel.Name = "completeDateLayoutPanel";
+            completeDateLayoutPanel.Padding = new Padding(0, 5, 0, 5);
+            completeDateLayoutPanel.Size = new Size(375, 61);
+            completeDateLayoutPanel.TabIndex = 8;
             // 
-            // endDateLabel
+            // completeDateLabel
             // 
-            endDateLabel.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            endDateLabel.Location = new Point(0, 5);
-            endDateLabel.Margin = new Padding(0);
-            endDateLabel.Name = "endDateLabel";
-            endDateLabel.Size = new Size(372, 25);
-            endDateLabel.TabIndex = 0;
-            endDateLabel.Text = "Дата завершения работы";
+            completeDateLabel.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            completeDateLabel.Location = new Point(0, 5);
+            completeDateLabel.Margin = new Padding(0);
+            completeDateLabel.Name = "completeDateLabel";
+            completeDateLabel.Size = new Size(372, 25);
+            completeDateLabel.TabIndex = 0;
+            completeDateLabel.Text = "Дата завершения работы";
             // 
-            // endDatePicker
+            // completeDatePicker
             // 
-            endDatePicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            endDatePicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            endDatePicker.Location = new Point(0, 30);
-            endDatePicker.Margin = new Padding(0);
-            endDatePicker.Name = "endDatePicker";
-            endDatePicker.Size = new Size(372, 26);
-            endDatePicker.TabIndex = 1;
+            completeDatePicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            completeDatePicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            completeDatePicker.Location = new Point(0, 30);
+            completeDatePicker.Margin = new Padding(0);
+            completeDatePicker.Name = "completeDatePicker";
+            completeDatePicker.Size = new Size(372, 26);
+            completeDatePicker.TabIndex = 1;
             // 
             // startDateLayoutPanel
             // 
@@ -530,20 +439,20 @@ namespace App
             postDatePicker.Size = new Size(372, 26);
             postDatePicker.TabIndex = 1;
             // 
-            // endedCheckBox
+            // completedCheckBox
             // 
-            endedCheckBox.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            endedCheckBox.AutoSize = true;
-            endedCheckBox.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            endedCheckBox.ImageAlign = ContentAlignment.MiddleRight;
-            endedCheckBox.Location = new Point(385, 28);
-            endedCheckBox.Margin = new Padding(0);
-            endedCheckBox.Name = "endedCheckBox";
-            endedCheckBox.Padding = new Padding(0, 5, 0, 5);
-            endedCheckBox.Size = new Size(375, 33);
-            endedCheckBox.TabIndex = 9;
-            endedCheckBox.Text = "Завершено";
-            endedCheckBox.UseVisualStyleBackColor = true;
+            completedCheckBox.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            completedCheckBox.AutoSize = true;
+            completedCheckBox.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            completedCheckBox.ImageAlign = ContentAlignment.MiddleRight;
+            completedCheckBox.Location = new Point(385, 28);
+            completedCheckBox.Margin = new Padding(0);
+            completedCheckBox.Name = "completedCheckBox";
+            completedCheckBox.Padding = new Padding(0, 5, 0, 5);
+            completedCheckBox.Size = new Size(375, 33);
+            completedCheckBox.TabIndex = 9;
+            completedCheckBox.Text = "Завершено";
+            completedCheckBox.UseVisualStyleBackColor = true;
             // 
             // buttonsLayoutPanel
             // 
@@ -561,7 +470,7 @@ namespace App
             // 
             // acceptButton
             // 
-            acceptButton.BackColor = SystemColors.MenuHighlight;
+            acceptButton.BackColor = SystemColors.Highlight;
             acceptButton.FlatStyle = FlatStyle.Flat;
             acceptButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             acceptButton.ForeColor = SystemColors.ButtonFace;
@@ -586,7 +495,7 @@ namespace App
             resetButton.Name = "resetButton";
             resetButton.Size = new Size(150, 50);
             resetButton.TabIndex = 7;
-            resetButton.Text = "Сбросить";
+            resetButton.Text = "Отменить";
             resetButton.UseVisualStyleBackColor = false;
             resetButton.Click += resetButton_Click;
             // 
@@ -601,9 +510,140 @@ namespace App
             toOrdersButton.Name = "toOrdersButton";
             toOrdersButton.Size = new Size(150, 50);
             toOrdersButton.TabIndex = 6;
-            toOrdersButton.Text = "Заказ-наряд";
+            toOrdersButton.Text = "К заказ-наряду";
             toOrdersButton.UseVisualStyleBackColor = false;
             toOrdersButton.Click += toOrdersButton_Click;
+            // 
+            // requestBindingSource
+            // 
+            requestBindingSource.DataSource = typeof(Request);
+            // 
+            // menuLayoutPanel
+            // 
+            menuLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            menuLayoutPanel.AutoSize = true;
+            menuLayoutPanel.ColumnCount = 3;
+            menuLayoutPanel.ColumnStyles.Add(new ColumnStyle());
+            menuLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            menuLayoutPanel.ColumnStyles.Add(new ColumnStyle());
+            menuLayoutPanel.Controls.Add(dbLayoutPanel, 2, 0);
+            menuLayoutPanel.Controls.Add(redirectLayoutPanel, 0, 0);
+            menuLayoutPanel.Location = new Point(23, 13);
+            menuLayoutPanel.Name = "menuLayoutPanel";
+            menuLayoutPanel.RowCount = 1;
+            menuLayoutPanel.RowStyles.Add(new RowStyle());
+            menuLayoutPanel.Size = new Size(914, 50);
+            menuLayoutPanel.TabIndex = 3;
+            // 
+            // dbLayoutPanel
+            // 
+            dbLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            dbLayoutPanel.AutoSize = true;
+            dbLayoutPanel.Controls.Add(addButton);
+            dbLayoutPanel.Controls.Add(editButton);
+            dbLayoutPanel.Controls.Add(deleteButton);
+            dbLayoutPanel.Location = new Point(120, 0);
+            dbLayoutPanel.Margin = new Padding(0);
+            dbLayoutPanel.Name = "dbLayoutPanel";
+            dbLayoutPanel.Size = new Size(794, 50);
+            dbLayoutPanel.TabIndex = 3;
+            // 
+            // addButton
+            // 
+            addButton.AutoSize = true;
+            addButton.BackColor = SystemColors.Highlight;
+            addButton.Dock = DockStyle.Left;
+            addButton.FlatStyle = FlatStyle.Flat;
+            addButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            addButton.ForeColor = SystemColors.ButtonFace;
+            addButton.Location = new Point(0, 0);
+            addButton.Margin = new Padding(0);
+            addButton.Name = "addButton";
+            addButton.Size = new Size(251, 50);
+            addButton.TabIndex = 1;
+            addButton.Text = "Добавить";
+            addButton.UseVisualStyleBackColor = false;
+            addButton.Click += addButton_Click;
+            // 
+            // editButton
+            // 
+            editButton.AutoSize = true;
+            editButton.BackColor = SystemColors.Highlight;
+            editButton.Dock = DockStyle.Left;
+            editButton.FlatStyle = FlatStyle.Flat;
+            editButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            editButton.ForeColor = SystemColors.ButtonFace;
+            editButton.Location = new Point(271, 0);
+            editButton.Margin = new Padding(20, 0, 20, 0);
+            editButton.Name = "editButton";
+            editButton.Size = new Size(251, 50);
+            editButton.TabIndex = 2;
+            editButton.Text = "Изменить";
+            editButton.UseVisualStyleBackColor = false;
+            editButton.Click += openButton_Click;
+            // 
+            // deleteButton
+            // 
+            deleteButton.AutoSize = true;
+            deleteButton.BackColor = SystemColors.Highlight;
+            deleteButton.Dock = DockStyle.Left;
+            deleteButton.FlatStyle = FlatStyle.Flat;
+            deleteButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            deleteButton.ForeColor = SystemColors.ButtonFace;
+            deleteButton.Location = new Point(542, 0);
+            deleteButton.Margin = new Padding(0);
+            deleteButton.Name = "deleteButton";
+            deleteButton.Size = new Size(251, 50);
+            deleteButton.TabIndex = 3;
+            deleteButton.Text = "Удалить";
+            deleteButton.UseVisualStyleBackColor = false;
+            deleteButton.Click += deleteButton_Click;
+            // 
+            // redirectLayoutPanel
+            // 
+            redirectLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            redirectLayoutPanel.AutoSize = true;
+            redirectLayoutPanel.Controls.Add(homeButton);
+            redirectLayoutPanel.Controls.Add(returnButton);
+            redirectLayoutPanel.Location = new Point(0, 5);
+            redirectLayoutPanel.Margin = new Padding(0);
+            redirectLayoutPanel.Name = "redirectLayoutPanel";
+            redirectLayoutPanel.Size = new Size(100, 40);
+            redirectLayoutPanel.TabIndex = 1;
+            // 
+            // homeButton
+            // 
+            homeButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            homeButton.BackColor = Color.Transparent;
+            homeButton.FlatAppearance.BorderSize = 0;
+            homeButton.FlatStyle = FlatStyle.Flat;
+            homeButton.Font = new Font("Segoe MDL2 Assets", 18F, FontStyle.Regular, GraphicsUnit.Pixel);
+            homeButton.ForeColor = SystemColors.WindowFrame;
+            homeButton.Location = new Point(0, 0);
+            homeButton.Margin = new Padding(0, 0, 10, 0);
+            homeButton.Name = "homeButton";
+            homeButton.Size = new Size(40, 40);
+            homeButton.TabIndex = 4;
+            homeButton.Text = "";
+            homeButton.UseVisualStyleBackColor = false;
+            homeButton.Click += homeButton_Click;
+            // 
+            // returnButton
+            // 
+            returnButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            returnButton.BackColor = Color.Transparent;
+            returnButton.FlatAppearance.BorderSize = 0;
+            returnButton.FlatStyle = FlatStyle.Flat;
+            returnButton.Font = new Font("Segoe MDL2 Assets", 18F, FontStyle.Regular, GraphicsUnit.Pixel);
+            returnButton.ForeColor = SystemColors.WindowFrame;
+            returnButton.Location = new Point(60, 0);
+            returnButton.Margin = new Padding(10, 0, 0, 0);
+            returnButton.Name = "returnButton";
+            returnButton.Size = new Size(40, 40);
+            returnButton.TabIndex = 5;
+            returnButton.Text = "";
+            returnButton.UseVisualStyleBackColor = false;
+            returnButton.Click += returnButton_Click;
             // 
             // requestsTable
             // 
@@ -615,69 +655,130 @@ namespace App
             requestsTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             requestsTable.BackgroundColor = Color.White;
             requestsTable.BorderStyle = BorderStyle.None;
+            requestsTable.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            requestsTable.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.White;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Pixel);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlDarkDark;
+            dataGridViewCellStyle1.Padding = new Padding(0, 7, 0, 7);
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.ControlLight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            requestsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             requestsTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            requestsTable.Columns.AddRange(new DataGridViewColumn[] { ownerIdDataGridViewTextBoxColumn, carIdDataGridViewTextBoxColumn, employeeIdDataGridViewTextBoxColumn, requestDateDataGridViewTextBoxColumn, startDateDataGridViewTextBoxColumn, completedDataGridViewCheckBoxColumn, completeDateDataGridViewTextBoxColumn });
+            requestsTable.Columns.AddRange(new DataGridViewColumn[] { requestIdDataGridViewTextBoxColumn, ownerIdDataGridViewTextBoxColumn, carIdDataGridViewTextBoxColumn, employeeIdDataGridViewTextBoxColumn, requestDateDataGridViewTextBoxColumn, startDateDataGridViewTextBoxColumn, completedDataGridViewCheckBoxColumn, completeDateDataGridViewTextBoxColumn });
             requestsTable.Cursor = Cursors.Hand;
             requestsTable.DataSource = requestBindingSource;
-            requestsTable.Dock = DockStyle.Top;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            dataGridViewCellStyle3.ForeColor = SystemColors.ControlDarkDark;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.ControlLight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            requestsTable.DefaultCellStyle = dataGridViewCellStyle3;
+            requestsTable.Dock = DockStyle.Fill;
             requestsTable.EditMode = DataGridViewEditMode.EditProgrammatically;
+            requestsTable.EnableHeadersVisualStyles = false;
             requestsTable.GridColor = SystemColors.ControlDark;
-            requestsTable.Location = new Point(20, 80);
+            requestsTable.Location = new Point(20, 86);
             requestsTable.Margin = new Padding(0);
+            requestsTable.MultiSelect = false;
             requestsTable.Name = "requestsTable";
-            requestsTable.Size = new Size(920, 240);
-            requestsTable.TabIndex = 2;
+            requestsTable.ReadOnly = true;
+            requestsTable.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Control;
+            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            requestsTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            requestsTable.RowHeadersVisible = false;
+            requestsTable.RowHeadersWidth = 23;
+            requestsTable.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            requestsTable.RowTemplate.Height = 32;
+            requestsTable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            requestsTable.Size = new Size(920, 242);
+            requestsTable.TabIndex = 5;
+            // 
+            // requestIdDataGridViewTextBoxColumn
+            // 
+            requestIdDataGridViewTextBoxColumn.DataPropertyName = "RequestId";
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.ControlLight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            requestIdDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            requestIdDataGridViewTextBoxColumn.HeaderText = "ИД";
+            requestIdDataGridViewTextBoxColumn.Name = "requestIdDataGridViewTextBoxColumn";
+            requestIdDataGridViewTextBoxColumn.ReadOnly = true;
+            requestIdDataGridViewTextBoxColumn.ToolTipText = "Идентификатор заявки";
             // 
             // ownerIdDataGridViewTextBoxColumn
             // 
             ownerIdDataGridViewTextBoxColumn.DataPropertyName = "OwnerId";
-            ownerIdDataGridViewTextBoxColumn.HeaderText = "OwnerId";
+            ownerIdDataGridViewTextBoxColumn.HeaderText = "Владелец";
             ownerIdDataGridViewTextBoxColumn.Name = "ownerIdDataGridViewTextBoxColumn";
+            ownerIdDataGridViewTextBoxColumn.ReadOnly = true;
+            ownerIdDataGridViewTextBoxColumn.ToolTipText = "Владелец автомобиля";
             // 
             // carIdDataGridViewTextBoxColumn
             // 
             carIdDataGridViewTextBoxColumn.DataPropertyName = "CarId";
-            carIdDataGridViewTextBoxColumn.HeaderText = "CarId";
+            carIdDataGridViewTextBoxColumn.HeaderText = "Автомобиль";
             carIdDataGridViewTextBoxColumn.Name = "carIdDataGridViewTextBoxColumn";
+            carIdDataGridViewTextBoxColumn.ReadOnly = true;
+            carIdDataGridViewTextBoxColumn.ToolTipText = "Ремонтируемый автомобиль";
             // 
             // employeeIdDataGridViewTextBoxColumn
             // 
             employeeIdDataGridViewTextBoxColumn.DataPropertyName = "EmployeeId";
-            employeeIdDataGridViewTextBoxColumn.HeaderText = "EmployeeId";
+            employeeIdDataGridViewTextBoxColumn.HeaderText = "Менеджер";
             employeeIdDataGridViewTextBoxColumn.Name = "employeeIdDataGridViewTextBoxColumn";
+            employeeIdDataGridViewTextBoxColumn.ReadOnly = true;
+            employeeIdDataGridViewTextBoxColumn.ToolTipText = "Работник, принявший заявку";
             // 
             // requestDateDataGridViewTextBoxColumn
             // 
             requestDateDataGridViewTextBoxColumn.DataPropertyName = "RequestDate";
-            requestDateDataGridViewTextBoxColumn.HeaderText = "RequestDate";
+            requestDateDataGridViewTextBoxColumn.HeaderText = "Дата поступления";
             requestDateDataGridViewTextBoxColumn.Name = "requestDateDataGridViewTextBoxColumn";
+            requestDateDataGridViewTextBoxColumn.ReadOnly = true;
+            requestDateDataGridViewTextBoxColumn.ToolTipText = "Дата обращения на сервис";
             // 
             // startDateDataGridViewTextBoxColumn
             // 
             startDateDataGridViewTextBoxColumn.DataPropertyName = "StartDate";
-            startDateDataGridViewTextBoxColumn.HeaderText = "StartDate";
+            startDateDataGridViewTextBoxColumn.HeaderText = "Дата начала";
             startDateDataGridViewTextBoxColumn.Name = "startDateDataGridViewTextBoxColumn";
+            startDateDataGridViewTextBoxColumn.ReadOnly = true;
+            startDateDataGridViewTextBoxColumn.ToolTipText = "Дата начала ремонтных работ";
             // 
             // completedDataGridViewCheckBoxColumn
             // 
             completedDataGridViewCheckBoxColumn.DataPropertyName = "Completed";
-            completedDataGridViewCheckBoxColumn.HeaderText = "Completed";
+            completedDataGridViewCheckBoxColumn.HeaderText = "Завершено";
             completedDataGridViewCheckBoxColumn.Name = "completedDataGridViewCheckBoxColumn";
+            completedDataGridViewCheckBoxColumn.ReadOnly = true;
+            completedDataGridViewCheckBoxColumn.ToolTipText = "Статус работы";
             // 
             // completeDateDataGridViewTextBoxColumn
             // 
             completeDateDataGridViewTextBoxColumn.DataPropertyName = "CompleteDate";
-            completeDateDataGridViewTextBoxColumn.HeaderText = "CompleteDate";
+            completeDateDataGridViewTextBoxColumn.HeaderText = "Дата завершения";
             completeDateDataGridViewTextBoxColumn.Name = "completeDateDataGridViewTextBoxColumn";
-            // 
-            // requestBindingSource
-            // 
-            requestBindingSource.DataSource = typeof(Request);
+            completeDateDataGridViewTextBoxColumn.ReadOnly = true;
+            completeDateDataGridViewTextBoxColumn.ToolTipText = "Дата завершения ремонтных работ";
             // 
             // RequestsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.White;
             ClientSize = new Size(960, 540);
             Controls.Add(formLayoutPanel);
@@ -689,10 +790,9 @@ namespace App
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Информационная система: заявки на ремонт";
             FormClosed += RequestsForm_FormClosed;
+            Load += RequestsForm_Load;
             formLayoutPanel.ResumeLayout(false);
             formLayoutPanel.PerformLayout();
-            menuLayoutPanel.ResumeLayout(false);
-            menuLayoutPanel.PerformLayout();
             controlsLayoutPanel.ResumeLayout(false);
             controlsLayoutPanel.PerformLayout();
             inputsLayoutPanel.ResumeLayout(false);
@@ -707,24 +807,23 @@ namespace App
             ((System.ComponentModel.ISupportInitialize)employeeBindingSource).EndInit();
             datesLayoutPanel.ResumeLayout(false);
             datesLayoutPanel.PerformLayout();
-            endDateLayoutPanel.ResumeLayout(false);
+            completeDateLayoutPanel.ResumeLayout(false);
             startDateLayoutPanel.ResumeLayout(false);
             postDateLayoutPanel.ResumeLayout(false);
             buttonsLayoutPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)requestsTable).EndInit();
             ((System.ComponentModel.ISupportInitialize)requestBindingSource).EndInit();
+            menuLayoutPanel.ResumeLayout(false);
+            menuLayoutPanel.PerformLayout();
+            dbLayoutPanel.ResumeLayout(false);
+            dbLayoutPanel.PerformLayout();
+            redirectLayoutPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)requestsTable).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private TableLayoutPanel formLayoutPanel;
-        private FlowLayoutPanel menuLayoutPanel;
-        private Button homeButton;
-        private Button returnButton;
-        private Button addButton;
-        private Button editButton;
-        private Button deleteButton;
         private TableLayoutPanel controlsLayoutPanel;
         private TableLayoutPanel inputsLayoutPanel;
         private TableLayoutPanel pickersLayoutPanel;
@@ -736,34 +835,42 @@ namespace App
         private ComboBox ownersPicker;
         private FlowLayoutPanel employeeLayoutPanel;
         private Label employeeLabel;
-        private ComboBox employeePicker;
+        private ComboBox employeesPicker;
         private TableLayoutPanel datesLayoutPanel;
-        private FlowLayoutPanel endDateLayoutPanel;
-        private Label endDateLabel;
-        private DateTimePicker endDatePicker;
+        private FlowLayoutPanel completeDateLayoutPanel;
+        private Label completeDateLabel;
+        private DateTimePicker completeDatePicker;
         private FlowLayoutPanel startDateLayoutPanel;
         private Label startDateLabel;
         private DateTimePicker startDatePicker;
         private FlowLayoutPanel postDateLayoutPanel;
         private Label postDateLabel;
         private DateTimePicker postDatePicker;
-        private DataGridView requestsTable;
         private FlowLayoutPanel buttonsLayoutPanel;
         private Button acceptButton;
         private Button resetButton;
         private Button toOrdersButton;
-        private CheckBox endedCheckBox;
+        private CheckBox completedCheckBox;
         private BindingSource requestBindingSource;
+        private BindingSource ownerBindingSource;
+        private BindingSource employeeBindingSource;
+        private BindingSource carBindingSource;
+        private TableLayoutPanel menuLayoutPanel;
+        private FlowLayoutPanel dbLayoutPanel;
+        private Button addButton;
+        private Button editButton;
+        private Button deleteButton;
+        private FlowLayoutPanel redirectLayoutPanel;
+        private Button homeButton;
+        private Button returnButton;
+        private DataGridView requestsTable;
+        private DataGridViewTextBoxColumn requestIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn ownerIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn carIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn employeeIdDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn employeeDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn requestDateDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn startDateDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn completedDataGridViewCheckBoxColumn;
         private DataGridViewTextBoxColumn completeDateDataGridViewTextBoxColumn;
-        private BindingSource ownerBindingSource;
-        private BindingSource employeeBindingSource;
-        private BindingSource carBindingSource;
     }
 }

@@ -15,6 +15,22 @@ namespace App
         /// </summary>
         public virtual List<Part> Parts { get; set; } // поставляемые запчасти
 
+        public string SupplierInfo
+        {
+            get {
+                if (this.SupplierName is not null)
+                    return this.TaxpayerIdentificationNumber + " - " + this.SupplierName;
+                else return this.ToString();
+            }
+        }
+
+        public override string ToString()
+        {
+            if (this.TaxpayerIdentificationNumber is not null)
+                return this.TaxpayerIdentificationNumber;
+            else return base.ToString();
+        }
+
         public Supplier()
         {
             this.Supplies = new List<Supply>();

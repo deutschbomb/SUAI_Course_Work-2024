@@ -2,11 +2,12 @@
 using EntityFramework.Exceptions.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
+using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace App
 {
-    public partial class ClientsForm : Form, IView, IViewPages
+    public partial class ClientsForm : Form, IView, IViewDefault, IViewDefaultClients, IViewControls
     {
         private bool ADD_OWNER_FLAG;
         private bool EDIT_OWNER_FLAG;
@@ -21,8 +22,6 @@ namespace App
         {
             InitializeComponent();
             this.Presenter = Presenter;
-            this.Presenter.db = new Context();
-            this.Presenter.db.Database.EnsureCreated();
             this.home = home;
 
             this.Presenter.db.Owners.Load();
@@ -50,10 +49,9 @@ namespace App
                 MessageBoxIcon.Error);
         }
 
-        public void Controls_toDefault()
+        public void clientControls_toDefault()
         {
             this.ownersPicker.SelectedIndex = -1;
-            this.carsPicker.SelectedIndex = -1;
 
             this.nameInput.Text =
                 this.surnameInput.Text =
@@ -61,6 +59,11 @@ namespace App
                 this.passportInput.Text =
                 this.addressInput.Text =
                 this.telephoneInput.Text = null;
+        }
+
+        public void carControls_toDefault()
+        {
+            this.carsPicker.SelectedIndex = -1;
 
             this.brandInput.Text =
                 this.modelInput.Text =
@@ -71,7 +74,13 @@ namespace App
             this.priceInput.Value = 0;
         }
 
-        public void Reset()
+        public void Controls_toDefault()
+        {
+            clientControls_toDefault();
+            carControls_toDefault();
+        }
+
+        public void Return()
         {
             this.Controls_toDefault();
 
@@ -80,9 +89,9 @@ namespace App
                 this.ADD_CAR_FLAG =
                 this.EDIT_CAR_FLAG = false;
 
-            this.leftLayoutPanel.Enabled = this.rightLayoutPanel.Enabled = false;
+            this. controlsLayoutPanel.Enabled = 
+                this.clientLayoutPanel.Enabled = this.carLayoutPanel.Enabled = false;
             this.dbLayoutPanel.Enabled = true;
-            this.clientsLayoutPanel.Enabled = true;
         }
 
         private void homeButton_Click(object sender, EventArgs e)
@@ -97,7 +106,8 @@ namespace App
 
         private void ClientsForm_Load(object sender, EventArgs e)
         {
-            this.leftLayoutPanel.Enabled = this.rightLayoutPanel.Enabled = false;
+            this. controlsLayoutPanel.Enabled = 
+                this.clientLayoutPanel.Enabled = this.carLayoutPanel.Enabled = false;
 
             this.yearInput.Maximum = DateTime.Now.Year;
             this.priceInput.Maximum = int.MaxValue;
@@ -107,16 +117,14 @@ namespace App
 
         private void ClientsForm_FormClosed(object sender, EventArgs e)
         {
-            this.Presenter.db.Dispose();
-            this.Presenter.db = null;
             this.home.Show();
         }
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            this.leftLayoutPanel.Enabled = this.rightLayoutPanel.Enabled = true;
+            this. controlsLayoutPanel.Enabled = 
+                this.clientLayoutPanel.Enabled = this.carLayoutPanel.Enabled = true;
             this.dbLayoutPanel.Enabled = false;
-            this.clientsLayoutPanel.Enabled = false;
 
             this.Controls_toDefault();
 
@@ -127,12 +135,12 @@ namespace App
         {
             if (this.ownersPicker.SelectedIndex == -1 && this.carsPicker.SelectedIndex == -1) return;
 
+            this.controlsLayoutPanel.Enabled = true;
             this.dbLayoutPanel.Enabled = false;
-            this.clientsLayoutPanel.Enabled = false;
 
-            if (this.carsPicker.SelectedIndex == -1)
+            if (this.ownersPicker.SelectedIndex != -1)
             {
-                this.leftLayoutPanel.Enabled = true;
+                this.clientLayoutPanel.Enabled = true;
                 int index = (int)this.ownersPicker.SelectedValue;
 
                 Owner owner = this.Presenter.db.Owners.Find(index);
@@ -147,16 +155,12 @@ namespace App
                 this.EDIT_OWNER_FLAG = true;
             }
 
-            if (this.ownersPicker.SelectedIndex == -1)
+            if (this.carsPicker.SelectedIndex != -1)
             {
-                this.rightLayoutPanel.Enabled = true;
+                this.carLayoutPanel.Enabled = true;
                 int index = (int)this.carsPicker.SelectedValue;
 
                 Car car = this.Presenter.db.Cars.Find(index);
-
-                if (car == null) { MessageBox.Show("Объект"); }
-                if (car.BrandName == null) { MessageBox.Show("Поле"); }
-                return;
 
                 this.brandInput.Text = car.BrandName;
                 this.modelInput.Text = car.ModelName;
@@ -174,7 +178,7 @@ namespace App
         {
             if (this.ownersPicker.SelectedIndex == -1 && this.carsPicker.SelectedIndex == -1) return;
 
-            if (this.carsPicker.SelectedIndex == -1)
+            if (this.ownersPicker.SelectedIndex != -1)
             {
                 int index = (int)this.ownersPicker.SelectedValue;
 
@@ -193,7 +197,7 @@ namespace App
                 MessageBox.Show("Запись о владельце успешно удалена из базы данных!");
             }
 
-            if (this.ownersPicker.SelectedIndex == -1)
+            if (this.carsPicker.SelectedIndex != -1)
             {
                 int index = (int)this.ownersPicker.SelectedValue;
 
@@ -241,7 +245,7 @@ namespace App
 
                     this.ownersPicker.DataSource = this.Presenter.db.Owners.Local.ToList();
                     MessageBox.Show("Запись о владельце успешно добавлена в базу данных!");
-                    this.Controls_toDefault();
+                    this.clientControls_toDefault();
                 }
                 catch (CannotInsertNullException cine)
                 {
@@ -281,7 +285,7 @@ namespace App
 
                     this.carsPicker.DataSource = this.Presenter.db.Cars.Local.ToList();
                     MessageBox.Show("Запись об автомобиле успешно добавлена в базу данных!");
-                    this.Controls_toDefault();
+                    this.carControls_toDefault();
                 }
                 catch (CannotInsertNullException cine)
                 {
@@ -323,7 +327,7 @@ namespace App
 
                     this.ownersPicker.DataSource = this.Presenter.db.Owners.Local.ToList();
                     MessageBox.Show("Запись о владельце успешно изменена в базе данных!");
-                    this.Reset();
+                    this.Return();
                 }
                 catch (CannotInsertNullException cine)
                 {
@@ -365,7 +369,7 @@ namespace App
 
                     this.carsPicker.DataSource = this.Presenter.db.Cars.Local.ToList();
                     MessageBox.Show("Запись об автомобиле успешно изменена в базе данных!");
-                    this.Reset();
+                    this.Return();
                 }
                 catch (CannotInsertNullException cine)
                 {
@@ -385,7 +389,7 @@ namespace App
             if (ResultDialog("Вы уверены, что хотите отменить операцию и вернуться к выбору клиентов?",
                 "Отмена операции") == DialogResult.No) return;
 
-            this.Reset();
+            this.Return();
         }
 
         private void passportInput_Enter(object sender, EventArgs e)
@@ -410,25 +414,52 @@ namespace App
 
         private void telephoneInput_Enter(object sender, EventArgs e)
         {
-            this.telephoneInput.Text = Regex.Replace(this.telephoneInput.Text, @"(\D)", @"").Insert(0, "+");
+            this.telephoneInput.Text = "+" + Regex.Replace(this.telephoneInput.Text, @"(\D)", @"");
         }
 
         private void telephoneInput_Leave(object sender, EventArgs e)
         {
             this.telephoneInput.Text = Regex.IsMatch(this.telephoneInput.Text, @"^\+$") ? "" :
-                this.telephoneInput.Text = Regex.Replace(this.telephoneInput.Text,
+                Regex.Replace(this.telephoneInput.Text,
                     @"\+(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})", @"+$1 ($2) $3-$4-$5");
         }
 
         private void licenseInputeInput_Enter(object sender, EventArgs e)
         {
-            this.licenseInput.Text = Regex.Replace(this.licenseInput.Text, @"(\W)", @"");
+            this.licenseInput.Text = Regex.IsMatch(this.licenseInput.Text,
+                @"([АВЕКМНОРСТУХ]{1}) (\d{3}) ([АВЕКМНОРСТУХ]{2})") ?
+                    Regex.Replace(this.licenseInput.Text,
+                        @"([АВЕКМНОРСТУХ]{1}) (\d{3}) ([АВЕКМНОРСТУХ]{2})", @"$1$2$3") : "";
         }
 
         private void licenseInputInput_Leave(object sender, EventArgs e)
         {
+            this.licenseInput.Text = this.licenseInput.Text.ToUpper();
             this.licenseInput.Text = Regex.Replace(this.licenseInput.Text,
-                    @"([АВЕКМНОРСТУХ]{1})(\d{3})([АВЕКМНОРСТУХ]{2})", @"$1$2$3");
+                    @"([АВЕКМНОРСТУХ]{1})(\d{3})([АВЕКМНОРСТУХ]{2})", @"$1 $2 $3");
+        }
+
+        public void comboBox_DropDown(object sender, EventArgs e)
+        {
+            var cb = sender as ComboBox;
+
+            int widestStringInPixels = 0;
+            foreach (Object o in cb.Items)
+            {
+                string toCheck;
+                PropertyInfo pinfo;
+                Type objectType = o.GetType();
+                if (cb.DisplayMember.CompareTo("") == 0) toCheck = o.ToString();
+                else
+                {
+                    pinfo = objectType.GetProperty(cb.DisplayMember);
+                    toCheck = pinfo.GetValue(o, null).ToString();
+
+                }
+                if (TextRenderer.MeasureText(toCheck, cb.Font).Width > widestStringInPixels)
+                    widestStringInPixels = TextRenderer.MeasureText(toCheck, cb.Font).Width;
+            }
+            cb.DropDownWidth = widestStringInPixels + 15;
         }
     }
 }

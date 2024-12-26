@@ -34,6 +34,7 @@ namespace App
             divider = new Label();
             controlsLayoutPanel = new TableLayoutPanel();
             buttonsLayoutPanel = new FlowLayoutPanel();
+            editButton = new Button();
             acceptButton = new Button();
             resetButton = new Button();
             inputsLayoutPanel = new FlowLayoutPanel();
@@ -73,7 +74,7 @@ namespace App
             employeesPicker = new ComboBox();
             employeeBindingSource = new BindingSource(components);
             addButton = new Button();
-            editButton = new Button();
+            openButton = new Button();
             deleteButton = new Button();
             redirectLayoutPanel = new FlowLayoutPanel();
             homeButton = new Button();
@@ -152,14 +153,31 @@ namespace App
             // 
             buttonsLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             buttonsLayoutPanel.AutoSize = true;
+            buttonsLayoutPanel.Controls.Add(editButton);
             buttonsLayoutPanel.Controls.Add(acceptButton);
             buttonsLayoutPanel.Controls.Add(resetButton);
             buttonsLayoutPanel.FlowDirection = FlowDirection.TopDown;
-            buttonsLayoutPanel.Location = new Point(770, 154);
+            buttonsLayoutPanel.Location = new Point(770, 129);
             buttonsLayoutPanel.Margin = new Padding(0);
             buttonsLayoutPanel.Name = "buttonsLayoutPanel";
-            buttonsLayoutPanel.Size = new Size(150, 110);
+            buttonsLayoutPanel.Size = new Size(150, 160);
             buttonsLayoutPanel.TabIndex = 2;
+            // 
+            // editButton
+            // 
+            editButton.BackColor = SystemColors.MenuHighlight;
+            editButton.FlatStyle = FlatStyle.Flat;
+            editButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            editButton.ForeColor = SystemColors.ButtonFace;
+            editButton.Location = new Point(0, 0);
+            editButton.Margin = new Padding(0);
+            editButton.Name = "editButton";
+            editButton.Size = new Size(150, 50);
+            editButton.TabIndex = 6;
+            editButton.Text = "Изменить";
+            editButton.UseVisualStyleBackColor = false;
+            editButton.Visible = false;
+            editButton.Click += editButton_Click;
             // 
             // acceptButton
             // 
@@ -167,8 +185,8 @@ namespace App
             acceptButton.FlatStyle = FlatStyle.Flat;
             acceptButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             acceptButton.ForeColor = SystemColors.ButtonFace;
-            acceptButton.Location = new Point(0, 0);
-            acceptButton.Margin = new Padding(0, 0, 0, 10);
+            acceptButton.Location = new Point(0, 50);
+            acceptButton.Margin = new Padding(0);
             acceptButton.Name = "acceptButton";
             acceptButton.Size = new Size(150, 50);
             acceptButton.TabIndex = 6;
@@ -183,8 +201,8 @@ namespace App
             resetButton.FlatStyle = FlatStyle.Flat;
             resetButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             resetButton.ForeColor = SystemColors.ControlText;
-            resetButton.Location = new Point(0, 60);
-            resetButton.Margin = new Padding(0);
+            resetButton.Location = new Point(0, 110);
+            resetButton.Margin = new Padding(0, 10, 0, 0);
             resetButton.Name = "resetButton";
             resetButton.Size = new Size(150, 50);
             resetButton.TabIndex = 7;
@@ -309,6 +327,7 @@ namespace App
             // birthDatePicker
             // 
             birthDatePicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            birthDatePicker.Checked = false;
             birthDatePicker.CustomFormat = "не указано";
             birthDatePicker.DropDownAlign = LeftRightAlignment.Right;
             birthDatePicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -317,9 +336,8 @@ namespace App
             birthDatePicker.Name = "birthDatePicker";
             birthDatePicker.ShowCheckBox = true;
             birthDatePicker.Size = new Size(375, 26);
-            birthDatePicker.TabIndex = 1;
-            birthDatePicker.ValueChanged += dateTimePicker_ValueChanged;
-            birthDatePicker.Leave += dateTimePicker_Leave;
+            birthDatePicker.TabIndex = 5;
+            birthDatePicker.ValueChanged += birthDatePicker_ValueChanged;
             // 
             // passportLayoutPanel
             // 
@@ -595,16 +613,13 @@ namespace App
             // employmentDatePicker
             // 
             employmentDatePicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            employmentDatePicker.CustomFormat = "не указано";
+            employmentDatePicker.CustomFormat = "";
             employmentDatePicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             employmentDatePicker.Location = new Point(0, 30);
             employmentDatePicker.Margin = new Padding(0);
             employmentDatePicker.Name = "employmentDatePicker";
-            employmentDatePicker.ShowCheckBox = true;
             employmentDatePicker.Size = new Size(375, 26);
-            employmentDatePicker.TabIndex = 1;
-            employmentDatePicker.ValueChanged += dateTimePicker_ValueChanged;
-            employmentDatePicker.Leave += dateTimePicker_Leave;
+            employmentDatePicker.TabIndex = 5;
             // 
             // menuLayoutPanel
             // 
@@ -628,9 +643,10 @@ namespace App
             dbLayoutPanel.AutoSize = true;
             dbLayoutPanel.Controls.Add(employeesPicker);
             dbLayoutPanel.Controls.Add(addButton);
-            dbLayoutPanel.Controls.Add(editButton);
+            dbLayoutPanel.Controls.Add(openButton);
             dbLayoutPanel.Controls.Add(deleteButton);
             dbLayoutPanel.Dock = DockStyle.Fill;
+            dbLayoutPanel.Enabled = false;
             dbLayoutPanel.Location = new Point(120, 0);
             dbLayoutPanel.Margin = new Padding(0);
             dbLayoutPanel.Name = "dbLayoutPanel";
@@ -642,9 +658,8 @@ namespace App
             employeesPicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             employeesPicker.BackColor = Color.White;
             employeesPicker.DataSource = employeeBindingSource;
-            employeesPicker.DisplayMember = "EmployeeSurname";
+            employeesPicker.DisplayMember = "EmployeeFullName";
             employeesPicker.DropDownStyle = ComboBoxStyle.DropDownList;
-            employeesPicker.FlatStyle = FlatStyle.System;
             employeesPicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             employeesPicker.FormattingEnabled = true;
             employeesPicker.Location = new Point(0, 11);
@@ -653,6 +668,7 @@ namespace App
             employeesPicker.Size = new Size(200, 27);
             employeesPicker.TabIndex = 2;
             employeesPicker.ValueMember = "EmployeeId";
+            employeesPicker.DropDown += comboBox_DropDown;
             // 
             // employeeBindingSource
             // 
@@ -675,22 +691,22 @@ namespace App
             addButton.UseVisualStyleBackColor = false;
             addButton.Click += addButton_Click;
             // 
-            // editButton
+            // openButton
             // 
-            editButton.AutoSize = true;
-            editButton.BackColor = SystemColors.MenuHighlight;
-            editButton.Dock = DockStyle.Left;
-            editButton.FlatStyle = FlatStyle.Flat;
-            editButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            editButton.ForeColor = SystemColors.ButtonFace;
-            editButton.Location = new Point(420, 0);
-            editButton.Margin = new Padding(10, 0, 10, 0);
-            editButton.Name = "editButton";
-            editButton.Size = new Size(180, 50);
-            editButton.TabIndex = 2;
-            editButton.Text = "Изменить";
-            editButton.UseVisualStyleBackColor = false;
-            editButton.Click += editButton_Click;
+            openButton.AutoSize = true;
+            openButton.BackColor = SystemColors.MenuHighlight;
+            openButton.Dock = DockStyle.Left;
+            openButton.FlatStyle = FlatStyle.Flat;
+            openButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            openButton.ForeColor = SystemColors.ButtonFace;
+            openButton.Location = new Point(420, 0);
+            openButton.Margin = new Padding(10, 0, 10, 0);
+            openButton.Name = "openButton";
+            openButton.Size = new Size(180, 50);
+            openButton.TabIndex = 2;
+            openButton.Text = "Просмотр";
+            openButton.UseVisualStyleBackColor = false;
+            openButton.Click += openButton_Click;
             // 
             // deleteButton
             // 
@@ -759,6 +775,7 @@ namespace App
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.White;
             ClientSize = new Size(960, 540);
             Controls.Add(formLayoutPanel);
@@ -854,7 +871,8 @@ namespace App
         private Button homeButton;
         private Button returnButton;
         private Button addButton;
-        private Button editButton;
+        private Button openButton;
         private Button deleteButton;
+        private Button editButton;
     }
 }

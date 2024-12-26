@@ -45,5 +45,11 @@ namespace App
             this.Hide();
             logistics.Show();
         }
+
+        private void MainForm_FormClosed(object sender, EventArgs e)
+        {
+            //this.Presenter.db.Dispose();
+            //this.Presenter.db = null;
+        }
     }
 }

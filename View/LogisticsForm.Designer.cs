@@ -30,14 +30,17 @@ namespace App
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             formLayoutPanel = new TableLayoutPanel();
             suppliesTable = new DataGridView();
-            menuLayoutPanel = new FlowLayoutPanel();
-            homeButton = new Button();
-            returnButton = new Button();
-            addButton = new Button();
-            editButton = new Button();
-            deleteButton = new Button();
+            supplyIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            employeeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            supplierDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dateOfPostDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            deliveredDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
+            dateOfDeliveryDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            supplyBindingSource = new BindingSource(components);
             controlsLayoutPanel = new TableLayoutPanel();
             inputsLayoutPanel = new TableLayoutPanel();
             partsLayoutPanel = new TableLayoutPanel();
@@ -51,9 +54,11 @@ namespace App
             supplierLayoutPanel = new FlowLayoutPanel();
             suppliersLabel = new Label();
             suppliersPicker = new ComboBox();
+            supplierBindingSource = new BindingSource(components);
             employeeLayoutPanel = new FlowLayoutPanel();
             employeeLabel = new Label();
-            employeePicker = new ComboBox();
+            employeesPicker = new ComboBox();
+            employeeBindingSource = new BindingSource(components);
             datesLayoutPanel = new TableLayoutPanel();
             deliveryDateLayoutPanel = new FlowLayoutPanel();
             deliveryDateLabel = new Label();
@@ -63,14 +68,22 @@ namespace App
             postDatePicker = new DateTimePicker();
             deliveryStateCheckBox = new CheckBox();
             buttonsLayoutPanel = new FlowLayoutPanel();
+            editButton = new Button();
             acceptButton = new Button();
             resetButton = new Button();
-            employeeBindingSource = new BindingSource(components);
-            supplierBindingSource = new BindingSource(components);
+            menuLayoutPanel = new TableLayoutPanel();
+            dbLayoutPanel = new FlowLayoutPanel();
+            addButton = new Button();
+            openButton = new Button();
+            deleteButton = new Button();
+            redirectLayoutPanel = new FlowLayoutPanel();
+            homeButton = new Button();
+            returnButton = new Button();
+            positionBindingSource = new BindingSource(components);
             partBindingSource = new BindingSource(components);
             formLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)suppliesTable).BeginInit();
-            menuLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)supplyBindingSource).BeginInit();
             controlsLayoutPanel.SuspendLayout();
             inputsLayoutPanel.SuspendLayout();
             partsLayoutPanel.SuspendLayout();
@@ -79,13 +92,17 @@ namespace App
             partLayoutPanel.SuspendLayout();
             personsLayoutPanel.SuspendLayout();
             supplierLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)supplierBindingSource).BeginInit();
             employeeLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)employeeBindingSource).BeginInit();
             datesLayoutPanel.SuspendLayout();
             deliveryDateLayoutPanel.SuspendLayout();
             postDateLayoutPanel.SuspendLayout();
             buttonsLayoutPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)employeeBindingSource).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)supplierBindingSource).BeginInit();
+            menuLayoutPanel.SuspendLayout();
+            dbLayoutPanel.SuspendLayout();
+            redirectLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)positionBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)partBindingSource).BeginInit();
             SuspendLayout();
             // 
@@ -94,135 +111,135 @@ namespace App
             formLayoutPanel.BackColor = Color.Transparent;
             formLayoutPanel.ColumnCount = 1;
             formLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            formLayoutPanel.Controls.Add(suppliesTable, 0, 3);
-            formLayoutPanel.Controls.Add(menuLayoutPanel, 0, 1);
-            formLayoutPanel.Controls.Add(controlsLayoutPanel, 0, 5);
+            formLayoutPanel.Controls.Add(suppliesTable, 0, 2);
+            formLayoutPanel.Controls.Add(controlsLayoutPanel, 0, 4);
+            formLayoutPanel.Controls.Add(menuLayoutPanel, 0, 0);
             formLayoutPanel.Dock = DockStyle.Fill;
             formLayoutPanel.Location = new Point(0, 0);
             formLayoutPanel.Margin = new Padding(0);
             formLayoutPanel.Name = "formLayoutPanel";
-            formLayoutPanel.Padding = new Padding(20, 0, 20, 0);
-            formLayoutPanel.RowCount = 7;
-            formLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 10F));
+            formLayoutPanel.Padding = new Padding(20, 10, 20, 10);
+            formLayoutPanel.RowCount = 5;
             formLayoutPanel.RowStyles.Add(new RowStyle());
             formLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             formLayoutPanel.RowStyles.Add(new RowStyle());
             formLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             formLayoutPanel.RowStyles.Add(new RowStyle());
-            formLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 10F));
             formLayoutPanel.Size = new Size(960, 540);
             formLayoutPanel.TabIndex = 2;
             // 
             // suppliesTable
             // 
+            suppliesTable.AllowUserToAddRows = false;
+            suppliesTable.AllowUserToDeleteRows = false;
+            suppliesTable.AllowUserToResizeColumns = false;
+            suppliesTable.AllowUserToResizeRows = false;
+            suppliesTable.AutoGenerateColumns = false;
+            suppliesTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             suppliesTable.BackgroundColor = Color.White;
             suppliesTable.BorderStyle = BorderStyle.None;
+            suppliesTable.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            suppliesTable.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Pixel);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlDarkDark;
+            dataGridViewCellStyle1.Padding = new Padding(12, 7, 12, 6);
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.ControlLight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            suppliesTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             suppliesTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            suppliesTable.Columns.AddRange(new DataGridViewColumn[] { supplyIdDataGridViewTextBoxColumn, employeeDataGridViewTextBoxColumn, supplierDataGridViewTextBoxColumn, dateOfPostDataGridViewTextBoxColumn, deliveredDataGridViewCheckBoxColumn, dateOfDeliveryDataGridViewTextBoxColumn });
             suppliesTable.Cursor = Cursors.Hand;
-            suppliesTable.Dock = DockStyle.Top;
+            suppliesTable.DataSource = supplyBindingSource;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.White;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlDarkDark;
+            dataGridViewCellStyle2.Padding = new Padding(12, 0, 12, 0);
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.ControlLight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            suppliesTable.DefaultCellStyle = dataGridViewCellStyle2;
+            suppliesTable.Dock = DockStyle.Fill;
+            suppliesTable.EditMode = DataGridViewEditMode.EditProgrammatically;
+            suppliesTable.EnableHeadersVisualStyles = false;
             suppliesTable.GridColor = SystemColors.ControlDark;
             suppliesTable.Location = new Point(20, 80);
             suppliesTable.Margin = new Padding(0);
+            suppliesTable.MultiSelect = false;
             suppliesTable.Name = "suppliesTable";
+            suppliesTable.ReadOnly = true;
+            suppliesTable.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            suppliesTable.RowHeadersVisible = false;
+            suppliesTable.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            suppliesTable.RowTemplate.Height = 32;
+            suppliesTable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             suppliesTable.Size = new Size(920, 225);
             suppliesTable.TabIndex = 2;
             // 
-            // menuLayoutPanel
+            // supplyIdDataGridViewTextBoxColumn
             // 
-            menuLayoutPanel.AutoSize = true;
-            menuLayoutPanel.Controls.Add(homeButton);
-            menuLayoutPanel.Controls.Add(returnButton);
-            menuLayoutPanel.Controls.Add(addButton);
-            menuLayoutPanel.Controls.Add(editButton);
-            menuLayoutPanel.Controls.Add(deleteButton);
-            menuLayoutPanel.Dock = DockStyle.Fill;
-            menuLayoutPanel.Location = new Point(20, 10);
-            menuLayoutPanel.Margin = new Padding(0);
-            menuLayoutPanel.Name = "menuLayoutPanel";
-            menuLayoutPanel.Size = new Size(920, 50);
-            menuLayoutPanel.TabIndex = 0;
+            supplyIdDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            supplyIdDataGridViewTextBoxColumn.DataPropertyName = "SupplyId";
+            supplyIdDataGridViewTextBoxColumn.HeaderText = "ИД";
+            supplyIdDataGridViewTextBoxColumn.Name = "supplyIdDataGridViewTextBoxColumn";
+            supplyIdDataGridViewTextBoxColumn.ReadOnly = true;
+            supplyIdDataGridViewTextBoxColumn.ToolTipText = "Идентификатор поставки в таблице";
+            supplyIdDataGridViewTextBoxColumn.Width = 72;
             // 
-            // homeButton
+            // employeeDataGridViewTextBoxColumn
             // 
-            homeButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            homeButton.BackColor = Color.Transparent;
-            homeButton.FlatAppearance.BorderSize = 0;
-            homeButton.FlatStyle = FlatStyle.Flat;
-            homeButton.Font = new Font("Segoe MDL2 Assets", 18F, FontStyle.Regular, GraphicsUnit.Pixel);
-            homeButton.ForeColor = SystemColors.WindowFrame;
-            homeButton.Location = new Point(0, 5);
-            homeButton.Margin = new Padding(0, 0, 10, 0);
-            homeButton.Name = "homeButton";
-            homeButton.Size = new Size(40, 40);
-            homeButton.TabIndex = 4;
-            homeButton.Text = "";
-            homeButton.UseVisualStyleBackColor = false;
-            homeButton.Click += homeButton_Click;
+            employeeDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            employeeDataGridViewTextBoxColumn.DataPropertyName = "Employee";
+            employeeDataGridViewTextBoxColumn.HeaderText = "Ответственный";
+            employeeDataGridViewTextBoxColumn.Name = "employeeDataGridViewTextBoxColumn";
+            employeeDataGridViewTextBoxColumn.ReadOnly = true;
+            employeeDataGridViewTextBoxColumn.ToolTipText = "Кладовщик, ответственный за поставку";
             // 
-            // returnButton
+            // supplierDataGridViewTextBoxColumn
             // 
-            returnButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            returnButton.BackColor = Color.Transparent;
-            returnButton.FlatAppearance.BorderSize = 0;
-            returnButton.FlatStyle = FlatStyle.Flat;
-            returnButton.Font = new Font("Segoe MDL2 Assets", 18F, FontStyle.Regular, GraphicsUnit.Pixel);
-            returnButton.ForeColor = SystemColors.WindowFrame;
-            returnButton.Location = new Point(60, 5);
-            returnButton.Margin = new Padding(10, 0, 10, 0);
-            returnButton.Name = "returnButton";
-            returnButton.Size = new Size(40, 40);
-            returnButton.TabIndex = 5;
-            returnButton.Text = "";
-            returnButton.UseVisualStyleBackColor = false;
-            returnButton.Click += returnButton_Click;
+            supplierDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            supplierDataGridViewTextBoxColumn.DataPropertyName = "Supplier";
+            supplierDataGridViewTextBoxColumn.HeaderText = "Поставщик";
+            supplierDataGridViewTextBoxColumn.Name = "supplierDataGridViewTextBoxColumn";
+            supplierDataGridViewTextBoxColumn.ReadOnly = true;
+            supplierDataGridViewTextBoxColumn.ToolTipText = "Поставщик, доставляющий запчасть";
             // 
-            // addButton
+            // dateOfPostDataGridViewTextBoxColumn
             // 
-            addButton.AutoSize = true;
-            addButton.BackColor = SystemColors.MenuHighlight;
-            addButton.Dock = DockStyle.Left;
-            addButton.FlatStyle = FlatStyle.Flat;
-            addButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            addButton.ForeColor = SystemColors.ButtonFace;
-            addButton.Location = new Point(120, 0);
-            addButton.Margin = new Padding(10, 0, 10, 0);
-            addButton.Name = "addButton";
-            addButton.Size = new Size(253, 50);
-            addButton.TabIndex = 1;
-            addButton.Text = "Добавить";
-            addButton.UseVisualStyleBackColor = false;
+            dateOfPostDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dateOfPostDataGridViewTextBoxColumn.DataPropertyName = "DateOfPost";
+            dateOfPostDataGridViewTextBoxColumn.HeaderText = "Дата оформления";
+            dateOfPostDataGridViewTextBoxColumn.Name = "dateOfPostDataGridViewTextBoxColumn";
+            dateOfPostDataGridViewTextBoxColumn.ReadOnly = true;
+            dateOfPostDataGridViewTextBoxColumn.ToolTipText = "Дата оформления поставки";
+            dateOfPostDataGridViewTextBoxColumn.Width = 155;
             // 
-            // editButton
+            // deliveredDataGridViewCheckBoxColumn
             // 
-            editButton.AutoSize = true;
-            editButton.BackColor = SystemColors.MenuHighlight;
-            editButton.Dock = DockStyle.Left;
-            editButton.FlatStyle = FlatStyle.Flat;
-            editButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            editButton.ForeColor = SystemColors.ButtonFace;
-            editButton.Location = new Point(393, 0);
-            editButton.Margin = new Padding(10, 0, 10, 0);
-            editButton.Name = "editButton";
-            editButton.Size = new Size(253, 50);
-            editButton.TabIndex = 2;
-            editButton.Text = "Изменить";
-            editButton.UseVisualStyleBackColor = false;
+            deliveredDataGridViewCheckBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            deliveredDataGridViewCheckBoxColumn.DataPropertyName = "Delivered";
+            deliveredDataGridViewCheckBoxColumn.HeaderText = "Доставлено";
+            deliveredDataGridViewCheckBoxColumn.Name = "deliveredDataGridViewCheckBoxColumn";
+            deliveredDataGridViewCheckBoxColumn.ReadOnly = true;
+            deliveredDataGridViewCheckBoxColumn.ToolTipText = "Состояние поставки";
+            deliveredDataGridViewCheckBoxColumn.Width = 101;
             // 
-            // deleteButton
+            // dateOfDeliveryDataGridViewTextBoxColumn
             // 
-            deleteButton.AutoSize = true;
-            deleteButton.BackColor = SystemColors.MenuHighlight;
-            deleteButton.Dock = DockStyle.Left;
-            deleteButton.FlatStyle = FlatStyle.Flat;
-            deleteButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            deleteButton.ForeColor = SystemColors.ButtonFace;
-            deleteButton.Location = new Point(666, 0);
-            deleteButton.Margin = new Padding(10, 0, 0, 0);
-            deleteButton.Name = "deleteButton";
-            deleteButton.Size = new Size(253, 50);
-            deleteButton.TabIndex = 3;
-            deleteButton.Text = "Удалить";
-            deleteButton.UseVisualStyleBackColor = false;
+            dateOfDeliveryDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dateOfDeliveryDataGridViewTextBoxColumn.DataPropertyName = "DateOfDelivery";
+            dateOfDeliveryDataGridViewTextBoxColumn.HeaderText = "Дата доставки";
+            dateOfDeliveryDataGridViewTextBoxColumn.Name = "dateOfDeliveryDataGridViewTextBoxColumn";
+            dateOfDeliveryDataGridViewTextBoxColumn.ReadOnly = true;
+            dateOfDeliveryDataGridViewTextBoxColumn.ToolTipText = "Дата доставки запчасти на склад";
+            dateOfDeliveryDataGridViewTextBoxColumn.Width = 132;
+            // 
+            // supplyBindingSource
+            // 
+            supplyBindingSource.DataSource = typeof(Supply);
             // 
             // controlsLayoutPanel
             // 
@@ -233,7 +250,7 @@ namespace App
             controlsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F));
             controlsLayoutPanel.Controls.Add(inputsLayoutPanel, 0, 0);
             controlsLayoutPanel.Controls.Add(buttonsLayoutPanel, 2, 0);
-            controlsLayoutPanel.Location = new Point(20, 325);
+            controlsLayoutPanel.Location = new Point(20, 329);
             controlsLayoutPanel.Margin = new Padding(0);
             controlsLayoutPanel.Name = "controlsLayoutPanel";
             controlsLayoutPanel.RowCount = 1;
@@ -263,9 +280,9 @@ namespace App
             // 
             partsLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             partsLayoutPanel.ColumnCount = 3;
-            partsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 550F));
-            partsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
             partsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            partsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
+            partsLayoutPanel.ColumnStyles.Add(new ColumnStyle());
             partsLayoutPanel.Controls.Add(amountLayoutPane, 2, 0);
             partsLayoutPanel.Controls.Add(partLayoutPanel, 0, 0);
             partsLayoutPanel.Location = new Point(0, 63);
@@ -283,11 +300,11 @@ namespace App
             amountLayoutPane.Controls.Add(amountLabel);
             amountLayoutPane.Controls.Add(amountInput);
             amountLayoutPane.FlowDirection = FlowDirection.TopDown;
-            amountLayoutPane.Location = new Point(560, 1);
+            amountLayoutPane.Location = new Point(630, 1);
             amountLayoutPane.Margin = new Padding(0);
             amountLayoutPane.Name = "amountLayoutPane";
             amountLayoutPane.Padding = new Padding(0, 5, 0, 5);
-            amountLayoutPane.Size = new Size(200, 61);
+            amountLayoutPane.Size = new Size(130, 61);
             amountLayoutPane.TabIndex = 3;
             // 
             // amountLabel
@@ -297,9 +314,9 @@ namespace App
             amountLabel.Location = new Point(0, 5);
             amountLabel.Margin = new Padding(0);
             amountLabel.Name = "amountLabel";
-            amountLabel.Size = new Size(200, 25);
+            amountLabel.Size = new Size(130, 25);
             amountLabel.TabIndex = 0;
-            amountLabel.Text = "Количество";
+            amountLabel.Text = "Количество, шт. *";
             // 
             // amountInput
             // 
@@ -308,50 +325,50 @@ namespace App
             amountInput.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             amountInput.Location = new Point(0, 30);
             amountInput.Margin = new Padding(0);
+            amountInput.Maximum = new decimal(new int[] { 999999999, 0, 0, 0 });
             amountInput.Name = "amountInput";
-            amountInput.Size = new Size(200, 26);
+            amountInput.Size = new Size(130, 26);
             amountInput.TabIndex = 1;
+            amountInput.TextAlign = HorizontalAlignment.Center;
+            amountInput.ThousandsSeparator = true;
             // 
             // partLayoutPanel
             // 
-            partLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             partLayoutPanel.AutoSize = true;
             partLayoutPanel.Controls.Add(partsLabel);
             partLayoutPanel.Controls.Add(partsPicker);
+            partLayoutPanel.Dock = DockStyle.Top;
             partLayoutPanel.FlowDirection = FlowDirection.TopDown;
             partLayoutPanel.Location = new Point(0, 0);
             partLayoutPanel.Margin = new Padding(0);
             partLayoutPanel.Name = "partLayoutPanel";
             partLayoutPanel.Padding = new Padding(0, 5, 0, 5);
-            partLayoutPanel.Size = new Size(550, 62);
+            partLayoutPanel.Size = new Size(620, 62);
             partLayoutPanel.TabIndex = 2;
             // 
             // partsLabel
             // 
+            partsLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             partsLabel.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             partsLabel.Location = new Point(0, 5);
             partsLabel.Margin = new Padding(0);
             partsLabel.Name = "partsLabel";
-            partsLabel.Size = new Size(550, 25);
+            partsLabel.Size = new Size(620, 25);
             partsLabel.TabIndex = 0;
-            partsLabel.Text = "Запчасть";
+            partsLabel.Text = "Запчасти *";
             // 
             // partsPicker
             // 
             partsPicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             partsPicker.BackColor = Color.White;
-            partsPicker.DataSource = partBindingSource;
-            partsPicker.DisplayMember = "PartName";
             partsPicker.DropDownStyle = ComboBoxStyle.DropDownList;
-            partsPicker.FlatStyle = FlatStyle.System;
             partsPicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             partsPicker.FormattingEnabled = true;
             partsPicker.Location = new Point(0, 30);
             partsPicker.Margin = new Padding(0);
             partsPicker.Name = "partsPicker";
-            partsPicker.Size = new Size(550, 27);
+            partsPicker.Size = new Size(620, 27);
             partsPicker.TabIndex = 1;
-            partsPicker.ValueMember = "PartId";
             // 
             // personsLayoutPanel
             // 
@@ -393,16 +410,15 @@ namespace App
             suppliersLabel.Name = "suppliersLabel";
             suppliersLabel.Size = new Size(375, 25);
             suppliersLabel.TabIndex = 0;
-            suppliersLabel.Text = "Поставщик";
+            suppliersLabel.Text = "Поставщик *";
             // 
             // suppliersPicker
             // 
             suppliersPicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             suppliersPicker.BackColor = Color.White;
             suppliersPicker.DataSource = supplierBindingSource;
-            suppliersPicker.DisplayMember = "TaxpayerIdentificationNumber";
+            suppliersPicker.DisplayMember = "SupplierInfo";
             suppliersPicker.DropDownStyle = ComboBoxStyle.DropDownList;
-            suppliersPicker.FlatStyle = FlatStyle.System;
             suppliersPicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             suppliersPicker.FormattingEnabled = true;
             suppliersPicker.Location = new Point(0, 30);
@@ -411,13 +427,18 @@ namespace App
             suppliersPicker.Size = new Size(375, 27);
             suppliersPicker.TabIndex = 1;
             suppliersPicker.ValueMember = "SupplierId";
+            suppliersPicker.SelectionChangeCommitted += suppliersPicker_SelectionChangeCommitted;
+            // 
+            // supplierBindingSource
+            // 
+            supplierBindingSource.DataSource = typeof(Supplier);
             // 
             // employeeLayoutPanel
             // 
             employeeLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             employeeLayoutPanel.AutoSize = true;
             employeeLayoutPanel.Controls.Add(employeeLabel);
-            employeeLayoutPanel.Controls.Add(employeePicker);
+            employeeLayoutPanel.Controls.Add(employeesPicker);
             employeeLayoutPanel.FlowDirection = FlowDirection.TopDown;
             employeeLayoutPanel.Location = new Point(0, 0);
             employeeLayoutPanel.Margin = new Padding(0);
@@ -434,24 +455,27 @@ namespace App
             employeeLabel.Name = "employeeLabel";
             employeeLabel.Size = new Size(375, 25);
             employeeLabel.TabIndex = 0;
-            employeeLabel.Text = "Ответственный";
+            employeeLabel.Text = "Ответственный *";
             // 
-            // employeePicker
+            // employeesPicker
             // 
-            employeePicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            employeePicker.BackColor = Color.White;
-            employeePicker.DataSource = employeeBindingSource;
-            employeePicker.DisplayMember = "EmployeeSurname";
-            employeePicker.DropDownStyle = ComboBoxStyle.DropDownList;
-            employeePicker.FlatStyle = FlatStyle.System;
-            employeePicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            employeePicker.FormattingEnabled = true;
-            employeePicker.Location = new Point(0, 30);
-            employeePicker.Margin = new Padding(0);
-            employeePicker.Name = "employeePicker";
-            employeePicker.Size = new Size(375, 27);
-            employeePicker.TabIndex = 1;
-            employeePicker.ValueMember = "EmployeeId";
+            employeesPicker.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            employeesPicker.BackColor = Color.White;
+            employeesPicker.DataSource = employeeBindingSource;
+            employeesPicker.DisplayMember = "EmployeeFullName";
+            employeesPicker.DropDownStyle = ComboBoxStyle.DropDownList;
+            employeesPicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            employeesPicker.FormattingEnabled = true;
+            employeesPicker.Location = new Point(0, 30);
+            employeesPicker.Margin = new Padding(0);
+            employeesPicker.Name = "employeesPicker";
+            employeesPicker.Size = new Size(375, 27);
+            employeesPicker.TabIndex = 1;
+            employeesPicker.ValueMember = "EmployeeId";
+            // 
+            // employeeBindingSource
+            // 
+            employeeBindingSource.DataSource = typeof(Employee);
             // 
             // datesLayoutPanel
             // 
@@ -496,7 +520,7 @@ namespace App
             deliveryDateLabel.Name = "deliveryDateLabel";
             deliveryDateLabel.Size = new Size(320, 25);
             deliveryDateLabel.TabIndex = 0;
-            deliveryDateLabel.Text = "Дата прибытия";
+            deliveryDateLabel.Text = "Дата прибытия *";
             // 
             // deliveryDatePicker
             // 
@@ -530,7 +554,7 @@ namespace App
             postDateLabel.Name = "postDateLabel";
             postDateLabel.Size = new Size(320, 25);
             postDateLabel.TabIndex = 0;
-            postDateLabel.Text = "Дата оформления";
+            postDateLabel.Text = "Дата оформления *";
             // 
             // postDatePicker
             // 
@@ -561,28 +585,46 @@ namespace App
             // 
             buttonsLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             buttonsLayoutPanel.AutoSize = true;
+            buttonsLayoutPanel.Controls.Add(editButton);
             buttonsLayoutPanel.Controls.Add(acceptButton);
             buttonsLayoutPanel.Controls.Add(resetButton);
             buttonsLayoutPanel.FlowDirection = FlowDirection.TopDown;
-            buttonsLayoutPanel.Location = new Point(770, 43);
+            buttonsLayoutPanel.Location = new Point(770, 18);
             buttonsLayoutPanel.Margin = new Padding(0);
             buttonsLayoutPanel.Name = "buttonsLayoutPanel";
-            buttonsLayoutPanel.Size = new Size(150, 110);
+            buttonsLayoutPanel.Size = new Size(150, 160);
             buttonsLayoutPanel.TabIndex = 3;
+            // 
+            // editButton
+            // 
+            editButton.BackColor = SystemColors.Highlight;
+            editButton.FlatStyle = FlatStyle.Flat;
+            editButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            editButton.ForeColor = SystemColors.ButtonFace;
+            editButton.Location = new Point(0, 0);
+            editButton.Margin = new Padding(0);
+            editButton.Name = "editButton";
+            editButton.Size = new Size(150, 50);
+            editButton.TabIndex = 6;
+            editButton.Text = "Изменить";
+            editButton.UseVisualStyleBackColor = false;
+            editButton.Visible = false;
+            editButton.Click += editButton_Click;
             // 
             // acceptButton
             // 
-            acceptButton.BackColor = SystemColors.MenuHighlight;
+            acceptButton.BackColor = SystemColors.Highlight;
             acceptButton.FlatStyle = FlatStyle.Flat;
             acceptButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             acceptButton.ForeColor = SystemColors.ButtonFace;
-            acceptButton.Location = new Point(0, 0);
-            acceptButton.Margin = new Padding(0, 0, 0, 10);
+            acceptButton.Location = new Point(0, 50);
+            acceptButton.Margin = new Padding(0);
             acceptButton.Name = "acceptButton";
             acceptButton.Size = new Size(150, 50);
             acceptButton.TabIndex = 6;
             acceptButton.Text = "Отправить";
             acceptButton.UseVisualStyleBackColor = false;
+            acceptButton.Click += acceptButton_Click;
             // 
             // resetButton
             // 
@@ -591,21 +633,147 @@ namespace App
             resetButton.FlatStyle = FlatStyle.Flat;
             resetButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             resetButton.ForeColor = SystemColors.ControlText;
-            resetButton.Location = new Point(0, 60);
-            resetButton.Margin = new Padding(0);
+            resetButton.Location = new Point(0, 110);
+            resetButton.Margin = new Padding(0, 10, 0, 0);
             resetButton.Name = "resetButton";
             resetButton.Size = new Size(150, 50);
             resetButton.TabIndex = 7;
-            resetButton.Text = "Сбросить";
+            resetButton.Text = "Отменить";
             resetButton.UseVisualStyleBackColor = false;
+            resetButton.Click += resetButton_Click;
             // 
-            // employeeBindingSource
+            // menuLayoutPanel
             // 
-            employeeBindingSource.DataSource = typeof(Employee);
+            menuLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            menuLayoutPanel.AutoSize = true;
+            menuLayoutPanel.ColumnCount = 3;
+            menuLayoutPanel.ColumnStyles.Add(new ColumnStyle());
+            menuLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            menuLayoutPanel.ColumnStyles.Add(new ColumnStyle());
+            menuLayoutPanel.Controls.Add(dbLayoutPanel, 2, 0);
+            menuLayoutPanel.Controls.Add(redirectLayoutPanel, 0, 0);
+            menuLayoutPanel.Location = new Point(20, 10);
+            menuLayoutPanel.Margin = new Padding(0);
+            menuLayoutPanel.Name = "menuLayoutPanel";
+            menuLayoutPanel.RowCount = 1;
+            menuLayoutPanel.RowStyles.Add(new RowStyle());
+            menuLayoutPanel.Size = new Size(920, 50);
+            menuLayoutPanel.TabIndex = 3;
             // 
-            // supplierBindingSource
+            // dbLayoutPanel
             // 
-            supplierBindingSource.DataSource = typeof(Supplier);
+            dbLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            dbLayoutPanel.AutoSize = true;
+            dbLayoutPanel.Controls.Add(addButton);
+            dbLayoutPanel.Controls.Add(openButton);
+            dbLayoutPanel.Controls.Add(deleteButton);
+            dbLayoutPanel.Enabled = false;
+            dbLayoutPanel.Location = new Point(120, 0);
+            dbLayoutPanel.Margin = new Padding(0);
+            dbLayoutPanel.Name = "dbLayoutPanel";
+            dbLayoutPanel.Size = new Size(800, 50);
+            dbLayoutPanel.TabIndex = 3;
+            // 
+            // addButton
+            // 
+            addButton.AutoSize = true;
+            addButton.BackColor = SystemColors.Highlight;
+            addButton.Dock = DockStyle.Left;
+            addButton.FlatStyle = FlatStyle.Flat;
+            addButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            addButton.ForeColor = SystemColors.ButtonFace;
+            addButton.Location = new Point(0, 0);
+            addButton.Margin = new Padding(0);
+            addButton.Name = "addButton";
+            addButton.Size = new Size(250, 50);
+            addButton.TabIndex = 1;
+            addButton.Text = "Добавить";
+            addButton.UseVisualStyleBackColor = false;
+            addButton.Click += addButton_Click;
+            // 
+            // openButton
+            // 
+            openButton.AutoSize = true;
+            openButton.BackColor = SystemColors.Highlight;
+            openButton.Dock = DockStyle.Left;
+            openButton.FlatStyle = FlatStyle.Flat;
+            openButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            openButton.ForeColor = SystemColors.ButtonFace;
+            openButton.Location = new Point(270, 0);
+            openButton.Margin = new Padding(20, 0, 20, 0);
+            openButton.Name = "openButton";
+            openButton.Size = new Size(250, 50);
+            openButton.TabIndex = 2;
+            openButton.Text = "Просмотр";
+            openButton.UseVisualStyleBackColor = false;
+            openButton.Click += openButton_Click;
+            // 
+            // deleteButton
+            // 
+            deleteButton.AutoSize = true;
+            deleteButton.BackColor = SystemColors.Highlight;
+            deleteButton.Dock = DockStyle.Left;
+            deleteButton.FlatStyle = FlatStyle.Flat;
+            deleteButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            deleteButton.ForeColor = SystemColors.ButtonFace;
+            deleteButton.Location = new Point(540, 0);
+            deleteButton.Margin = new Padding(0);
+            deleteButton.Name = "deleteButton";
+            deleteButton.Size = new Size(250, 50);
+            deleteButton.TabIndex = 3;
+            deleteButton.Text = "Удалить";
+            deleteButton.UseVisualStyleBackColor = false;
+            deleteButton.Click += deleteButton_Click;
+            // 
+            // redirectLayoutPanel
+            // 
+            redirectLayoutPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            redirectLayoutPanel.AutoSize = true;
+            redirectLayoutPanel.Controls.Add(homeButton);
+            redirectLayoutPanel.Controls.Add(returnButton);
+            redirectLayoutPanel.Location = new Point(0, 5);
+            redirectLayoutPanel.Margin = new Padding(0);
+            redirectLayoutPanel.Name = "redirectLayoutPanel";
+            redirectLayoutPanel.Size = new Size(100, 40);
+            redirectLayoutPanel.TabIndex = 1;
+            // 
+            // homeButton
+            // 
+            homeButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            homeButton.BackColor = Color.Transparent;
+            homeButton.FlatAppearance.BorderSize = 0;
+            homeButton.FlatStyle = FlatStyle.Flat;
+            homeButton.Font = new Font("Segoe MDL2 Assets", 18F, FontStyle.Regular, GraphicsUnit.Pixel);
+            homeButton.ForeColor = SystemColors.WindowFrame;
+            homeButton.Location = new Point(0, 0);
+            homeButton.Margin = new Padding(0, 0, 10, 0);
+            homeButton.Name = "homeButton";
+            homeButton.Size = new Size(40, 40);
+            homeButton.TabIndex = 4;
+            homeButton.Text = "";
+            homeButton.UseVisualStyleBackColor = false;
+            homeButton.Click += homeButton_Click;
+            // 
+            // returnButton
+            // 
+            returnButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            returnButton.BackColor = Color.Transparent;
+            returnButton.FlatAppearance.BorderSize = 0;
+            returnButton.FlatStyle = FlatStyle.Flat;
+            returnButton.Font = new Font("Segoe MDL2 Assets", 18F, FontStyle.Regular, GraphicsUnit.Pixel);
+            returnButton.ForeColor = SystemColors.WindowFrame;
+            returnButton.Location = new Point(60, 0);
+            returnButton.Margin = new Padding(10, 0, 0, 0);
+            returnButton.Name = "returnButton";
+            returnButton.Size = new Size(40, 40);
+            returnButton.TabIndex = 5;
+            returnButton.Text = "";
+            returnButton.UseVisualStyleBackColor = false;
+            returnButton.Click += returnButton_Click;
+            // 
+            // positionBindingSource
+            // 
+            positionBindingSource.DataSource = typeof(Position);
             // 
             // partBindingSource
             // 
@@ -625,11 +793,11 @@ namespace App
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Информационная система: логистика - поставки запчастей";
             FormClosed += LogisticsForm_FormClosed;
+            Load += LogisticsForm_Load;
             formLayoutPanel.ResumeLayout(false);
             formLayoutPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)suppliesTable).EndInit();
-            menuLayoutPanel.ResumeLayout(false);
-            menuLayoutPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)supplyBindingSource).EndInit();
             controlsLayoutPanel.ResumeLayout(false);
             controlsLayoutPanel.PerformLayout();
             inputsLayoutPanel.ResumeLayout(false);
@@ -641,14 +809,20 @@ namespace App
             personsLayoutPanel.ResumeLayout(false);
             personsLayoutPanel.PerformLayout();
             supplierLayoutPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)supplierBindingSource).EndInit();
             employeeLayoutPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)employeeBindingSource).EndInit();
             datesLayoutPanel.ResumeLayout(false);
             datesLayoutPanel.PerformLayout();
             deliveryDateLayoutPanel.ResumeLayout(false);
             postDateLayoutPanel.ResumeLayout(false);
             buttonsLayoutPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)employeeBindingSource).EndInit();
-            ((System.ComponentModel.ISupportInitialize)supplierBindingSource).EndInit();
+            menuLayoutPanel.ResumeLayout(false);
+            menuLayoutPanel.PerformLayout();
+            dbLayoutPanel.ResumeLayout(false);
+            dbLayoutPanel.PerformLayout();
+            redirectLayoutPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)positionBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)partBindingSource).EndInit();
             ResumeLayout(false);
         }
@@ -656,12 +830,6 @@ namespace App
         #endregion
 
         private TableLayoutPanel formLayoutPanel;
-        private FlowLayoutPanel menuLayoutPanel;
-        private Button homeButton;
-        private Button returnButton;
-        private Button addButton;
-        private Button editButton;
-        private Button deleteButton;
         private TableLayoutPanel controlsLayoutPanel;
         private TableLayoutPanel inputsLayoutPanel;
         private TableLayoutPanel partsLayoutPanel;
@@ -677,7 +845,7 @@ namespace App
         private ComboBox suppliersPicker;
         private FlowLayoutPanel employeeLayoutPanel;
         private Label employeeLabel;
-        private ComboBox employeePicker;
+        private ComboBox employeesPicker;
         private TableLayoutPanel datesLayoutPanel;
         private FlowLayoutPanel deliveryDateLayoutPanel;
         private Label deliveryDateLabel;
@@ -690,8 +858,26 @@ namespace App
         private Button acceptButton;
         private Button resetButton;
         private CheckBox deliveryStateCheckBox;
-        private BindingSource supplierBindingSource;
         private BindingSource employeeBindingSource;
         private BindingSource partBindingSource;
+        private TableLayoutPanel menuLayoutPanel;
+        private FlowLayoutPanel dbLayoutPanel;
+        private Button addButton;
+        private Button openButton;
+        private Button deleteButton;
+        private FlowLayoutPanel redirectLayoutPanel;
+        private Button homeButton;
+        private Button returnButton;
+        private DataGridViewTextBoxColumn employeeIdDataGridViewTextBoxColumn;
+        private BindingSource supplyBindingSource;
+        private DataGridViewTextBoxColumn supplyIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn employeeDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn supplierDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn dateOfPostDataGridViewTextBoxColumn;
+        private DataGridViewCheckBoxColumn deliveredDataGridViewCheckBoxColumn;
+        private DataGridViewTextBoxColumn dateOfDeliveryDataGridViewTextBoxColumn;
+        private BindingSource positionBindingSource;
+        private Button editButton;
+        private BindingSource supplierBindingSource;
     }
 }

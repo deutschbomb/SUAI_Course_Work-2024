@@ -1,15 +1,11 @@
 
 using EntityFramework.Exceptions.Common;
-using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
 
 namespace App
 {
-    public partial class StorageForm : Form, IView, IViewPages
+    public partial class StorageForm : Form, IView, IViewDefault
     {
-        private bool ADD_FLAG;
-        private bool EDIT_FLAG;
-
         Presenter Presenter;
         MainForm home;
 
@@ -17,14 +13,14 @@ namespace App
         {
             InitializeComponent();
             this.Presenter = Presenter;
-            this.Presenter.db = new Context();
-            this.Presenter.db.Database.EnsureCreated();
             this.home = home;
+            this.Presenter.ContextLoad();
 
-            this.Presenter.db.StorageParts.Load();
-            this.accountingBindingSource.DataSource = this.Presenter.db.StorageParts.Local.ToList();
-            this.Presenter.db.Parts.Load();
-            this.partBindingSource.DataSource = this.Presenter.db.Parts.Local.ToList();
+            this.Presenter.StoragePartsTableLoad();
+            this.Presenter.PartsTableLoad();
+
+            this.accountingBindingSource.DataSource = this.Presenter.StoragePartsTableToList();
+            this.partBindingSource.DataSource = this.Presenter.PartsTableToList();
         }
 
         public DialogResult ResultDialog(string message, string head)
@@ -48,6 +44,9 @@ namespace App
 
         public void Controls_toDefault()
         {
+            this.controlsLayoutPanel.Enabled = !this.controlsLayoutPanel.Enabled;
+            this.dbLayoutPanel.Enabled = !this.dbLayoutPanel.Enabled;
+
             this.catalogueNumberInput.Text =
                 this.nameInput.Text = null;
 
@@ -55,15 +54,12 @@ namespace App
                 this.priceInput.Value = 0;
         }
 
-        public void Reset()
+        public void Return()
         {
             this.Controls_toDefault();
 
-            this.ADD_FLAG = this.EDIT_FLAG = false;
-
-            this.controlsLayoutPanel.Enabled = false;
-            this.dbLayoutPanel.Enabled = true;
-            this.storageTable.Enabled = true;
+            this.acceptButton.Visible = true;
+            this.editButton.Visible = false;
         }
 
         private void homeButton_Click(object sender, EventArgs e)
@@ -85,8 +81,6 @@ namespace App
 
         private void StorageForm_Load(object sender, EventArgs e)
         {
-            this.controlsLayoutPanel.Enabled = false;
-
             this.balanceInput.Maximum =
                 this.priceInput.Maximum = int.MaxValue;
 
@@ -95,153 +89,140 @@ namespace App
 
         private void StorageForm_FormClosed(object sender, EventArgs e)
         {
-            this.Presenter.db.Dispose();
-            this.Presenter.db = null;
+            this.Presenter.ContextDispose();
             this.home.Show();
         }
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            this.controlsLayoutPanel.Enabled = true;
-            this.dbLayoutPanel.Enabled = false;
-            this.storageTable.Enabled = false;
-
             this.Controls_toDefault();
-
-            this.ADD_FLAG = true;
         }
 
-        private void editButton_Click(object sender, EventArgs e)
+        private void openButton_Click(object sender, EventArgs e)
         {
-            if (this.storageTable.CurrentCell.ColumnIndex != this.storageTable.Columns[0].DisplayIndex) return;
+            if (this.storageTable.CurrentRow is null) return;
 
-            this.controlsLayoutPanel.Enabled = true;
-            this.dbLayoutPanel.Enabled = false;
-            this.storageTable.Enabled = false;
+            this.controlsLayoutPanel.Enabled = !this.controlsLayoutPanel.Enabled;
+            this.dbLayoutPanel.Enabled = !this.dbLayoutPanel.Enabled;
 
             int index = (int)this.storageTable
-                [storageTable.CurrentCellAddress.X, storageTable.CurrentCellAddress.Y].Value;
+                [0, this.storageTable.CurrentRow.Index].Value;
 
-            Accounting storagePart = this.Presenter.db.StorageParts.Find(index);
+            Accounting accounting = this.Presenter.StoragePartsFind(index);
 
-            this.catalogueNumberInput.Text = storagePart.Part.CatalogueNumber;
-            this.nameInput.Text = storagePart.Part.PartName;
-            this.balanceInput.Value = Convert.ToInt32(storagePart.Balance);
-            this.priceInput.Value = Convert.ToInt32(storagePart.PartPrice);
+            this.catalogueNumberInput.Text = accounting.Part.CatalogueNumber;
+            this.nameInput.Text = accounting.Part.PartName;
+            this.balanceInput.Value = Convert.ToInt32(accounting.Balance);
+            this.priceInput.Value = Convert.ToInt32(accounting.PartPrice);
 
-            this.EDIT_FLAG = true;
+            this.acceptButton.Visible = false;
+            this.editButton.Visible = true;
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            if (this.storageTable.CurrentCell.ColumnIndex != this.storageTable.Columns[0].DisplayIndex) return;
-            int index = (int)this.storageTable
-                [storageTable.CurrentCellAddress.X, storageTable.CurrentCellAddress.Y].Value;
-
-            if (ResultDialog("Вы уверены, что хотите удалить выбранную запись?",
+            if (this.storageTable.CurrentRow is null) return;
+            
+            if (ResultDialog("Вы уверены, что хотите удалить выбранную запись о запчасти?",
                 "Удалить запись") == DialogResult.No) return;
+
+            int index = (int)this.storageTable[0, storageTable.CurrentCellAddress.Y].Value;
 
             Accounting accounting = this.Presenter.db.StorageParts.Find(index);
 
-            this.Presenter.db.StorageParts.Remove(accounting);
-            this.Presenter.db.Parts.Remove(accounting.Part);
-            this.Presenter.db.SaveChanges();
+            this.Presenter.StoragePartsRemove(accounting);
+            this.Presenter.PartsRemove(accounting.Part);
+            this.Presenter.ContextSaveChanges();
 
-            this.partBindingSource.DataSource = this.Presenter.db.Parts.Local.ToList();
-            this.accountingBindingSource.DataSource = this.Presenter.db.StorageParts.Local.ToList();
+            this.accountingBindingSource.DataSource = this.Presenter.StoragePartsTableToList();
+            this.partBindingSource.DataSource = this.Presenter.PartsTableToList();
 
             MessageBox.Show("Запись успешно удалена из базы данных!");
         }
 
         private void acceptButton_Click(object sender, EventArgs e)
         {
-            if (ADD_FLAG)
+            if (ResultDialog("Вы уверены, что хотите добавить новую запись о запчасти?",
+                "Добавить запись") == DialogResult.No) return;
+
+            Accounting accounting = new Accounting();
+
+            accounting.Part = new Part
             {
-                if (ResultDialog("Вы уверены, что хотите добавить новую запись?",
-                    "Добавить запись") == DialogResult.No) return;
+                CatalogueNumber = this.catalogueNumberInput.Text != "" ?
+                    Regex.Replace(this.catalogueNumberInput.Text, @"(\W)", @"") : null,
 
-                Accounting accounting = new Accounting();
+                PartName = this.nameInput.Text != "" ? this.nameInput.Text : null
+            };
 
-                accounting.Part = new Part
-                {
-                    CatalogueNumber = this.catalogueNumberInput.Text != "" ?
-                        Regex.Replace(this.catalogueNumberInput.Text, @"(\W)", @"") : null,
+            accounting.Balance = Convert.ToInt32(this.balanceInput.Value);
+            accounting.PartPrice = Convert.ToInt32(this.priceInput.Value);
 
-                    PartName = this.nameInput.Text != "" ? this.nameInput.Text : null
-                };
+            try
+            {
+                this.Presenter.StoragePartsAdd(accounting);
+                this.Presenter.ContextSaveChanges();
 
-                accounting.Balance = Convert.ToInt32(this.balanceInput.Value);
-                accounting.PartPrice = Convert.ToInt32(this.priceInput.Value);
+                this.accountingBindingSource.DataSource = this.Presenter.StoragePartsTableToList();
+                this.partBindingSource.DataSource = this.Presenter.PartsTableToList();
 
-                try
-                {
-                    this.Presenter.db.StorageParts.Add(accounting);
-                    this.Presenter.db.SaveChanges();
+                MessageBox.Show("Запись о запчасти успешно добавлена в базу данных!");
+            }
+            catch (Exception ex) when (ex is CannotInsertNullException || ex is ReferenceConstraintException)
+            {
+                this.Presenter.StoragePartsRemove(accounting);
+                this.Presenter.PartsRemove(accounting.Part);
 
-                    this.partBindingSource.DataSource = this.Presenter.db.Parts.Local.ToList();
-                    this.accountingBindingSource.DataSource = this.Presenter.db.StorageParts.Local.ToList();
-
-                    MessageBox.Show("Запись успешно добавлена в базу данных!");
-                }
-                catch (CannotInsertNullException cine)
-                {
-                    this.Presenter.db.StorageParts.Remove(accounting);
-                    this.Presenter.db.Parts.Remove(accounting.Part);
-                    ErrorDialog(cine.InnerException.Message, "Обязательное поле не заполнено!");
-                }
-                catch (ReferenceConstraintException rce)
-                {
-                    this.Presenter.db.StorageParts.Remove(accounting);
-                    this.Presenter.db.Parts.Remove(accounting.Part);
-                    ErrorDialog(rce.InnerException.Message, "Значение указано неверно!");
-                }
-
-                this.Controls_toDefault();
+                if (ex is CannotInsertNullException)
+                    ErrorDialog(ex.InnerException.Message, "Обязательное поле не заполнено!");
+                if (ex is ReferenceConstraintException)
+                    ErrorDialog(ex.InnerException.Message, "Значение указано неверно!");
             }
 
-            if (EDIT_FLAG)
+            this.Controls_toDefault();
+        }
+
+        private void editButton_Click(object sender, EventArgs e)
+        {
+            if (this.storageTable.CurrentRow is null) return;
+            
+            if (ResultDialog("Вы уверены, что хотите изменить существующую запись о запчасти?",
+                "Измененить запись") == DialogResult.No) return;
+
+            int index = (int)this.storageTable[0, storageTable.CurrentCellAddress.Y].Value;
+
+            Accounting accounting = this.Presenter.db.StorageParts.Find(index);
+
+            accounting.Part.CatalogueNumber = this.catalogueNumberInput.Text != "" ?
+                    Regex.Replace(this.catalogueNumberInput.Text, @"(\W)", @"") : null;
+
+            accounting.Part.PartName = this.nameInput.Text != "" ? this.nameInput.Text : null;
+
+            accounting.Balance = Convert.ToInt32(this.balanceInput.Value);
+            accounting.PartPrice = Convert.ToInt32(this.priceInput.Value);
+
+            try
             {
+                this.Presenter.StoragePartsEntry(accounting);
+                this.Presenter.ContextSaveChanges();
 
-                if (this.storageTable.CurrentCell.ColumnIndex != this.storageTable.Columns[0].DisplayIndex) return;
-                int index = (int)this.storageTable
-                    [storageTable.CurrentCellAddress.X, storageTable.CurrentCellAddress.Y].Value;
+                this.accountingBindingSource.DataSource = this.Presenter.StoragePartsTableToList();
+                this.partBindingSource.DataSource = this.Presenter.PartsTableToList();
 
-                if (ResultDialog("Вы уверены, что хотите изменить существующую запись?",
-                    "Измененить запись") == DialogResult.No) return;
-
-                Accounting accounting = this.Presenter.db.StorageParts.Find(index);
-
-                accounting.Part.CatalogueNumber = this.catalogueNumberInput.Text != "" ?
-                        Regex.Replace(this.catalogueNumberInput.Text, @"(\W)", @"") : null;
-
-                accounting.Part.PartName = this.nameInput.Text != "" ? this.nameInput.Text : null;
-
-                accounting.Balance = Convert.ToInt32(this.balanceInput.Value);
-                accounting.PartPrice = Convert.ToInt32(this.priceInput.Value);
-
-                try
-                {
-                    this.Presenter.db.Entry(accounting).State = EntityState.Modified;
-                    this.Presenter.db.SaveChanges();
-
-                    this.partBindingSource.DataSource = this.Presenter.db.Parts.Local.ToList();
-                    this.accountingBindingSource.DataSource = this.Presenter.db.StorageParts.Local.ToList();
-
-                    MessageBox.Show("Запись успешно изменена в базе данных!");
-                }
-                catch (CannotInsertNullException cine)
-                {
-                    this.Presenter.db.StorageParts.Remove(accounting);
-                    this.Presenter.db.Parts.Remove(accounting.Part);
-                    ErrorDialog(cine.InnerException.Message, "Обязательное поле не заполнено!");
-                }
-                catch (ReferenceConstraintException rce)
-                {
-                    this.Presenter.db.StorageParts.Remove(accounting);
-                    this.Presenter.db.Parts.Remove(accounting.Part);
-                    ErrorDialog(rce.InnerException.Message, "Значение указано неверно!");
-                }
+                MessageBox.Show("Запись о запчасти успешно изменена в базе данных!");
             }
+            catch (Exception ex) when (ex is CannotInsertNullException || ex is ReferenceConstraintException)
+            {
+                this.Presenter.StoragePartsRemove(accounting);
+                this.Presenter.PartsRemove(accounting.Part);
+
+                if (ex is CannotInsertNullException)
+                    ErrorDialog(ex.InnerException.Message, "Обязательное поле не заполнено!");
+                if (ex is ReferenceConstraintException)
+                    ErrorDialog(ex.InnerException.Message, "Значение указано неверно!");
+            }
+
+            this.Return();
         }
 
         private void resetButton_Click(object sender, EventArgs e)
@@ -249,7 +230,7 @@ namespace App
             if (ResultDialog("Вы уверены, что хотите отменить операцию и вернуться к выбору запчастей?",
                 "Отмена операции") == DialogResult.No) return;
 
-            this.Reset();
+            this.Return();
         }
 
         private void catalogueNumberInput_Enter(object sender, EventArgs e)

@@ -101,7 +101,7 @@ namespace App
             // employeesButton
             // 
             employeesButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            employeesButton.BackColor = SystemColors.MenuHighlight;
+            employeesButton.BackColor = SystemColors.Highlight;
             employeesButton.FlatStyle = FlatStyle.Flat;
             employeesButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             employeesButton.ForeColor = SystemColors.ButtonFace;
@@ -143,7 +143,7 @@ namespace App
             // clientsButton
             // 
             clientsButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            clientsButton.BackColor = SystemColors.MenuHighlight;
+            clientsButton.BackColor = SystemColors.Highlight;
             clientsButton.FlatStyle = FlatStyle.Flat;
             clientsButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             clientsButton.ForeColor = SystemColors.ButtonFace;
@@ -159,7 +159,7 @@ namespace App
             // requestsButton
             // 
             requestsButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            requestsButton.BackColor = SystemColors.MenuHighlight;
+            requestsButton.BackColor = SystemColors.Highlight;
             requestsButton.FlatStyle = FlatStyle.Flat;
             requestsButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             requestsButton.ForeColor = SystemColors.ButtonFace;
@@ -221,7 +221,7 @@ namespace App
             // storageButton
             // 
             storageButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            storageButton.BackColor = SystemColors.MenuHighlight;
+            storageButton.BackColor = SystemColors.Highlight;
             storageButton.FlatStyle = FlatStyle.Flat;
             storageButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             storageButton.ForeColor = SystemColors.ButtonFace;
@@ -237,7 +237,7 @@ namespace App
             // logisticsButton
             // 
             logisticsButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            logisticsButton.BackColor = SystemColors.MenuHighlight;
+            logisticsButton.BackColor = SystemColors.Highlight;
             logisticsButton.FlatStyle = FlatStyle.Flat;
             logisticsButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             logisticsButton.ForeColor = SystemColors.ButtonFace;
@@ -264,6 +264,7 @@ namespace App
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Информационная система: автосервис";
+            FormClosed += MainForm_FormClosed;
             formLayoutPanel.ResumeLayout(false);
             formLayoutPanel.PerformLayout();
             internalLayoutPanel.ResumeLayout(false);
