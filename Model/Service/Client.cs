@@ -20,9 +20,9 @@ namespace App
                 if (this.OwnerName is not null)
                     if (this.OwnerPatronymic is not null)
                         return String.Format("{0}: {1} {2}. {3}.",
-                                this.OwnerPassportNumber, this.OwnerSurname, this.OwnerName[0], this.OwnerPatronymic[0]);
-                    else return String.Format("{0}: {1} {2}.", this.OwnerPassportNumber, this.OwnerSurname, this.OwnerName[0]);
-                else return String.Format("{0}: {1}", this.OwnerPassportNumber, this.OwnerSurname);
+                                this.ToString(), this.OwnerSurname, this.OwnerName[0], this.OwnerPatronymic[0]);
+                    else return String.Format("{0}: {1} {2}.", this.ToString(), this.OwnerSurname, this.OwnerName[0]);
+                else return String.Format("{0}: {1}", this.ToString(), this.OwnerSurname);
             }
         }
 
@@ -61,7 +61,7 @@ namespace App
         {
             get
             {
-                return this.ModelName + ": " + Regex.Replace(this.VehicleIdentificationNumber,
+                return this.ModelName + ": " + Regex.Replace(this.LicensePlate,
                     @"([АВЕКМНОРСТУХ]{1})(\d{3})([АВЕКМНОРСТУХ]{2})", @"$1 $2 $3");
             }
         }

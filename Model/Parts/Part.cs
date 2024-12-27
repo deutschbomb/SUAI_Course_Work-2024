@@ -1,4 +1,6 @@
 ﻿
+using System.Text.RegularExpressions;
+
 namespace App
 {
     // Класс запчасти
@@ -29,7 +31,7 @@ namespace App
         
         public override string ToString()
         {
-            return this.CatalogueNumber + " - " + this.PartName;
+            return Regex.Replace(this.CatalogueNumber, @"(\w{2})(\w{2})(\w{3})(\w{3})", @"$1 $2 $3 $4") + " - " + this.PartName;
         }
 
         public Part()

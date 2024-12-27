@@ -50,6 +50,8 @@ namespace App
 
         public void ownerControls_toDefault()
         {
+            this.ownerLayoutPanel.Enabled = false;
+
             this.ownersPicker.SelectedIndex = -1;
 
             this.nameInput.Text =
@@ -62,6 +64,8 @@ namespace App
 
         public void carControls_toDefault()
         {
+            this.carLayoutPanel.Enabled = false;
+
             this.carsPicker.SelectedIndex = -1;
 
             this.brandInput.Text =
@@ -75,7 +79,7 @@ namespace App
 
         public void Controls_toDefault()
         {
-            this.controlsLayoutPanel.Enabled = !this.controlsLayoutPanel.Enabled;
+            this.buttonsLayoutPanel.Enabled = !this.buttonsLayoutPanel.Enabled;
             this.dbLayoutPanel.Enabled = !this.dbLayoutPanel.Enabled;
             ownerControls_toDefault();
             carControls_toDefault();
@@ -122,12 +126,12 @@ namespace App
         {
             if (this.ownersPicker.SelectedIndex == -1 && this.carsPicker.SelectedIndex == -1) return;
 
-            this.controlsLayoutPanel.Enabled = !this.controlsLayoutPanel.Enabled;
+            this.buttonsLayoutPanel.Enabled = !this.buttonsLayoutPanel.Enabled;
             this.dbLayoutPanel.Enabled = !this.dbLayoutPanel.Enabled;
 
             if (this.ownersPicker.SelectedIndex != -1)
             {
-                this.carLayoutPanel.Enabled = !this.carLayoutPanel.Enabled;
+                this.ownerLayoutPanel.Enabled = !this.ownerLayoutPanel.Enabled;
 
                 int index = (int)this.ownersPicker.SelectedValue;
 
@@ -143,7 +147,7 @@ namespace App
 
             if (this.carsPicker.SelectedIndex != -1)
             {
-                this.ownerLayoutPanel.Enabled = !this.ownerLayoutPanel.Enabled;
+                this.carLayoutPanel.Enabled = !this.carLayoutPanel.Enabled;
 
                 int index = (int)this.carsPicker.SelectedValue;
 
